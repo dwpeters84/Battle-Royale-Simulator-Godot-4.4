@@ -1,11 +1,9 @@
-# MainGame.gd
-extends Node # Or Control if your root is a Control node
+extends Node
 
-# References to nodes (use @onready or export)
-@onready var character_container = $"../Characters" # Assuming you group characters under a node
+@onready var character_container = $"../Characters"
 @onready var event_handler = $"../EventHandler"
-@onready var trigger_button: Button = $"../Button" # Adjust path as needed
-@onready var event_log: RichTextLabel = $"../RichTextLabel" # Adjust path as needed
+@onready var trigger_button: Button = $"../Button"
+@onready var event_log: RichTextLabel = $"../RichTextLabel"
 var gamestarted: bool
 
 var characters: Array[Character] = []
@@ -23,11 +21,8 @@ func add_log_entry(text: String):
 func _on_event_log_updated(log_text: Variant) -> void:
 	add_log_entry(log_text)
 
-# --- Signal Callbacks from EventHandler ---
-
-
-# --- Signal Callbacks from Characters (Example) ---
 func _on_character_died(character: Character):
+	# Warning: This function is kinda broke atm. 
 	add_log_entry("[color=red]%s has fallen.[/color]" % character.char_name)
 	# Check for game over condition
 	var alive_count = characters.count(func(c): return c.is_alive)
@@ -50,38 +45,25 @@ func _on_character_died(character: Character):
 			add_log_entry("[color=orange]There are no survivors.[/color]")
 
 func _on_character_health_changed(character: Character, new_health: int, max_health: int):
-	# Optional: Log minor health changes or update a dedicated UI panel per character
 	print("%s health is now %d/%d" % [character.char_name, new_health, max_health])
-	# Find the character's UI panel and update its health bar, for example.
 
 
 func _on_start_game_pressed() -> void:
-	# --- Collect Character References ---
-	# Option 1: If characters are direct children or in a specific container
 	for child in character_container.get_children():
 		if child is Character: # Type check using class_name
 			characters.append(child)
-			 # Optional: Connect signals from each character to the main scene if needed
 			child.died.connect(_on_character_died)
 			child.health_changed.connect(_on_character_health_changed)
-			 # etc.
-
-	# Option 2: If characters are added to a group named "tributes"
-	# characters = get_tree().get_nodes_in_group("tributes")
-
 	if characters.is_empty():
 		printerr("No Character nodes found!")
 		return
 
 	print("MainGame found %d characters." % characters.size())
 
-	# --- Initialize Event Handler ---
 	event_handler.set_characters(characters)
 
-	# --- Connect Signals ---
 	trigger_button.pressed.connect(event_handler.trigger_random_event)
 
-	# --- Initial Log Message ---
 	event_log.clear()
 	gamestarted = true
 	add_log_entry("the swag games begin....")

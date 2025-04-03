@@ -1,18 +1,12 @@
-# EventHandler.gd
 extends Node
 
-# Signal to send the formatted event text to the UI
 signal event_log_updated(log_text)
 
-# List of active characters (passed in from the main scene)
 var characters: Array[Character] = []
 var multiline: bool
 var rng = RandomNumberGenerator.new()
 
-# Define event structures
-# You can expand this significantly, potentially loading from JSON/CSV later
 var events = [
-	# --- Single Character Events ---
 	{
 		"id": "find_water",
 		"participants": 1,
@@ -32,7 +26,6 @@ var events = [
 		"text": "{name1} heard a terrifying scream nearby. {pronoun1_subj} felt a chill run down {pronoun1_poss} spine.",
 		"effect": func(chars: Array[Character]): chars[0].adjust_sanity(-5)
 	},
-	# --- Two Character Events ---
 	{
 		"id": "minor_scuffle",
 		"participants": 2,
@@ -153,7 +146,7 @@ func trigger_random_event():
 		emit_signal("event_log_updated", "The arena falls silent...")
 		return
 
-	# Filter events that *can* happen based on participant count and conditions
+	# Filter events that can happen based on participant count and conditions
 	var possible_events = []
 	for event_data in events:
 		var required_participants = event_data["participants"]
@@ -165,8 +158,7 @@ func trigger_random_event():
 				
 				if temp_participants and event_data["condition"].call(temp_participants):
 					possible_events.append(event_data)
-				 # Note: selecting temp participants isn't perfect if the condition depends heavily
-				 # on *specific* pairs, but it's a good approximation.
+				 # Note: selecting temp participants isn't perfect if the condition depends heavily on *specific* pairs, but it's a good approximation.
 			else:
 				possible_events.append(event_data)
 
@@ -200,31 +192,26 @@ func trigger_random_event():
 		format_args[prefix + "poss"] = char.pronouns["poss"]
 		format_args[prefix + "possa"] = char.pronouns["possa"]
 		format_args[prefix + "ref"] = char.pronouns["ref"]
-		# Add any other character stats you might want in the text
+
 		format_args["health%d" % (i+1)] = char.health
-		# etc.
 
-	var formatted_text = chosen_event["text"].format(format_args, "{_}") # Use placeholder for missing keys
+	var formatted_text = chosen_event["text"].format(format_args, "{_}")
 
-	# Emit the main text
 	emit_signal("event_log_updated", formatted_text)
 
-	# Execute the event's effect
 	if chosen_event.has("effect"):
-		chosen_event["effect"].call(participants) # Pass the selected participants array
+		chosen_event["effect"].call(participants) 
 
-
-# Helper to select a specific number of unique characters
 func select_participants(char_pool: Array[Character], count: int) -> Array[Character]:
 	if count > char_pool.size():
-		return [] # Not enough characters
+		return []
 	
 	var selected: Array[Character] = []
-	var available = char_pool.duplicate() # Work on a copy
-	available.shuffle() # Randomize order
+	var available = char_pool.duplicate() 
+	available.shuffle() 
 	
 	for i in range(count):
-		if available.is_empty(): # Should not happen with initial check, but safety
+		if available.is_empty(): 
 			printerr("Error selecting participants: pool emptied unexpectedly.")
 			return []
 		selected.append(available.pop_front())
