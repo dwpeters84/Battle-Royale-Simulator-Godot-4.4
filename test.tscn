@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://c36oouwxqfmui"]
+
+[ext_resource type="Script" uid="uid://c4vivp3qor3ot" path="res://test.gd" id="1_8uh7m"]
+[ext_resource type="PackedScene" uid="uid://dcq5g3w8sqqsa" path="res://CharMaker.tscn" id="2_6uqi0"]
+[ext_resource type="Script" uid="uid://bl7afyy546t51" path="res://node.gd" id="3_6uqi0"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="MainGame" type="Node" parent="."]
+script = ExtResource("3_6uqi0")
+
+[node name="EventHandler" type="Node" parent="."]
+script = ExtResource("1_8uh7m")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 44.0
+offset_top = 15.0
+offset_right = 1092.0
+offset_bottom = 196.0
+bbcode_enabled = true
+
+[node name="Button" type="Button" parent="."]
+offset_left = 14.0
+offset_top = 561.0
+offset_right = 175.0
+offset_bottom = 592.0
+text = "Trigger Event"
+
+[node name="Characters" type="Node" parent="."]
+
+[node name="Character" parent="Characters" instance=ExtResource("2_6uqi0")]
+position = Vector2(121, 414)
+scale = Vector2(0.709689, 0.708421)
+
+[node name="Character2" parent="Characters" instance=ExtResource("2_6uqi0")]
+position = Vector2(255, 414)
+scale = Vector2(0.709689, 0.708421)
+
+[node name="Character3" parent="Characters" instance=ExtResource("2_6uqi0")]
+position = Vector2(385, 415)
+scale = Vector2(0.709689, 0.708421)
+
+[node name="Character4" parent="Characters" instance=ExtResource("2_6uqi0")]
+position = Vector2(514, 415)
+scale = Vector2(0.709689, 0.708421)
+
+[node name="Character5" parent="Characters" instance=ExtResource("2_6uqi0")]
+position = Vector2(643, 415)
+scale = Vector2(0.709689, 0.708421)
+
+[node name="Character6" parent="Characters" instance=ExtResource("2_6uqi0")]
+position = Vector2(774, 415)
+scale = Vector2(0.709689, 0.708421)
+
+[node name="Character7" parent="Characters" instance=ExtResource("2_6uqi0")]
+position = Vector2(903, 415)
+scale = Vector2(0.709689, 0.708421)
+
+[node name="Character8" parent="Characters" instance=ExtResource("2_6uqi0")]
+position = Vector2(1033, 414)
+scale = Vector2(0.709689, 0.708421)
+
+[node name="StartGame" type="Button" parent="."]
+offset_left = 12.0
+offset_top = 601.0
+offset_right = 164.0
+offset_bottom = 634.0
+text = "Start Game"
+
+[connection signal="event_log_updated" from="EventHandler" to="MainGame" method="_on_event_log_updated"]
+[connection signal="pressed" from="StartGame" to="MainGame" method="_on_start_game_pressed"]

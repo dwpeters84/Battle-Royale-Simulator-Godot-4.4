@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcq5g3w8sqqsa"]
+
+[ext_resource type="Script" uid="uid://edtlhuere4x0" path="res://character_info.gd" id="1_ie0yp"]
+[ext_resource type="Texture2D" uid="uid://bc0l8kpimoovl" path="res://char_icons/unknown.png" id="2_nolpt"]
+[ext_resource type="Texture2D" uid="uid://uuc4pjl1w4tm" path="res://ui_icons/folder1.png" id="3_xpj6t"]
+[ext_resource type="Texture2D" uid="uid://cw4k5166qr806" path="res://ui_icons/folder2.png" id="4_d7fhg"]
+
+[node name="Character" type="Node2D"]
+script = ExtResource("1_ie0yp")
+
+[node name="CharIcon" type="TextureRect" parent="."]
+offset_left = -83.0
+offset_top = -173.0
+offset_right = 87.0
+offset_bottom = 1.0
+texture = ExtResource("2_nolpt")
+expand_mode = 2
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="ChangeCharIcon" type="TextureButton" parent="."]
+offset_left = -76.0
+offset_top = -168.0
+offset_right = -51.0
+offset_bottom = -143.0
+texture_normal = ExtResource("3_xpj6t")
+texture_pressed = ExtResource("4_d7fhg")
+texture_hover = ExtResource("3_xpj6t")
+metadata/_edit_use_anchors_ = true
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.jpg", "*png", "*jpeg")
+
+[node name="NameInput" type="TextEdit" parent="."]
+offset_left = -85.0
+offset_top = -1.0
+offset_right = 90.0
+offset_bottom = 37.0
+placeholder_text = "Character Name"
+metadata/_edit_use_anchors_ = true
+
+[node name="PronounsButton" type="OptionButton" parent="."]
+offset_left = -84.0
+offset_top = 38.0
+offset_right = 89.0
+offset_bottom = 74.0
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PersonalityButton" type="OptionButton" parent="."]
+offset_left = -84.0
+offset_top = 75.0
+offset_right = 89.0
+offset_bottom = 109.0
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BuildsButton" type="OptionButton" parent="."]
+offset_left = -84.0
+offset_top = 110.0
+offset_right = 89.0
+offset_bottom = 142.0
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Health" type="RichTextLabel" parent="."]
+offset_left = -79.0
+offset_top = 140.0
+offset_right = 87.0
+offset_bottom = 164.0
+bbcode_enabled = true
+text = "[center]HP: ???/???[/center]"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sanity" type="RichTextLabel" parent="."]
+offset_left = -86.0
+offset_top = 160.0
+offset_right = 96.0
+offset_bottom = 184.0
+bbcode_enabled = true
+text = "[center]SANITY: ???/???[/center]"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="ChangeCharIcon" to="." method="_on_change_char_icon_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_img_picked"]
+[connection signal="text_changed" from="NameInput" to="." method="_on_name_input_text_changed"]
+[connection signal="item_selected" from="PronounsButton" to="." method="on_selected"]
+[connection signal="item_selected" from="PersonalityButton" to="." method="on_selected"]
+[connection signal="item_selected" from="BuildsButton" to="." method="on_selected"]

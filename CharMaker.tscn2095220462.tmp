@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://dcq5g3w8sqqsa"]
+
+[ext_resource type="Script" uid="uid://edtlhuere4x0" path="res://character_info.gd" id="1_ie0yp"]
+[ext_resource type="Texture2D" uid="uid://bc0l8kpimoovl" path="res://char_icons/unknown.png" id="2_nolpt"]
+[ext_resource type="Texture2D" uid="uid://uuc4pjl1w4tm" path="res://ui_icons/folder1.png" id="3_xpj6t"]
+[ext_resource type="Texture2D" uid="uid://cw4k5166qr806" path="res://ui_icons/folder2.png" id="4_d7fhg"]
+[ext_resource type="Script" uid="uid://cgsk3ry13uhr5" path="res://name_input.gd" id="5_xpj6t"]
+
+[node name="Character" type="Node2D"]
+script = ExtResource("1_ie0yp")
+
+[node name="CharIcon" type="TextureRect" parent="."]
+offset_left = 36.0
+offset_top = 17.0
+offset_right = 210.0
+offset_bottom = 186.0
+texture = ExtResource("2_nolpt")
+stretch_mode = 4
+
+[node name="ChangeCharIcon" type="TextureButton" parent="."]
+offset_left = 44.0
+offset_top = 22.0
+offset_right = 69.0
+offset_bottom = 47.0
+texture_normal = ExtResource("3_xpj6t")
+texture_pressed = ExtResource("4_d7fhg")
+texture_hover = ExtResource("3_xpj6t")
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.jpg", "*png", "*jpeg")
+
+[node name="NameInput" type="TextEdit" parent="."]
+offset_left = 35.0
+offset_top = 193.0
+offset_right = 210.0
+offset_bottom = 231.0
+placeholder_text = "Character Name"
+script = ExtResource("5_xpj6t")
+
+[node name="Debug" type="Button" parent="."]
+offset_left = 686.0
+offset_top = 98.0
+offset_right = 797.0
+offset_bottom = 127.0
+text = "print info"
+
+[node name="PronounsButton" type="OptionButton" parent="."]
+offset_left = 35.0
+offset_top = 236.0
+offset_right = 208.0
+offset_bottom = 272.0
+alignment = 1
+
+[node name="PersonalityButton" type="OptionButton" parent="."]
+offset_left = 36.0
+offset_top = 278.0
+offset_right = 208.0
+offset_bottom = 312.0
+
+[connection signal="pressed" from="ChangeCharIcon" to="." method="_on_change_char_icon_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_img_picked"]
+[connection signal="text_changed" from="NameInput" to="." method="_on_name_input_text_changed"]
+[connection signal="pressed" from="Debug" to="." method="_on_debug_pressed"]
