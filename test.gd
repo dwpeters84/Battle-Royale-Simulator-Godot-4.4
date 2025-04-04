@@ -141,6 +141,9 @@ func set_characters(char_list: Array[Character]):
 
 # Called when the button is pressed
 func trigger_random_event():
+	$"../MainGame".character_movement()
+	update_map_ui()
+	
 	var alive_characters = characters.filter(func(c): return c.is_alive)
 
 	if alive_characters.size() < 1:
@@ -219,3 +222,15 @@ func select_participants(char_pool: Array[Character], count: int) -> Array[Chara
 		selected.append(available.pop_front())
 		
 	return selected
+	
+func update_map_ui():
+	var string_trim_amnt = 28
+	for pos in $"../MapTemp".get_children():
+		var pos_string = str(pos).left(-string_trim_amnt)
+		var number_in_area = 0
+
+		for char in characters:
+			if char.is_alive and pos_string == str(char.pos):
+				number_in_area += 1
+
+		pos.text = "[font_size=40][center]" + str(number_in_area)

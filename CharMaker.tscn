@@ -121,9 +121,18 @@ texture_under = ExtResource("5_rku1n")
 texture_over = ExtResource("6_yvs2x")
 texture_progress = ExtResource("7_xn6mw")
 
+[node name="Button" type="Button" parent="."]
+visible = false
+offset_left = 19.0
+offset_top = 593.0
+offset_right = 221.0
+offset_bottom = 627.0
+text = "test movement"
+
 [connection signal="pressed" from="ChangeCharIcon" to="." method="_on_change_char_icon_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_img_picked"]
 [connection signal="text_changed" from="NameInput" to="." method="_on_name_input_text_changed"]
 [connection signal="item_selected" from="PronounsButton" to="." method="on_selected"]
 [connection signal="item_selected" from="PersonalityButton" to="." method="on_selected"]
 [connection signal="item_selected" from="BuildsButton" to="." method="on_selected"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

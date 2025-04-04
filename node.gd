@@ -1,5 +1,11 @@
 extends Node
 
+@export var map_size_minimum_y: int = 0
+@export var map_size_minimum_x: int = 0
+@export var map_size_maximum_y: int = 2
+@export var map_size_maximum_x: int = 2
+@export var move_check = 15
+
 @onready var character_container = $"../Characters"
 @onready var event_handler = $"../EventHandler"
 @onready var trigger_button: Button = $"../Button"
@@ -57,7 +63,7 @@ func _on_character_health_changed(character: Character, new_health: int, max_hea
 func _on_start_game_pressed() -> void:
 	for child in character_container.get_children():
 		if child is Character: # Type check using class_name
-			print(child.char_name, " is ready for battle!")
+			print(child.char_name, " is ready for battle! Their current position is ", child.pos)
 			characters.append(child)
 			child.died.connect(_on_character_died)
 			child.health_changed.connect(_on_character_health_changed)
@@ -80,3 +86,42 @@ func _on_start_game_pressed() -> void:
 	
 	for character in characters:
 		character.toggle_ui(true)
+	
+	event_handler.update_map_ui()
+
+func character_movement():
+	var move_y
+	var move_x
+	
+	for char in characters:
+		
+		move_y = 0
+		move_x = 0
+		var roll = randi_range(1,20)
+		if roll >= move_check:
+			var roll2 = randi_range(1,4)
+			
+			if roll2 == 1:
+				move_y = 1
+				print(char.char_name, " attempts to move to ", (char.pos.x + move_x), ",", (char.pos.y + move_y))
+			elif roll2 == 2:
+				move_x = 1
+				print(char.char_name, " attempts to move to ", (char.pos.x + move_x), ",", (char.pos.y + move_y))
+			elif roll2 == 3:
+				move_y = -1
+				print(char.char_name, " attempts to move to ", (char.pos.x + move_x), ",", (char.pos.y + move_y))
+			elif roll2 == 4:
+				move_x = -1
+				print(char.char_name, " attempts to move to ", (char.pos.x + move_x), ",", (char.pos.y + move_y))
+			if check_valid_movement((char.pos.x + move_x), (char.pos.y + move_y)) == true:
+				char.move(move_x, move_y)
+			else:
+				print(char.char_name, " tries to move, but can't.")
+		else:
+			print(char.char_name, " decides not to move.")
+				
+func check_valid_movement(x, y):
+	if x >= map_size_minimum_x and x <= map_size_maximum_x and y >= map_size_minimum_y and y <= map_size_maximum_y:
+		return true
+	else:
+		return false

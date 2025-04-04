@@ -67,8 +67,16 @@ var inventory: Array = [] # For items later
 @onready var texture_rect: TextureRect = $CharIcon
 @onready var file_dialog: FileDialog = $FileDialog
 
+var pos = Vector2i(0,0)
+var roll
+	
+	
 # --- Initialization ---
 func _ready() -> void:
+	
+	pos.x = randi_range(0, 2)
+	pos.y = randi_range(0, 2)
+
 	is_alive = true
 	unique_id = str(get_instance_id()) #just in case
 
@@ -108,7 +116,14 @@ func _ready() -> void:
 	calculate_stats()
 	update_ui_labels()
 
-
+func move(move_x, move_y):
+	if is_alive:
+		pos.x += move_x
+		pos.y += move_y
+		print(char_name, " has moved ", pos)
+	else:
+		print(char_name + " cannot move because they're dead, lol.")
+	
 func set_char_name(new_name: String):
 	print("set_char_name: Received:", new_name) 
 	var potential_name = new_name.strip_edges() 
