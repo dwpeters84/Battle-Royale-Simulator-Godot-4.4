@@ -10,39 +10,45 @@ var characters: Array[Character] = []
 
 func add_log_entry(text: String):
 	if gamestarted:
-		event_log.add_text(text + "\n")
+		event_log.append_text(text + "\n")
 	elif event_handler.multiline == true:
-		event_log.add_text(text + "\n")
+		event_log.append_text(text + "\n")
 	else:
 		event_log.clear()
-		event_log.add_text(text + "\n")
+		event_log.append_text(text + "\n")
 	event_log.scroll_to_line(event_log.get_line_count() - 1)
 	
+	
 func _on_event_log_updated(log_text: Variant) -> void:
-	add_log_entry(log_text)
+	add_log_entry("[center][font_size=20]" + log_text + "[/font_size][/center]")
 
 func _on_character_died(character: Character):
-	# Warning: This function is kinda broke atm. 
-	add_log_entry("[color=red]%s has fallen.[/color]" % character.char_name)
-	# Check for game over condition
-	var alive_count = characters.count(func(c): return c.is_alive)
-	add_log_entry("%d tributes remain." % alive_count)
+	add_log_entry("[center][color=red][font_size=20]%s has fallen.[/font_size][/color][/center]" % character.char_name)
+	var alive_count = 0
+	for char in character_container.get_children():
+		if char.is_alive:
+			alive_count += 1
+			print(char.char_name, " is still alive!")
+		else:
+			print(char.char_name, " is dead!")
+	add_log_entry("[center]%d tributes remain.[/center]" % alive_count)
 
-	if alive_count >= 1:
+	if alive_count <= 1:
 		trigger_button.disabled = true # Stop triggering events
 
 		# Find the INDEX of the winner
-		var winner_index : int = characters.find(func(c): return c.is_alive)
+		var winner_index : int =-1
+		for i in characters.size():
+			if characters[i].is_alive:
+				winner_index = i
+				break
 
-		# Check if an index was found (find returns -1 if not found)
 		if winner_index != -1:
-			# Get the actual Character object using the index
 			var winner_character : Character = characters[winner_index]
-			# Now access char_name on the Character object
-			add_log_entry("[color=green][b]%s is the victor![/b][/color]" % winner_character.char_name)
+			add_log_entry("[color=green][b][font_size=35][center]%s is the victor![/center][/font_size][/b][/color]" % winner_character.char_name)
 		else:
 			# This handles the case where alive_count is 0 (no survivors)
-			add_log_entry("[color=orange]There are no survivors.[/color]")
+			add_log_entry("[color=orange][center][font_size=20]There are no survivors.[/font_size][/center][/color]")
 
 func _on_character_health_changed(character: Character, new_health: int, max_health: int):
 	print("%s health is now %d/%d" % [character.char_name, new_health, max_health])
@@ -51,6 +57,7 @@ func _on_character_health_changed(character: Character, new_health: int, max_hea
 func _on_start_game_pressed() -> void:
 	for child in character_container.get_children():
 		if child is Character: # Type check using class_name
+			print(child.char_name, " is ready for battle!")
 			characters.append(child)
 			child.died.connect(_on_character_died)
 			child.health_changed.connect(_on_character_health_changed)
@@ -70,3 +77,6 @@ func _on_start_game_pressed() -> void:
 	for char in characters:
 		add_log_entry("%s enters the arena." % char.char_name)
 	gamestarted = false
+	
+	for character in characters:
+		character.toggle_ui(true)

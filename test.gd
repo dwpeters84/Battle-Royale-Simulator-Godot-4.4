@@ -5,6 +5,8 @@ signal event_log_updated(log_text)
 var characters: Array[Character] = []
 var multiline: bool
 var rng = RandomNumberGenerator.new()
+var acted = []
+var unacted 
 
 var events = [
 	{
@@ -106,8 +108,8 @@ var events = [
 			var defender = chars[3]
 			
 			var diceroll = randi_range(0, 20) 
-			var total_score = diceroll + defender.constitution
-			var total_score2 = diceroll + defender.dexterity
+			var total_score = diceroll + defender.endurance
+			var total_score2 = diceroll + defender.form
 			var target_number = 18 
 			
 			multiline = true
@@ -118,11 +120,11 @@ var events = [
 				print(defender.char_name, " passed with dexterity!")
 			elif total_score >= target_number:
 				var success_message = "They deal a lot of damage, but not as much as they could due to  " + defender.char_name + "'s great endurance!"
-				defender.adjust_health(-2 + (-attacker1.strength) + (-attacker2.strength) + (-attacker3.strength))
+				defender.adjust_health(-2 + (-attacker1.attack) + (-attacker2.attack) + (-attacker3.attack))
 				emit_signal("event_log_updated", success_message)
 				print(defender.char_name, " passed with consitution!")
 			else:
-				defender.adjust_health(-15 + (-attacker1.strength) + (-attacker2.strength) + (-attacker3.strength))
+				defender.adjust_health(-15 + (-attacker1.attack) + (-attacker2.attack) + (-attacker3.attack))
 				var failure_message = "They succeed, dealing massive damage to   " + defender.char_name + "!!!"
 				emit_signal("event_log_updated", failure_message)
 				print(defender.char_name, " failed...")

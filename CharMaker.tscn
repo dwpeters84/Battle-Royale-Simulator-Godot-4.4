@@ -1,11 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcq5g3w8sqqsa"]
+[gd_scene load_steps=8 format=3 uid="uid://dcq5g3w8sqqsa"]
 
 [ext_resource type="Script" uid="uid://edtlhuere4x0" path="res://character_info.gd" id="1_ie0yp"]
 [ext_resource type="Texture2D" uid="uid://bc0l8kpimoovl" path="res://char_icons/unknown.png" id="2_nolpt"]
 [ext_resource type="Texture2D" uid="uid://uuc4pjl1w4tm" path="res://ui_icons/folder1.png" id="3_xpj6t"]
 [ext_resource type="Texture2D" uid="uid://cw4k5166qr806" path="res://ui_icons/folder2.png" id="4_d7fhg"]
+[ext_resource type="Texture2D" uid="uid://cd3t4etm7uoru" path="res://ui_icons/under.png" id="5_rku1n"]
+[ext_resource type="Texture2D" uid="uid://lrn86wakid5s" path="res://ui_icons/over.png" id="6_yvs2x"]
+[ext_resource type="Texture2D" uid="uid://e3ohkiiamuu6" path="res://ui_icons/progress.png" id="7_xn6mw"]
 
 [node name="Character" type="Node2D"]
+position = Vector2(1, 0)
 script = ExtResource("1_ie0yp")
 
 [node name="CharIcon" type="TextureRect" parent="."]
@@ -36,54 +40,86 @@ access = 2
 filters = PackedStringArray("*.jpg", "*png", "*jpeg")
 
 [node name="NameInput" type="TextEdit" parent="."]
-offset_left = -85.0
+offset_left = -83.0
 offset_top = -1.0
-offset_right = 90.0
+offset_right = 92.0
 offset_bottom = 37.0
 placeholder_text = "Character Name"
 metadata/_edit_use_anchors_ = true
 
 [node name="PronounsButton" type="OptionButton" parent="."]
-offset_left = -84.0
+offset_left = -82.0
 offset_top = 38.0
-offset_right = 89.0
+offset_right = 91.0
 offset_bottom = 74.0
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="PersonalityButton" type="OptionButton" parent="."]
-offset_left = -84.0
+offset_left = -82.0
 offset_top = 75.0
-offset_right = 89.0
+offset_right = 91.0
 offset_bottom = 109.0
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="BuildsButton" type="OptionButton" parent="."]
-offset_left = -84.0
+offset_left = -82.0
 offset_top = 110.0
-offset_right = 89.0
+offset_right = 91.0
 offset_bottom = 142.0
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Health" type="RichTextLabel" parent="."]
-offset_left = -79.0
-offset_top = 140.0
-offset_right = 87.0
-offset_bottom = 164.0
+visible = false
+z_index = 1
+offset_left = -78.0
+offset_top = 6.0
+offset_right = 88.0
+offset_bottom = 30.0
 bbcode_enabled = true
 text = "[center]HP: ???/???[/center]"
 metadata/_edit_use_anchors_ = true
 
 [node name="Sanity" type="RichTextLabel" parent="."]
-offset_left = -86.0
-offset_top = 160.0
-offset_right = 96.0
-offset_bottom = 184.0
+visible = false
+z_index = 1
+offset_left = -87.0
+offset_top = 38.0
+offset_right = 95.0
+offset_bottom = 62.0
 bbcode_enabled = true
 text = "[center]SANITY: ???/???[/center]"
 metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+offset_left = -80.0
+offset_top = -206.0
+offset_right = 90.0
+offset_bottom = -166.0
+bbcode_enabled = true
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+visible = false
+offset_left = -86.0
+offset_top = 3.0
+offset_right = 95.0
+offset_bottom = 33.0
+texture_under = ExtResource("5_rku1n")
+texture_over = ExtResource("6_yvs2x")
+texture_progress = ExtResource("7_xn6mw")
+
+[node name="SanityBar" type="TextureProgressBar" parent="."]
+visible = false
+offset_left = -86.0
+offset_top = 35.0
+offset_right = 95.0
+offset_bottom = 65.0
+texture_under = ExtResource("5_rku1n")
+texture_over = ExtResource("6_yvs2x")
+texture_progress = ExtResource("7_xn6mw")
 
 [connection signal="pressed" from="ChangeCharIcon" to="." method="_on_change_char_icon_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_img_picked"]

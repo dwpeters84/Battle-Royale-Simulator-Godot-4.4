@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://c36oouwxqfmui"]
+[gd_scene load_steps=8 format=3 uid="uid://c36oouwxqfmui"]
 
 [ext_resource type="Script" uid="uid://c4vivp3qor3ot" path="res://test.gd" id="1_8uh7m"]
 [ext_resource type="PackedScene" uid="uid://dcq5g3w8sqqsa" path="res://CharMaker.tscn" id="2_6uqi0"]
 [ext_resource type="Script" uid="uid://bl7afyy546t51" path="res://node.gd" id="3_6uqi0"]
+[ext_resource type="Texture2D" uid="uid://bt1f4fsw734dg" path="res://bgs/1.jpg" id="4_vbegm"]
+[ext_resource type="Texture2D" uid="uid://dq4i3ay5bqbt" path="res://bgs/2.png" id="5_ehkex"]
+[ext_resource type="Texture2D" uid="uid://dqe58vtsxoe7s" path="res://bgs/3.png" id="6_xersf"]
+[ext_resource type="Texture2D" uid="uid://vlwmxfauyumn" path="res://bgs/4.png" id="7_00tp4"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -14,57 +18,69 @@ script = ExtResource("1_8uh7m")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_left = 44.0
-offset_top = 15.0
-offset_right = 1092.0
-offset_bottom = 196.0
+offset_top = 44.0
+offset_right = 1113.0
+offset_bottom = 290.0
 bbcode_enabled = true
-
-[node name="Button" type="Button" parent="."]
-offset_left = 14.0
-offset_top = 561.0
-offset_right = 175.0
-offset_bottom = 592.0
-text = "Trigger Event"
 
 [node name="Characters" type="Node" parent="."]
 
 [node name="Character" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(121, 414)
-scale = Vector2(0.709689, 0.708421)
+position = Vector2(110, 502)
 
 [node name="Character2" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(255, 414)
-scale = Vector2(0.709689, 0.708421)
+position = Vector2(293, 502)
 
 [node name="Character3" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(385, 415)
-scale = Vector2(0.709689, 0.708421)
+position = Vector2(475, 502)
 
 [node name="Character4" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(514, 415)
-scale = Vector2(0.709689, 0.708421)
+position = Vector2(658, 502)
 
 [node name="Character5" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(643, 415)
-scale = Vector2(0.709689, 0.708421)
+position = Vector2(842, 502)
 
 [node name="Character6" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(774, 415)
-scale = Vector2(0.709689, 0.708421)
+position = Vector2(1026, 502)
 
-[node name="Character7" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(903, 415)
-scale = Vector2(0.709689, 0.708421)
+[node name="Areas" type="Node" parent="."]
 
-[node name="Character8" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(1033, 414)
-scale = Vector2(0.709689, 0.708421)
+[node name="Area1" type="TextureRect" parent="Areas"]
+visible = false
+offset_right = 1152.0
+offset_bottom = 647.0
+texture = ExtResource("4_vbegm")
+
+[node name="Area2" type="TextureRect" parent="Areas"]
+visible = false
+offset_right = 1152.0
+offset_bottom = 647.0
+texture = ExtResource("5_ehkex")
+
+[node name="Area3" type="TextureRect" parent="Areas"]
+visible = false
+offset_right = 1152.0
+offset_bottom = 647.0
+texture = ExtResource("6_xersf")
+
+[node name="Area4" type="TextureRect" parent="Areas"]
+visible = false
+offset_right = 1152.0
+offset_bottom = 647.0
+texture = ExtResource("7_00tp4")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 558.0
+offset_top = 6.0
+offset_right = 719.0
+offset_bottom = 39.0
+text = "Trigger Event"
 
 [node name="StartGame" type="Button" parent="."]
-offset_left = 12.0
-offset_top = 601.0
-offset_right = 164.0
-offset_bottom = 634.0
+offset_left = 404.0
+offset_top = 6.0
+offset_right = 556.0
+offset_bottom = 39.0
 text = "Start Game"
 
 [connection signal="event_log_updated" from="EventHandler" to="MainGame" method="_on_event_log_updated"]

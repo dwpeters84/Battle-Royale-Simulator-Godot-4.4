@@ -23,44 +23,25 @@ var picked_pronoun_key: String = "they/them"
 var pronouns: Dictionary = available_pronouns[picked_pronoun_key]
 
 var builds = {
-	"Obese": {"str_mod": 5, "dex_mod": 1, "con_mod": 4},
-	"Overweight": {"str_mod": 4, "dex_mod": 2, "con_mod": 3},
-	"Chubby": {"str_mod": 3, "dex_mod": 2, "con_mod": 3},
-	"Average": {"str_mod": 2, "dex_mod": 3, "con_mod": 3},
-	"Underweight": {"str_mod": 2, "dex_mod": 3, "con_mod": 1},
-	"Fit": {"str_mod": 2, "dex_mod": 4, "con_mod": 4},
-	"Burly": {"str_mod": 5, "dex_mod": 2, "con_mod": 3},
-	"Superhuman": {"str_mod": 6, "dex_mod": 6, "con_mod": 6},
-	"Muscular": {"str_mod": 4, "dex_mod": 3, "con_mod": 3}
+	"Overweight": {"form_mod": 1, "end_mod": 2, "ing_mod": 1},
+	"Average": {"form_mod": 2, "end_mod": 2, "ing_mod": 1},
+	"Underweight": {"form_mod": 2, "end_mod": 1, "ing_mod": 1},
+	"Muscular": {"form_mod": 3, "end_mod": 3, "ing_mod": 1}
 	}
 
 var personalities = {
-	"Goofy": {"int_mod": 0, "wis_mod": 4, "chr_mod": 5},
-	"Nerdy": {"int_mod": 7, "wis_mod": 6, "chr_mod": 5},
-	"Genius": {"int_mod": 10, "wis_mod": 8, "chr_mod": 3},
-	"Idiot": {"int_mod": 0, "wis_mod": 1, "chr_mod": 3},
-	"Charismatic": {"int_mod": 3, "wis_mod": 3, "chr_mod": 7},
-	"Philosophical": {"int_mod": 2, "wis_mod": 7, "chr_mod": 4},
-	"Suave": {"int_mod": 3, "wis_mod": 5, "chr_mod": 5},
-	"Empathetic": {"int_mod": 0, "wis_mod": 0, "chr_mod": 0},
-	"Evil": {"int_mod": 0, "wis_mod": 0, "chr_mod": 0},
-	"Asshole": {"int_mod": 0, "wis_mod": 0, "chr_mod": 0},
-	"Mischievous": {"int_mod": 0, "wis_mod": 0, "chr_mod": 0},
-	"Kind": {"int_mod": 0, "wis_mod": 0, "chr_mod": 0},
-	"Brave": {"int_mod": 0, "wis_mod": 0, "chr_mod": 0},
-	"Shy": {"int_mod": 0, "wis_mod": 0, "chr_mod": 0},
-	"Dramatic": {"int_mod": 0, "wis_mod": 0, "chr_mod": 0},
-	"Calm": {"int_mod": 3, "wis_mod": 5, "chr_mod": 2},
-	"Adventurous": {"int_mod": 3, "wis_mod": 2, "chr_mod": 5},
-	"Lazy": {"int_mod": 1, "wis_mod": 1, "chr_mod": 2}
+	"Bubbly": {"percep_mod": 1, "chr_mod": 3, "ing_mod": 1},
+	"Reserved": {"percep_mod": 1, "chr_mod": 2, "ing_mod": 1},
+	"Keen": {"percep_mod": 3, "chr_mod": 1, "ing_mod": 1},
+	"Dull": {"percep_mod": 2, "chr_mod": 1, "ing_mod": 1},
+	"Chill": {"percep_mod": 2, "chr_mod": 2, "ing_mod": 1},
 	}
-
+	
 # Core Stats
-var strength: int = 1
-var dexterity: int = 1
-var constitution: int = 1
-var intelligence: int = 1
-var wisdom: int = 1
+var form: int = 1
+var endurance: int = 1
+var perception: int = 1
+var ingenuity: int = 1
 var charisma: int = 1
 
 # Derived Stats
@@ -72,7 +53,7 @@ var sanity: int = 10 : set = set_sanity
 var attack: int = 1
 var defense: int = 1
 
-var is_alive: bool = true
+var is_alive: bool
 var inventory: Array = [] # For items later
 
 @onready var name_input: TextEdit = $NameInput
@@ -81,11 +62,14 @@ var inventory: Array = [] # For items later
 @onready var builds_button: OptionButton = $BuildsButton
 @onready var health_label: RichTextLabel = $Health
 @onready var sanity_label: RichTextLabel = $Sanity
+@onready var health_bar = $HealthBar
+@onready var sanity_bar = $SanityBar
 @onready var texture_rect: TextureRect = $CharIcon
 @onready var file_dialog: FileDialog = $FileDialog
 
 # --- Initialization ---
 func _ready() -> void:
+	is_alive = true
 	unique_id = str(get_instance_id()) #just in case
 
 	# Populate Dropdowns
@@ -153,36 +137,35 @@ func set_sanity(value: int):
 
 
 func calculate_stats():
-	strength = 1
-	dexterity = 1
-	constitution = 1
-	intelligence = 1
-	wisdom = 1
+	form = 1
+	endurance = 1
+	perception = 1
+	ingenuity = 1
 	charisma = 1
 
 	# Apply mods from selected build
 	var selected_build = builds_button.get_item_text(builds_button.selected)
 	if builds.has(selected_build):
 		var build_mods = builds[selected_build]
-		strength += build_mods["str_mod"]
-		dexterity += build_mods["dex_mod"]
-		constitution += build_mods["con_mod"]
+		form += build_mods["form_mod"]
+		endurance += build_mods["end_mod"]
+		ingenuity += build_mods["ing_mod"]
 
 	# Apply mods from selected personality
 	var selected_personality = personality_button.get_item_text(personality_button.selected)
 	if personalities.has(selected_personality):
 		var personality_mods = personalities[selected_personality]
-		intelligence += personality_mods["int_mod"]
-		wisdom += personality_mods["wis_mod"]
+		perception += personality_mods["percep_mod"]
+		ingenuity += personality_mods["ing_mod"]
 		charisma += personality_mods["chr_mod"]
 
 	# Calculate derived stats. All formulas are subject to change.
-	max_health = 5 + (constitution * 5) + (strength * 2) 
-	max_sanity = 5 + (intelligence * 3) + (wisdom * 3) 
+	max_health = 5 + (form * 5) + (endurance * 2) + ingenuity
+	max_sanity = 5 + (perception * 3) + (charisma * 3) + ingenuity
 	health = max_health
 	sanity = max_sanity
-	attack = 2 + strength + (dexterity / 2) 
-	defense = 1 + dexterity + (constitution / 2)
+	attack = 2 + form + (ingenuity / 2) 
+	defense = 1 + endurance + (ingenuity / 2)
 
 	# Reset health/sanity to new max if they haven't been damaged yet
 	# Or potentially scale current health/sanity if desired
@@ -196,14 +179,20 @@ func calculate_stats():
 
 func update_ui_labels():
 	if health_label: 
-		health_label.text = "HEALTH: %d/%d" % [health, max_health]
+		health_bar.max_value = max_health
+		health_bar.value = health
+		health_label.text = "[center]HEALTH: %d/%d[/center]" % [health, max_health]
 	if sanity_label:
-		sanity_label.text = "SANITY: %d/%d" % [sanity, max_sanity]
+		sanity_bar.max_value = max_sanity
+		sanity_bar.value = sanity
+		sanity_label.text = "[center]SANITY: %d/%d[/center]" % [sanity, max_sanity]
 
 func die():
 	if is_alive:
-		print("%s has died." % char_name)
 		is_alive = false
+		var deadimg = Image.load_from_file("res://char_icons/dead.png")
+		var texture = ImageTexture.create_from_image(deadimg)
+		texture_rect.texture = texture
 		died.emit(self) # Emit signal *after* setting is_alive
 
 func adjust_health(amount: int):
@@ -236,6 +225,8 @@ func _on_name_input_text_changed() -> void:
 		char_name = current_input_text
 	print("_on_name_input_text_changed: char_name updated to:", char_name)
 	
+	$RichTextLabel.text = "[center][font_size=22]" + $NameInput.text + "[/font_size][/center]"
+	
 func _on_pronoun_selected(index: int) -> void:
 	picked_pronoun_key = pronouns_button.get_item_text(index)
 	if available_pronouns.has(picked_pronoun_key):
@@ -262,3 +253,19 @@ func _on_img_picked(path: String) -> void:
 		print("Image loaded successfully for %s from: %s" % [char_name, path])
 	else:
 		printerr("Failed to load image for %s from: %s" % [char_name, path])
+
+func toggle_ui(bool):
+	
+	var charmakerui = [$ChangeCharIcon, $NameInput, $PronounsButton, $PersonalityButton, $BuildsButton]
+	for label in charmakerui:
+		if bool:
+			label.hide()
+		else:
+			label.show()
+	
+	var ingameui = [$Health, $Sanity, $RichTextLabel, $HealthBar, $SanityBar]
+	for label in ingameui:
+		if bool:
+			label.show()
+		else:
+			label.hide()
