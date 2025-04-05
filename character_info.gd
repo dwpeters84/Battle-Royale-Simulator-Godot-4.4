@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 class_name Character
 
 # Signal emitted when the character's health reaches zero or below
@@ -73,9 +73,10 @@ var roll
 	
 # --- Initialization ---
 func _ready() -> void:
-	
+
 	pos.x = randi_range(0, 2)
 	pos.y = randi_range(0, 2)
+	$Label.text = "current pos: " + str(pos.x) + "," + str(pos.y)
 
 	is_alive = true
 	unique_id = str(get_instance_id()) #just in case
@@ -120,6 +121,7 @@ func move(move_x, move_y):
 	if is_alive:
 		pos.x += move_x
 		pos.y += move_y
+		$Label.text = "current pos: " + str(pos.x) + "," + str(pos.y)
 		print(char_name, " has moved ", pos)
 	else:
 		print(char_name + " cannot move because they're dead, lol.")
@@ -278,7 +280,7 @@ func toggle_ui(bool):
 		else:
 			label.show()
 	
-	var ingameui = [$Health, $Sanity, $RichTextLabel, $HealthBar, $SanityBar]
+	var ingameui = [$Health, $Sanity, $RichTextLabel, $HealthBar, $SanityBar, $Label]
 	for label in ingameui:
 		if bool:
 			label.show()

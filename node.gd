@@ -31,7 +31,7 @@ func _on_event_log_updated(log_text: Variant) -> void:
 func _on_character_died(character: Character):
 	add_log_entry("[center][color=red][font_size=20]%s has fallen.[/font_size][/color][/center]" % character.char_name)
 	var alive_count = 0
-	for char in character_container.get_children():
+	for char in characters:
 		if char.is_alive:
 			alive_count += 1
 			print(char.char_name, " is still alive!")
@@ -61,12 +61,9 @@ func _on_character_health_changed(character: Character, new_health: int, max_hea
 
 
 func _on_start_game_pressed() -> void:
-	for child in character_container.get_children():
-		if child is Character: # Type check using class_name
-			print(child.char_name, " is ready for battle! Their current position is ", child.pos)
-			characters.append(child)
-			child.died.connect(_on_character_died)
-			child.health_changed.connect(_on_character_health_changed)
+	characters.clear()
+	_find_characters(character_container)
+
 	if characters.is_empty():
 		printerr("No Character nodes found!")
 		return
@@ -88,6 +85,16 @@ func _on_start_game_pressed() -> void:
 		character.toggle_ui(true)
 	
 	event_handler.update_map_ui()
+	
+func _find_characters(node: Node) -> void:
+	for child in node.get_children():
+		if child is Character:
+			print(child.char_name, " is ready for battle! Their current position is ", child.pos)
+			characters.append(child)
+			child.died.connect(_on_character_died)
+			child.health_changed.connect(_on_character_health_changed)
+		elif child.get_child_count() > 0:
+			_find_characters(child) # Recurse into child
 
 func character_movement():
 	var move_y

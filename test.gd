@@ -125,7 +125,7 @@ var events = [
 				print(defender.char_name, " passed with consitution!")
 			else:
 				defender.adjust_health(-15 + (-attacker1.attack) + (-attacker2.attack) + (-attacker3.attack))
-				var failure_message = "They succeed, dealing massive damage to   " + defender.char_name + "!!!"
+				var failure_message = "They succeed, dealing massive damage to " + defender.char_name + "!!!"
 				emit_signal("event_log_updated", failure_message)
 				print(defender.char_name, " failed...")
 			multiline = false
@@ -219,18 +219,18 @@ func select_participants(char_pool: Array[Character], count: int) -> Array[Chara
 		if available.is_empty(): 
 			printerr("Error selecting participants: pool emptied unexpectedly.")
 			return []
-		selected.append(available.pop_front())
+		else:
+			selected.append(available.pop_front())
 		
 	return selected
 	
 func update_map_ui():
-	var string_trim_amnt = 28
+	var string_trim_amnt = 29
 	for pos in $"../MapTemp".get_children():
 		var pos_string = str(pos).left(-string_trim_amnt)
 		var number_in_area = 0
 
 		for char in characters:
-			if char.is_alive and pos_string == str(char.pos):
+			if char.is_alive and str(pos_string) == str(char.pos):
 				number_in_area += 1
-
-		pos.text = "[font_size=40][center]" + str(number_in_area)
+			pos.text = "[font_size=40][center]" + str(number_in_area)

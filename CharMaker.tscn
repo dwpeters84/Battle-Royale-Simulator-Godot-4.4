@@ -8,11 +8,15 @@
 [ext_resource type="Texture2D" uid="uid://lrn86wakid5s" path="res://ui_icons/over.png" id="6_yvs2x"]
 [ext_resource type="Texture2D" uid="uid://e3ohkiiamuu6" path="res://ui_icons/progress.png" id="7_xn6mw"]
 
-[node name="Character" type="Node2D"]
-position = Vector2(1, 0)
+[node name="Character" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1.0
+offset_right = 1.0
 script = ExtResource("1_ie0yp")
 
 [node name="CharIcon" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = -83.0
 offset_top = -173.0
 offset_right = 87.0
@@ -23,6 +27,7 @@ stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="ChangeCharIcon" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = -76.0
 offset_top = -168.0
 offset_right = -51.0
@@ -40,6 +45,7 @@ access = 2
 filters = PackedStringArray("*.jpg", "*png", "*jpeg")
 
 [node name="NameInput" type="TextEdit" parent="."]
+layout_mode = 0
 offset_left = -83.0
 offset_top = -1.0
 offset_right = 92.0
@@ -48,6 +54,7 @@ placeholder_text = "Character Name"
 metadata/_edit_use_anchors_ = true
 
 [node name="PronounsButton" type="OptionButton" parent="."]
+layout_mode = 0
 offset_left = -82.0
 offset_top = 38.0
 offset_right = 91.0
@@ -56,6 +63,7 @@ alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="PersonalityButton" type="OptionButton" parent="."]
+layout_mode = 0
 offset_left = -82.0
 offset_top = 75.0
 offset_right = 91.0
@@ -64,6 +72,7 @@ alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="BuildsButton" type="OptionButton" parent="."]
+layout_mode = 0
 offset_left = -82.0
 offset_top = 110.0
 offset_right = 91.0
@@ -74,6 +83,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Health" type="RichTextLabel" parent="."]
 visible = false
 z_index = 1
+layout_mode = 0
 offset_left = -78.0
 offset_top = 6.0
 offset_right = 88.0
@@ -85,6 +95,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Sanity" type="RichTextLabel" parent="."]
 visible = false
 z_index = 1
+layout_mode = 0
 offset_left = -87.0
 offset_top = 38.0
 offset_right = 95.0
@@ -95,6 +106,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -80.0
 offset_top = -206.0
 offset_right = 90.0
@@ -103,6 +115,7 @@ bbcode_enabled = true
 
 [node name="HealthBar" type="TextureProgressBar" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -86.0
 offset_top = 3.0
 offset_right = 95.0
@@ -113,6 +126,7 @@ texture_progress = ExtResource("7_xn6mw")
 
 [node name="SanityBar" type="TextureProgressBar" parent="."]
 visible = false
+layout_mode = 0
 offset_left = -86.0
 offset_top = 35.0
 offset_right = 95.0
@@ -123,16 +137,23 @@ texture_progress = ExtResource("7_xn6mw")
 
 [node name="Button" type="Button" parent="."]
 visible = false
+layout_mode = 0
 offset_left = 19.0
 offset_top = 593.0
 offset_right = 221.0
 offset_bottom = 627.0
 text = "test movement"
 
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -62.0
+offset_top = 62.0
+offset_right = 72.0
+offset_bottom = 85.0
+text = "current pos: ?,?"
+horizontal_alignment = 1
+
 [connection signal="pressed" from="ChangeCharIcon" to="." method="_on_change_char_icon_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_img_picked"]
 [connection signal="text_changed" from="NameInput" to="." method="_on_name_input_text_changed"]
-[connection signal="item_selected" from="PronounsButton" to="." method="on_selected"]
-[connection signal="item_selected" from="PersonalityButton" to="." method="on_selected"]
-[connection signal="item_selected" from="BuildsButton" to="." method="on_selected"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

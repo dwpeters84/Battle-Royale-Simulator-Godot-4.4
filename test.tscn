@@ -24,25 +24,318 @@ offset_right = 790.0
 offset_bottom = 290.0
 bbcode_enabled = true
 
-[node name="Characters" type="Node" parent="."]
+[node name="Characters" type="ScrollContainer" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(1073.11, 4.695)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = 305.0
+offset_right = 1150.0
+offset_bottom = 646.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+follow_focus = true
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
 
-[node name="Character" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(110, 502)
+[node name="Characters" type="HBoxContainer" parent="Characters"]
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
 
-[node name="Character2" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(293, 502)
+[node name="Panel" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
 
-[node name="Character3" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(475, 502)
+[node name="Character" parent="Characters/Characters/Panel" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
 
-[node name="Character4" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(658, 502)
+[node name="Panel2" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
 
-[node name="Character5" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(842, 502)
+[node name="Character" parent="Characters/Characters/Panel2" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
 
-[node name="Character6" parent="Characters" instance=ExtResource("2_6uqi0")]
-position = Vector2(1026, 502)
+[node name="Panel3" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel3" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel4" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel4" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel5" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel5" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel6" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel6" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel7" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel7" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel8" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel8" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel9" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel9" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel10" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel10" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel11" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel11" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel12" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel12" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel13" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel13" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel14" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel14" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel15" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel15" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel16" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel16" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel17" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel17" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel18" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel18" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel19" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel19" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel20" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel20" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel21" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel21" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel22" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel22" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel23" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel23" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="Panel24" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel24" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 193.78
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
 
 [node name="Areas" type="Node" parent="."]
 
@@ -196,6 +489,13 @@ offset_bottom = -72.0
 bbcode_enabled = true
 text = "[font_size=40][center]0"
 metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(1, 1)
+offset_left = 30.0
+offset_top = 688.0
+offset_right = 1431.0
+offset_bottom = 1315.0
 
 [connection signal="event_log_updated" from="EventHandler" to="MainGame" method="_on_event_log_updated"]
 [connection signal="pressed" from="StartGame" to="MainGame" method="_on_start_game_pressed"]
