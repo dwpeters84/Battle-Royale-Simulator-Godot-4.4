@@ -10,176 +10,162 @@
 [ext_resource type="Texture2D" uid="uid://cgjubft8k8u4n" path="res://ui_icons/trashcan.png" id="8_xn6mw"]
 [ext_resource type="Texture2D" uid="uid://c6l82vkbo5dyx" path="res://ui_icons/trashcanOpen.png" id="9_65qkp"]
 
-[node name="Character" type="Control"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 556.0
-offset_top = 319.0
-offset_right = 556.0
-offset_bottom = 319.0
+[node name="Character" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ie0yp")
 
-[node name="CharIcon" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = -83.0
-offset_top = -173.0
-offset_right = 91.0
-offset_bottom = 1.0
+[node name="MainPanel" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="CharIcon" type="TextureRect" parent="MainPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(174, 174)
+layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_nolpt")
 expand_mode = 2
-stretch_mode = 4
-metadata/_edit_use_anchors_ = true
+stretch_mode = 5
 
-[node name="ChangeCharIcon" type="TextureButton" parent="."]
+[node name="ChangeCharIcon" type="TextureButton" parent="MainPanel/CharIcon"]
+unique_name_in_owner = true
 z_index = 3
-layout_mode = 0
-offset_left = -76.0
-offset_top = -168.0
-offset_right = -51.0
-offset_bottom = -143.0
+layout_mode = 1
+offset_right = 25.0
+offset_bottom = 25.0
 texture_normal = ExtResource("3_xpj6t")
 texture_pressed = ExtResource("4_d7fhg")
 texture_hover = ExtResource("3_xpj6t")
-metadata/_edit_use_anchors_ = true
 
-[node name="DeleteButton" type="TextureButton" parent="."]
-z_index = 3
-layout_mode = 0
-offset_left = 59.0
-offset_top = -170.0
-offset_right = 109.0
-offset_bottom = -120.0
-scale = Vector2(0.565, 0.565)
-tooltip_text = "Delete Character"
-texture_normal = ExtResource("8_xn6mw")
-texture_pressed = ExtResource("9_65qkp")
-texture_hover = ExtResource("9_65qkp")
-
-[node name="FileDialog" type="FileDialog" parent="."]
+[node name="FileDialog" type="FileDialog" parent="MainPanel/CharIcon/ChangeCharIcon"]
+unique_name_in_owner = true
 title = "Open a File"
 ok_button_text = "Open"
 file_mode = 0
 access = 2
 filters = PackedStringArray("*.jpg", "*png", "*jpeg")
 
-[node name="NameInput" type="TextEdit" parent="."]
-layout_mode = 0
-offset_left = -83.0
-offset_top = -1.0
-offset_right = 92.0
-offset_bottom = 37.0
-placeholder_text = "Character Name"
-metadata/_edit_use_anchors_ = true
+[node name="DeleteButton" type="TextureButton" parent="MainPanel/CharIcon"]
+unique_name_in_owner = true
+z_index = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -29.0001
+offset_right = 20.9999
+offset_bottom = 50.0
+grow_horizontal = 0
+scale = Vector2(0.565, 0.565)
+tooltip_text = "Delete Character"
+texture_normal = ExtResource("8_xn6mw")
+texture_pressed = ExtResource("9_65qkp")
+texture_hover = ExtResource("9_65qkp")
 
-[node name="PronounsButton" type="OptionButton" parent="."]
-layout_mode = 0
-offset_left = -82.0
-offset_top = 38.0
-offset_right = 91.0
-offset_bottom = 74.0
-alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="PersonalityButton" type="OptionButton" parent="."]
-layout_mode = 0
-offset_left = -82.0
-offset_top = 75.0
-offset_right = 91.0
-offset_bottom = 109.0
-alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="BuildsButton" type="OptionButton" parent="."]
-layout_mode = 0
-offset_left = -82.0
-offset_top = 110.0
-offset_right = 91.0
-offset_bottom = 142.0
-alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Health" type="RichTextLabel" parent="."]
-visible = false
-z_index = 1
-layout_mode = 0
-offset_left = -78.0
-offset_top = 6.0
-offset_right = 88.0
-offset_bottom = 30.0
-bbcode_enabled = true
-text = "[center]HP: ???/???[/center]"
-metadata/_edit_use_anchors_ = true
-
-[node name="Sanity" type="RichTextLabel" parent="."]
-visible = false
-z_index = 1
-layout_mode = 0
-offset_left = -87.0
-offset_top = 38.0
-offset_right = 95.0
-offset_bottom = 62.0
-bbcode_enabled = true
-text = "[center]SANITY: ???/???[/center]"
-metadata/_edit_use_anchors_ = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-visible = false
-layout_mode = 0
-offset_left = -80.0
-offset_top = -206.0
-offset_right = 90.0
-offset_bottom = -166.0
-bbcode_enabled = true
-
-[node name="HealthBar" type="TextureProgressBar" parent="."]
-visible = false
-layout_mode = 0
-offset_left = -86.0
-offset_top = 3.0
-offset_right = 95.0
-offset_bottom = 33.0
-texture_under = ExtResource("5_rku1n")
-texture_over = ExtResource("6_yvs2x")
-texture_progress = ExtResource("7_xn6mw")
-
-[node name="SanityBar" type="TextureProgressBar" parent="."]
-visible = false
-layout_mode = 0
-offset_left = -86.0
-offset_top = 35.0
-offset_right = 95.0
-offset_bottom = 65.0
-texture_under = ExtResource("5_rku1n")
-texture_over = ExtResource("6_yvs2x")
-texture_progress = ExtResource("7_xn6mw")
-
-[node name="Button" type="Button" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 19.0
-offset_top = 593.0
-offset_right = 221.0
-offset_bottom = 627.0
-text = "test movement"
-
-[node name="Label" type="Label" parent="."]
-visible = false
-layout_mode = 0
-offset_left = -62.0
-offset_top = 62.0
-offset_right = 72.0
-offset_bottom = 85.0
-text = "current pos: ?,?"
-horizontal_alignment = 1
-
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="MainPanel/CharIcon/DeleteButton"]
+unique_name_in_owner = true
 initial_position = 2
+size = Vector2i(270, 100)
 ok_button_text = "Delete"
 dialog_text = "Are you sure you want to delete?"
 
-[connection signal="pressed" from="ChangeCharIcon" to="." method="_on_change_char_icon_pressed"]
-[connection signal="pressed" from="DeleteButton" to="." method="_on_delete_button_pressed"]
-[connection signal="file_selected" from="FileDialog" to="." method="_on_img_picked"]
-[connection signal="text_changed" from="NameInput" to="." method="_on_name_input_text_changed"]
-[connection signal="confirmed" from="ConfirmationDialog" to="." method="confirm_delete"]
+[node name="NameLabel" type="RichTextLabel" parent="MainPanel"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+bbcode_enabled = true
+
+[node name="EditControls" type="VBoxContainer" parent="MainPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NameInput" type="LineEdit" parent="MainPanel/EditControls"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Character Name"
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PronounsButton" type="OptionButton" parent="MainPanel/EditControls"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PersonalityButton" type="OptionButton" parent="MainPanel/EditControls"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BuildsButton" type="OptionButton" parent="MainPanel/EditControls"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Bars" type="VBoxContainer" parent="MainPanel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="MainPanel/Bars"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+nine_patch_stretch = true
+stretch_margin_left = 8
+stretch_margin_top = 8
+stretch_margin_right = 8
+stretch_margin_bottom = 8
+texture_under = ExtResource("5_rku1n")
+texture_over = ExtResource("6_yvs2x")
+texture_progress = ExtResource("7_xn6mw")
+
+[node name="Health" type="RichTextLabel" parent="MainPanel/Bars/HealthBar"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]HP: ???/???[/center]"
+
+[node name="SanityBar" type="TextureProgressBar" parent="MainPanel/Bars"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+nine_patch_stretch = true
+stretch_margin_left = 8
+stretch_margin_top = 8
+stretch_margin_right = 8
+stretch_margin_bottom = 8
+texture_under = ExtResource("5_rku1n")
+texture_over = ExtResource("6_yvs2x")
+texture_progress = ExtResource("7_xn6mw")
+
+[node name="Sanity" type="RichTextLabel" parent="MainPanel/Bars/SanityBar"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]SANITY: ???/???[/center]"
+
+[node name="PosLabel" type="Label" parent="MainPanel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "current pos: ?,?"
+horizontal_alignment = 1

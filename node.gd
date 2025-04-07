@@ -7,9 +7,9 @@ var map_size_minimum_x: int = 0
 @export var move_check = 15
 
 @onready var character_container = $"../Characters"
-@onready var event_handler = $"../EventHandler"
-@onready var trigger_button: Button = $"../Button"
-@onready var event_log: RichTextLabel = $"../RichTextLabel"
+@onready var event_handler = %EventHandler
+@onready var trigger_button: Button = %TriggerEventButton
+@onready var event_log: RichTextLabel = %GameLog
 var gamestarted: bool
 
 var characters: Array[Character] = []
