@@ -224,12 +224,5 @@ bbcode_enabled = true
 text = "[font_size=40][center]0"
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(1, 1)
-offset_left = 30.0
-offset_top = 688.0
-offset_right = 1431.0
-offset_bottom = 1315.0
-
 [connection signal="pressed" from="Characters/Characters/AddChar" to="Characters/Characters/AddChar" method="_on_pressed"]
 [connection signal="pressed" from="StartGame" to="MainGame" method="_on_start_game_pressed"]
