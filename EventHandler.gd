@@ -49,16 +49,10 @@ func sort_chars_by_pos():
 			
 			
 func trigger_random_event():
-	
-# THIS FUNCTION DOES NOT WORK ATM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# As for WHY it doesn't work, I have no fuckin' clue. 
-# I've been banging my head on the wall trying to get it to work :(
-# I've tried debugging it with print statements, it's just a really complex logic problem
-# My brain hurts
-	
 	print("\n--- New Event Trigger ---") 
 	sort_chars_by_pos() 
 
+	emit_signal("event_log_updated", "\n--- An hour passes... ---\n")
 
 	var main_game = get_node_or_null("../MainGame")
 	if main_game and main_game.has_method("character_movement"):
@@ -73,7 +67,10 @@ func trigger_random_event():
 	
 	# creating a copy of alive characters is crucial for this to work
 	# cuz we dont want to mess with the alive_characters list unless someone dies
-	var unacted_chars = alive_characters.duplicate() 
+	var unacted_chars = alive_characters.duplicate()
+	
+	# Randomize the list
+	unacted_chars.shuffle()
 
 	print("Starting event processing. Unacted characters: ", unacted_chars.size())
 
@@ -83,10 +80,6 @@ func trigger_random_event():
 	# This is where the problem lies, it's SOMEWHERE in here.
 	
 	while unacted_chars.size() > 0:
-		if unacted_chars.is_empty(): 
-			print("Warning: unacted_chars became empty unexpectedly inside loop.")
-			break
-
 		# this starts the events off by simply picking the first person in the array and naming them as the initiator
 		var initiator = unacted_chars[0] 
 		var initiator_pos = initiator.pos
@@ -117,22 +110,10 @@ func trigger_random_event():
 				suitable_events.append(event_dict)
 
 		if not suitable_events.is_empty():
-
 			var picked_event = suitable_events.pick_random()
 			print("  Found exact event: ", picked_event.get("text", "MISSING TEXT"))
 			var func_name_to_call = picked_event.get("effect_func", "")
-
-			if not func_name_to_call.is_empty() and is_instance_valid(eventfunctions) and eventfunctions.has_method(func_name_to_call):
-				print("    Calling effect function: ", func_name_to_call)
-				
-				# for this callable below, all the event logic is stored in $EventFunctions
-				eventfunctions.call(func_name_to_call, current_group)
-			elif not func_name_to_call.is_empty():
-				printerr("    EventFunctions node is invalid or missing method: ", func_name_to_call)
-
-			#everything beyond this point is for formatting.
-
-
+			# show print pre-func call
 			var format_args = {}
 			for i in range(group_size):
 				var char = current_group[i]
@@ -145,10 +126,18 @@ func trigger_random_event():
 				format_args[prefix + "ref"] = char.pronouns.get("ref", "?")
 				format_args["health%d" % (i+1)] = char.health 
 
+			# format the event
 			var formatted_text = picked_event.get("text", "Error: Event text missing").format(format_args, "{_}") 
 			emit_signal("event_log_updated", formatted_text)
 
-			print("    Removing group from unacted list: ", current_group.map(func(c): return c.char_name))
+			# call the function for the event
+			if not func_name_to_call.is_empty() and is_instance_valid(eventfunctions) and eventfunctions.has_method(func_name_to_call):
+				print("    Calling effect function: ", func_name_to_call)
+				# for this callable below, all the event logic is stored in $EventFunctions
+				eventfunctions.call(func_name_to_call, current_group)
+			elif not func_name_to_call.is_empty():
+				printerr("    EventFunctions node is invalid or missing method: ", func_name_to_call)
+		print("    Removing group from unacted list: ", current_group.map(func(c): return c.char_name))
 		for participant in current_group:
 			unacted_chars.erase(participant)
 
