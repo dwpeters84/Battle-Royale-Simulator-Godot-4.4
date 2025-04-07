@@ -233,5 +233,6 @@ offset_top = 688.0
 offset_right = 1431.0
 offset_bottom = 1315.0
 
+[connection signal="event_log_updated" from="EventHandler" to="MainGame" method="_on_event_log_updated"]
 [connection signal="pressed" from="Characters/Characters/AddChar" to="Characters/Characters/AddChar" method="_on_pressed"]
 [connection signal="pressed" from="StartGame" to="MainGame" method="_on_start_game_pressed"]
