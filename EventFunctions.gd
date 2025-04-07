@@ -53,16 +53,56 @@ func apply_ring_around_the_rosie(participants):
 		print("%s's roll is: %d (+%d Charisma) = %d. They needed %d to pass." % [char.char_name, diceroll, char_charisma, total_score, target_number])
 
 		if total_score >= target_number:
-			char.adjust_sanity(2)
 			var success_message = "%s enjoyed the nostalgic game." % char.char_name
 			event_handler.emit_signal("event_log_updated", success_message)
 			print(char.char_name, " passed!")
+			char.adjust_sanity(2)
 		else:
-			char.adjust_sanity(-3)
 			var failure_message = "It seems that %s hates ring around the rosie..." % char.char_name
 			event_handler.emit_signal("event_log_updated", failure_message)
 			print(char.char_name, " failed...")
+			char.adjust_sanity(-3)
 	# event_handler.multiline = false
+
+func apply_fight(participants):
+	if participants.size() < 2: return
+	var attacker = participants[0]
+	var defender = participants[1]
+
+	if not (is_instance_valid(attacker) and is_instance_valid(defender)):
+		printerr("Fight failed: Invalid character instance.")
+		return
+
+	# Proximity Check: Attackers near defender
+	if defender.pos != attacker.pos:
+		event_handler.emit_signal("event_log_updated", "The attacker couldn't coordinate their position around %s." % defender.char_name)
+		return
+
+	var defender_endurance = defender.endurance
+	var defender_form = defender.form
+	var attacker_attack = attacker.attack
+	var attacker_form = attacker.form
+
+	var diceroll_a = rng.randi_range(1, 20)
+	var diceroll_b = rng.randi_range(1, 20)
+	
+	if defender_form + diceroll_a > attacker_form + diceroll_b:
+		var success_message = attacker.char_name + " fails, as " + defender.char_name + " deftly dodges the assault!"
+		event_handler.emit_signal("event_log_updated", success_message)
+	elif defender_endurance + diceroll_a > attacker_form + diceroll_b:
+		var success_message = attacker.char_name + " lands blows, but " + defender.char_name + "'s endurance lessens the impact!"
+		event_handler.emit_signal("event_log_updated", success_message)
+		# Reduced damage calculation (example)
+		var damage_taken = 2 + (attacker_attack / 2) # Base + half combined attack
+		defender.adjust_health(-damage_taken)
+	else:
+		var failure_message = attacker.char_name + " overwhelms " + defender.char_name + ", dealing damage!"
+		event_handler.emit_signal("event_log_updated", failure_message)
+		# Full damage calculation (example)
+		var damage_taken = 5 + attacker_attack # Base + full combined attack
+		defender.adjust_health(-damage_taken)
+	print("roll results (def_f: %s def_rng: %s atk_f: %s atk_rng: %s)" % [defender_form, diceroll_a, attacker_form, diceroll_b])
+
 
 func apply_gang_attack(participants):
 	if participants.size() < 4: return
@@ -82,41 +122,41 @@ func apply_gang_attack(participants):
 		return
 
 	# Get stats safely
-	var defender_constitution = defender.constitution if defender.has("constitution") else 1
-	var defender_dexterity = defender.dexterity if defender.has("dexterity") else 1
+	var defender_endurance = defender.endurance
+	var defender_form = defender.form
 	var atk1_attack = attacker1.attack if attacker1.has("attack") else 1
 	var atk2_attack = attacker2.attack if attacker2.has("attack") else 1
 	var atk3_attack = attacker3.attack if attacker3.has("attack") else 1
 
-	var diceroll = rng.randi_range(0, 20)
-	var constitution_score = diceroll + defender_constitution
-	# Maybe roll dexterity separately? Or use same roll? Let's use same for now.
-	var dexterity_score = diceroll + defender_dexterity
+	var diceroll = rng.randi_range(1, 20)
+	var endurance_score = diceroll + defender_endurance
+	# Maybe roll form separately? Or use same roll? Let's use same for now.
+	var form_score = diceroll + defender_form
 	var target_number = 18
 
 	# event_handler.multiline = true
 
-	if dexterity_score >= target_number:
+	if form_score >= target_number:
 		var success_message = "They fail, as " + defender.char_name + " deftly dodges the assault!"
 		event_handler.emit_signal("event_log_updated", success_message)
-		print(defender.char_name, " passed with dexterity!")
-	elif constitution_score >= target_number:
+		print(defender.char_name, " passed with form!")
+	elif endurance_score >= target_number:
 		var success_message = "They land blows, but " + defender.char_name + "'s endurance lessens the impact!"
+		event_handler.emit_signal("event_log_updated", success_message)
+		print(defender.char_name, " passed with endurance!")
 		var total_attack = atk1_attack + atk2_attack + atk3_attack
 		# Reduced damage calculation (example)
-		var damage_taken = -2 - (total_attack / 2) # Base + half combined attack
-		defender.adjust_health(damage_taken)
-		event_handler.emit_signal("event_log_updated", success_message)
-		print(defender.char_name, " passed with constitution!")
+		var damage_taken = 2 + (total_attack / 2) # Base + half combined attack
+		# Call adjust_health last so if the defender dies, the damage source message comes first in the log
+		defender.adjust_health(-damage_taken)
 	else:
 		var failure_message = "They overwhelm " + defender.char_name + ", dealing massive damage!!!"
-		# Full damage calculation (example)
-		var damage_taken = -15 - atk1_attack - atk2_attack - atk3_attack # Base + full combined attack
-		defender.adjust_health(damage_taken)
 		event_handler.emit_signal("event_log_updated", failure_message)
 		print(defender.char_name, " failed...")
-
-	# event_handler.multiline = false
+		# Full damage calculation (example)
+		var damage_taken = 15 + atk1_attack + atk2_attack + atk3_attack # Base + full combined attack
+		# Call adjust_health last so if the defender dies, the damage source message comes first in the log
+		defender.adjust_health(-damage_taken)
 
 
 # ================================================================

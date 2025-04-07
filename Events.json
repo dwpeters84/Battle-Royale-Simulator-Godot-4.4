@@ -22,5 +22,11 @@
 	"participants": 4,
 	"text": "{name1}, {name2}, {name3} gang up on {name4}, attempting to beat {pronoun4_poss} senseless",
 	"effect_func": "apply_gang_attack"
+  },
+  {
+	"id": "fight",
+	"participants": 2,
+	"text": "{name1} attacks {name2}!",
+	"effect_func": "apply_fight"
   }
 ]
