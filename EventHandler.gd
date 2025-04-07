@@ -111,10 +111,10 @@ func trigger_random_event():
 		var group_size = current_group.size()
 		print("Processing Initiator: ", initiator.char_name, " | Group Size: ", group_size, " | Pos: ", initiator_pos, " | Unacted Left: ", unacted_chars.size())
 
-		var suitable_events = event_data.filter(
-			func(event_dict):
-				return event_dict.has("participants") and typeof(event_dict["participants"]) == TYPE_INT and event_dict.get("participants", -1) == group_size
-		)
+		var suitable_events = []
+		for event_dict in event_data:
+			if event_dict.has("participants") and event_dict["participants"] is float and event_dict.get("participants", -1) == group_size:
+				suitable_events.append(event_dict)
 
 		if not suitable_events.is_empty():
 
@@ -149,8 +149,8 @@ func trigger_random_event():
 			emit_signal("event_log_updated", formatted_text)
 
 			print("    Removing group from unacted list: ", current_group.map(func(c): return c.char_name))
-			for participant in current_group:
-				unacted_chars.erase(participant) 
+		for participant in current_group:
+			unacted_chars.erase(participant)
 
 
 func update_map_ui():
