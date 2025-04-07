@@ -22,21 +22,6 @@ var available_pronouns = {"he/him": {"subj": "he", "obj": "him", "poss": "his", 
 var picked_pronoun_key: String = "they/them"
 var pronouns: Dictionary = available_pronouns[picked_pronoun_key]
 
-var builds = {
-	"Overweight": {"form_mod": 1, "end_mod": 2, "ing_mod": 1},
-	"Average": {"form_mod": 2, "end_mod": 2, "ing_mod": 1},
-	"Underweight": {"form_mod": 2, "end_mod": 1, "ing_mod": 1},
-	"Muscular": {"form_mod": 3, "end_mod": 3, "ing_mod": 1}
-	}
-
-var personalities = {
-	"Bubbly": {"percep_mod": 1, "chr_mod": 3, "ing_mod": 1},
-	"Reserved": {"percep_mod": 1, "chr_mod": 2, "ing_mod": 1},
-	"Keen": {"percep_mod": 3, "chr_mod": 1, "ing_mod": 1},
-	"Dull": {"percep_mod": 2, "chr_mod": 1, "ing_mod": 1},
-	"Chill": {"percep_mod": 2, "chr_mod": 2, "ing_mod": 1},
-	}
-	
 # Core Stats
 var form: int = 1
 var endurance: int = 1
@@ -58,8 +43,6 @@ var inventory: Array = [] # For items later
 
 @onready var name_input: LineEdit = %NameInput
 @onready var pronouns_button: OptionButton = %PronounsButton
-@onready var personality_button: OptionButton = %PersonalityButton
-@onready var builds_button: OptionButton = %BuildsButton
 @onready var name_label: RichTextLabel = %NameLabel
 @onready var health_label: RichTextLabel = %Health
 @onready var sanity_label: RichTextLabel = %Sanity
@@ -73,6 +56,14 @@ var inventory: Array = [] # For items later
 @onready var edit_controls = %EditControls
 @onready var bars = %Bars
 @onready var pos_label = %PosLabel
+
+#stats
+@onready var form_slider = %FormSlider
+@onready var endurance_slider = %EnduranceSlider
+@onready var perception_slider = %PerceptionSlider
+@onready var ingenuity_slider = %IngenuitySlider
+@onready var charisma_slider = %CharismaSlider
+#/stats
 
 @onready var MainGameController = get_tree().get_first_node_in_group("GameControllers")
 
@@ -112,15 +103,14 @@ func _ready() -> void:
 		else:
 			printerr("Pronoun OptionButton has no items!")
 
-	for personality in personalities:
-		personality_button.add_item(personality)
-
-	for build in builds:
-		builds_button.add_item(build)
-
 	pronouns_button.item_selected.connect(_on_pronoun_selected)
-	personality_button.item_selected.connect(on_selection_changed)
-	builds_button.item_selected.connect(on_selection_changed)
+	# stats
+	form_slider.value_changed.connect(on_value_changed)
+	endurance_slider.value_changed.connect(on_value_changed)
+	perception_slider.value_changed.connect(on_value_changed)
+	ingenuity_slider.value_changed.connect(on_value_changed)
+	charisma_slider.value_changed.connect(on_value_changed)
+	# /stats
 	name_input.text_changed.connect(_on_name_input_text_changed)
 	change_img.pressed.connect(_on_change_char_icon_pressed)
 	delete_char.pressed.connect(_on_delete_button_pressed)
@@ -168,27 +158,11 @@ func set_sanity(value: int):
 
 
 func calculate_stats():
-	form = 1
-	endurance = 1
-	perception = 1
-	ingenuity = 1
-	charisma = 1
-
-	# Apply mods from selected build
-	var selected_build = builds_button.get_item_text(builds_button.selected)
-	if builds.has(selected_build):
-		var build_mods = builds[selected_build]
-		form += build_mods["form_mod"]
-		endurance += build_mods["end_mod"]
-		ingenuity += build_mods["ing_mod"]
-
-	# Apply mods from selected personality
-	var selected_personality = personality_button.get_item_text(personality_button.selected)
-	if personalities.has(selected_personality):
-		var personality_mods = personalities[selected_personality]
-		perception += personality_mods["percep_mod"]
-		ingenuity += personality_mods["ing_mod"]
-		charisma += personality_mods["chr_mod"]
+	form = form_slider.stat_value
+	endurance = endurance_slider.stat_value
+	perception = perception_slider.stat_value
+	ingenuity = ingenuity_slider.stat_value
+	charisma = charisma_slider.stat_value
 
 	# Calculate derived stats. All formulas are subject to change.
 	max_health = 5 + (form * 5) + (endurance * 2) + ingenuity
@@ -205,7 +179,6 @@ func calculate_stats():
 	if sanity == max_sanity or sanity > max_sanity:
 		set_sanity(max_sanity) # Use setter
 
-	update_ui_labels()
 	stats_finalized.emit(self) # Notify parent potentially
 
 func update_ui_labels():
@@ -270,7 +243,7 @@ func _on_pronoun_selected(index: int) -> void:
 		pronouns = available_pronouns[picked_pronoun_key]
 
 
-func on_selection_changed(index: int) -> void:
+func on_value_changed(_value: int) -> void:
 	calculate_stats()
 
 func _on_change_char_icon_pressed() -> void:
@@ -289,9 +262,7 @@ func toggle_ui(toggle):
 	edit_controls.visible = not toggle
 	change_img.visible = not toggle
 	delete_char.visible = not toggle
-	bars.visible = toggle
 	name_label.visible = toggle
-	pos_label.visible = toggle
 
 
 func _on_delete_button_pressed() -> void:

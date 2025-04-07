@@ -67,6 +67,7 @@ vertical_scroll_mode = 0
 [node name="Characters" type="HBoxContainer" parent="Characters"]
 layout_mode = 2
 size_flags_horizontal = 6
+size_flags_vertical = 3
 alignment = 1
 
 [node name="Character" parent="Characters/Characters" instance=ExtResource("3_20pc6")]

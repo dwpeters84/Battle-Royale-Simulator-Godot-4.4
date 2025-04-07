@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dcq5g3w8sqqsa"]
+[gd_scene load_steps=11 format=3 uid="uid://dcq5g3w8sqqsa"]
 
 [ext_resource type="Script" uid="uid://edtlhuere4x0" path="res://character_info.gd" id="1_ie0yp"]
 [ext_resource type="Texture2D" uid="uid://bc0l8kpimoovl" path="res://char_icons/unknown.png" id="2_nolpt"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cw4k5166qr806" path="res://ui_icons/folder2.png" id="4_d7fhg"]
 [ext_resource type="Texture2D" uid="uid://cd3t4etm7uoru" path="res://ui_icons/under.png" id="5_rku1n"]
 [ext_resource type="Texture2D" uid="uid://lrn86wakid5s" path="res://ui_icons/over.png" id="6_yvs2x"]
+[ext_resource type="PackedScene" uid="uid://qrmdcea33ubf" path="res://StatSlider.tscn" id="7_65qkp"]
 [ext_resource type="Texture2D" uid="uid://e3ohkiiamuu6" path="res://ui_icons/progress.png" id="7_xn6mw"]
 [ext_resource type="Texture2D" uid="uid://cgjubft8k8u4n" path="res://ui_icons/trashcan.png" id="8_xn6mw"]
 [ext_resource type="Texture2D" uid="uid://c6l82vkbo5dyx" path="res://ui_icons/trashcanOpen.png" id="9_65qkp"]
@@ -18,10 +19,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ie0yp")
 
-[node name="MainPanel" type="VBoxContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 2
+horizontal_scroll_mode = 0
 
-[node name="CharIcon" type="TextureRect" parent="MainPanel"]
+[node name="MainPanel" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CharIcon" type="TextureRect" parent="ScrollContainer/MainPanel"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(174, 174)
 layout_mode = 2
@@ -30,7 +36,7 @@ texture = ExtResource("2_nolpt")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="ChangeCharIcon" type="TextureButton" parent="MainPanel/CharIcon"]
+[node name="ChangeCharIcon" type="TextureButton" parent="ScrollContainer/MainPanel/CharIcon"]
 unique_name_in_owner = true
 z_index = 3
 layout_mode = 1
@@ -40,7 +46,7 @@ texture_normal = ExtResource("3_xpj6t")
 texture_pressed = ExtResource("4_d7fhg")
 texture_hover = ExtResource("3_xpj6t")
 
-[node name="FileDialog" type="FileDialog" parent="MainPanel/CharIcon/ChangeCharIcon"]
+[node name="FileDialog" type="FileDialog" parent="ScrollContainer/MainPanel/CharIcon/ChangeCharIcon"]
 unique_name_in_owner = true
 title = "Open a File"
 ok_button_text = "Open"
@@ -48,7 +54,7 @@ file_mode = 0
 access = 2
 filters = PackedStringArray("*.jpg", "*png", "*jpeg")
 
-[node name="DeleteButton" type="TextureButton" parent="MainPanel/CharIcon"]
+[node name="DeleteButton" type="TextureButton" parent="ScrollContainer/MainPanel/CharIcon"]
 unique_name_in_owner = true
 z_index = 3
 layout_mode = 1
@@ -65,55 +71,25 @@ texture_normal = ExtResource("8_xn6mw")
 texture_pressed = ExtResource("9_65qkp")
 texture_hover = ExtResource("9_65qkp")
 
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="MainPanel/CharIcon/DeleteButton"]
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="ScrollContainer/MainPanel/CharIcon/DeleteButton"]
 unique_name_in_owner = true
 initial_position = 2
 size = Vector2i(270, 100)
 ok_button_text = "Delete"
 dialog_text = "Are you sure you want to delete?"
 
-[node name="NameLabel" type="RichTextLabel" parent="MainPanel"]
+[node name="NameLabel" type="RichTextLabel" parent="ScrollContainer/MainPanel"]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 bbcode_enabled = true
 
-[node name="EditControls" type="VBoxContainer" parent="MainPanel"]
+[node name="Bars" type="VBoxContainer" parent="ScrollContainer/MainPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="NameInput" type="LineEdit" parent="MainPanel/EditControls"]
-unique_name_in_owner = true
-layout_mode = 2
-placeholder_text = "Character Name"
-alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="PronounsButton" type="OptionButton" parent="MainPanel/EditControls"]
-unique_name_in_owner = true
-layout_mode = 2
-alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="PersonalityButton" type="OptionButton" parent="MainPanel/EditControls"]
-unique_name_in_owner = true
-layout_mode = 2
-alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="BuildsButton" type="OptionButton" parent="MainPanel/EditControls"]
-unique_name_in_owner = true
-layout_mode = 2
-alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Bars" type="VBoxContainer" parent="MainPanel"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-
-[node name="HealthBar" type="TextureProgressBar" parent="MainPanel/Bars"]
+[node name="HealthBar" type="TextureProgressBar" parent="ScrollContainer/MainPanel/Bars"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
@@ -126,7 +102,7 @@ texture_under = ExtResource("5_rku1n")
 texture_over = ExtResource("6_yvs2x")
 texture_progress = ExtResource("7_xn6mw")
 
-[node name="Health" type="RichTextLabel" parent="MainPanel/Bars/HealthBar"]
+[node name="Health" type="RichTextLabel" parent="ScrollContainer/MainPanel/Bars/HealthBar"]
 unique_name_in_owner = true
 z_index = 1
 layout_mode = 1
@@ -138,7 +114,7 @@ grow_vertical = 2
 bbcode_enabled = true
 text = "[center]HP: ???/???[/center]"
 
-[node name="SanityBar" type="TextureProgressBar" parent="MainPanel/Bars"]
+[node name="SanityBar" type="TextureProgressBar" parent="ScrollContainer/MainPanel/Bars"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
@@ -151,7 +127,7 @@ texture_under = ExtResource("5_rku1n")
 texture_over = ExtResource("6_yvs2x")
 texture_progress = ExtResource("7_xn6mw")
 
-[node name="Sanity" type="RichTextLabel" parent="MainPanel/Bars/SanityBar"]
+[node name="Sanity" type="RichTextLabel" parent="ScrollContainer/MainPanel/Bars/SanityBar"]
 unique_name_in_owner = true
 z_index = 1
 layout_mode = 1
@@ -163,9 +139,56 @@ grow_vertical = 2
 bbcode_enabled = true
 text = "[center]SANITY: ???/???[/center]"
 
-[node name="PosLabel" type="Label" parent="MainPanel"]
+[node name="EditControls" type="VBoxContainer" parent="ScrollContainer/MainPanel"]
 unique_name_in_owner = true
-visible = false
+layout_mode = 2
+
+[node name="NameInput" type="LineEdit" parent="ScrollContainer/MainPanel/EditControls"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Character Name"
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PronounsButton" type="OptionButton" parent="ScrollContainer/MainPanel/EditControls"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/MainPanel/EditControls"]
+layout_mode = 2
+
+[node name="EditStats" type="VBoxContainer" parent="ScrollContainer/MainPanel/EditControls/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FormSlider" parent="ScrollContainer/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("7_65qkp")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EnduranceSlider" parent="ScrollContainer/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("7_65qkp")]
+unique_name_in_owner = true
+layout_mode = 2
+modified_stat = "endurance"
+
+[node name="PerceptionSlider" parent="ScrollContainer/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("7_65qkp")]
+unique_name_in_owner = true
+layout_mode = 2
+modified_stat = "perception"
+
+[node name="IngenuitySlider" parent="ScrollContainer/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("7_65qkp")]
+unique_name_in_owner = true
+layout_mode = 2
+modified_stat = "ingenuity"
+
+[node name="CharismaSlider" parent="ScrollContainer/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("7_65qkp")]
+unique_name_in_owner = true
+layout_mode = 2
+modified_stat = "charisma"
+
+[node name="PosLabel" type="Label" parent="ScrollContainer/MainPanel"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "current pos: ?,?"
 horizontal_alignment = 1
