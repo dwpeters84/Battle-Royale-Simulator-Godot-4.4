@@ -44,7 +44,7 @@ func apply_ring_around_the_rosie(participants):
 
 	for char in participants:
 		if not is_instance_valid(char): continue
-		var char_charisma = char.charisma if char.has("charisma") else 0
+		var char_charisma = char.charisma
 
 		var diceroll = rng.randi_range(0, 20)
 		var total_score = diceroll + char_charisma
@@ -124,9 +124,9 @@ func apply_gang_attack(participants):
 	# Get stats safely
 	var defender_endurance = defender.endurance
 	var defender_form = defender.form
-	var atk1_attack = attacker1.attack if attacker1.has("attack") else 1
-	var atk2_attack = attacker2.attack if attacker2.has("attack") else 1
-	var atk3_attack = attacker3.attack if attacker3.has("attack") else 1
+	var atk1_attack = attacker1.attack
+	var atk2_attack = attacker2.attack
+	var atk3_attack = attacker3.attack
 
 	var diceroll = rng.randi_range(1, 20)
 	var endurance_score = diceroll + defender_endurance
