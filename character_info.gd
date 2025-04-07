@@ -66,16 +66,20 @@ var inventory: Array = [] # For items later
 @onready var sanity_bar = $SanityBar
 @onready var texture_rect: TextureRect = $CharIcon
 @onready var file_dialog: FileDialog = $FileDialog
+@onready var change_img = $ChangeCharIcon
+@onready var delete_char = $DeleteButton
+@onready var MainGameController = get_tree().get_first_node_in_group("GameControllers")
 
 var pos = Vector2i(0,0)
 var roll
-	
+
+var delete_self: bool = false
 	
 # --- Initialization ---
 func _ready() -> void:
 
-	pos.x = randi_range(0, 2)
-	pos.y = randi_range(0, 2)
+	pos.x = randi_range(0, MainGameController.map_size_maximum_x)
+	pos.y = randi_range(0, MainGameController.map_size_maximum_y)
 	$Label.text = "current pos: " + str(pos.x) + "," + str(pos.y)
 
 	is_alive = true
@@ -273,7 +277,7 @@ func _on_img_picked(path: String) -> void:
 
 func toggle_ui(bool):
 	
-	var charmakerui = [$ChangeCharIcon, $NameInput, $PronounsButton, $PersonalityButton, $BuildsButton]
+	var charmakerui = [$ChangeCharIcon, $NameInput, $PronounsButton, $PersonalityButton, $BuildsButton, $DeleteButton]
 	for label in charmakerui:
 		if bool:
 			label.hide()
@@ -286,3 +290,11 @@ func toggle_ui(bool):
 			label.show()
 		else:
 			label.hide()
+
+
+func _on_delete_button_pressed() -> void:
+	$ConfirmationDialog.popup()
+	pass # Replace with function body.
+
+func confirm_delete() -> void:
+	get_parent().queue_free()

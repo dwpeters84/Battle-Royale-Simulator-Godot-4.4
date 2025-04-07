@@ -1,7 +1,7 @@
 extends Node
 
-@export var map_size_minimum_y: int = 0
-@export var map_size_minimum_x: int = 0
+var map_size_minimum_y: int = 0
+var map_size_minimum_x: int = 0
 @export var map_size_maximum_y: int = 2
 @export var map_size_maximum_x: int = 2
 @export var move_check = 15
@@ -17,10 +17,7 @@ var characters: Array[Character] = []
 func add_log_entry(text: String):
 	if gamestarted:
 		event_log.append_text(text + "\n")
-	elif event_handler.multiline == true:
-		event_log.append_text(text + "\n")
 	else:
-		event_log.clear()
 		event_log.append_text(text + "\n")
 	event_log.scroll_to_line(event_log.get_line_count() - 1)
 	
@@ -120,6 +117,7 @@ func character_movement():
 			elif roll2 == 4:
 				move_x = -1
 				print(char.char_name, " attempts to move to ", (char.pos.x + move_x), ",", (char.pos.y + move_y))
+				
 			if check_valid_movement((char.pos.x + move_x), (char.pos.y + move_y)) == true:
 				char.move(move_x, move_y)
 			else:

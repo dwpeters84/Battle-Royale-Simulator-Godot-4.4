@@ -1,0 +1,237 @@
+[gd_scene load_steps=10 format=3 uid="uid://c36oouwxqfmui"]
+
+[ext_resource type="Script" uid="uid://c4vivp3qor3ot" path="res://test.gd" id="1_8uh7m"]
+[ext_resource type="PackedScene" uid="uid://dcq5g3w8sqqsa" path="res://CharMaker.tscn" id="2_6uqi0"]
+[ext_resource type="Script" uid="uid://bl7afyy546t51" path="res://node.gd" id="3_6uqi0"]
+[ext_resource type="Texture2D" uid="uid://bt1f4fsw734dg" path="res://bgs/1.jpg" id="4_vbegm"]
+[ext_resource type="Script" uid="uid://cmmckut05nnn4" path="res://add_char.gd" id="4_xersf"]
+[ext_resource type="Texture2D" uid="uid://dq4i3ay5bqbt" path="res://bgs/2.png" id="5_ehkex"]
+[ext_resource type="Texture2D" uid="uid://dqe58vtsxoe7s" path="res://bgs/3.png" id="6_xersf"]
+[ext_resource type="Texture2D" uid="uid://vlwmxfauyumn" path="res://bgs/4.png" id="7_00tp4"]
+[ext_resource type="Texture2D" uid="uid://mh6i8xtxkfgv" path="res://ui_icons/map_temp.png" id="8_ehkex"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="MainGame" type="Node" parent="."]
+script = ExtResource("3_6uqi0")
+
+[node name="EventHandler" type="Node" parent="."]
+script = ExtResource("1_8uh7m")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 44.0
+offset_top = 58.0
+offset_right = 790.0
+offset_bottom = 290.0
+bbcode_enabled = true
+
+[node name="Characters" type="ScrollContainer" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(1073.11, 4.695)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = 305.0
+offset_right = 1150.0
+offset_bottom = 646.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+follow_focus = true
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+
+[node name="Characters" type="HBoxContainer" parent="Characters"]
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="Panel" type="Panel" parent="Characters/Characters"]
+custom_minimum_size = Vector2(195.815, 332.595)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Character" parent="Characters/Characters/Panel" instance=ExtResource("2_6uqi0")]
+offset_left = 95.0
+offset_top = 181.0
+offset_right = 95.0
+offset_bottom = 181.0
+size_flags_stretch_ratio = 0.0
+
+[node name="AddChar" type="Button" parent="Characters/Characters"]
+layout_mode = 2
+text = "Add Character"
+script = ExtResource("4_xersf")
+
+[node name="Button" type="Button" parent="Characters/Characters"]
+layout_mode = 2
+text = "Remove Character"
+
+[node name="Areas" type="Node" parent="."]
+
+[node name="Area1" type="TextureRect" parent="Areas"]
+visible = false
+offset_right = 1152.0
+offset_bottom = 647.0
+texture = ExtResource("4_vbegm")
+
+[node name="Area2" type="TextureRect" parent="Areas"]
+visible = false
+offset_right = 1152.0
+offset_bottom = 647.0
+texture = ExtResource("5_ehkex")
+
+[node name="Area3" type="TextureRect" parent="Areas"]
+visible = false
+offset_right = 1152.0
+offset_bottom = 647.0
+texture = ExtResource("6_xersf")
+
+[node name="Area4" type="TextureRect" parent="Areas"]
+visible = false
+offset_right = 1152.0
+offset_bottom = 647.0
+texture = ExtResource("7_00tp4")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 558.0
+offset_top = 6.0
+offset_right = 719.0
+offset_bottom = 39.0
+text = "Trigger Event"
+
+[node name="StartGame" type="Button" parent="."]
+offset_left = 404.0
+offset_top = 6.0
+offset_right = 556.0
+offset_bottom = 39.0
+text = "Start Game"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -3
+offset_left = 33.0
+offset_top = 51.0
+offset_right = 803.0
+offset_bottom = 295.0
+color = Color(0.230315, 0.230315, 0.230315, 1)
+
+[node name="MapTemp" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(969, 161)
+scale = Vector2(0.900803, 0.879219)
+texture = ExtResource("8_ehkex")
+
+[node name="(0, 0)" type="RichTextLabel" parent="MapTemp"]
+anchors_preset = -1
+anchor_bottom = 0.0266667
+offset_left = -128.0
+offset_top = 69.0
+offset_right = -73.0
+offset_bottom = 131.0
+bbcode_enabled = true
+text = "[font_size=40][center]0"
+metadata/_edit_use_anchors_ = true
+
+[node name="(0, 1)" type="RichTextLabel" parent="MapTemp"]
+anchors_preset = -1
+anchor_bottom = 0.04
+offset_left = -27.0
+offset_top = 67.0
+offset_right = 28.0
+offset_bottom = 129.0
+bbcode_enabled = true
+text = "[font_size=40][center]0"
+metadata/_edit_use_anchors_ = true
+
+[node name="(0, 2)" type="RichTextLabel" parent="MapTemp"]
+anchors_preset = -1
+anchor_bottom = 0.0333333
+offset_left = 72.0
+offset_top = 68.0
+offset_right = 127.0
+offset_bottom = 130.0
+bbcode_enabled = true
+text = "[font_size=40][center]0"
+metadata/_edit_use_anchors_ = true
+
+[node name="(1, 0)" type="RichTextLabel" parent="MapTemp"]
+anchors_preset = -1
+anchor_bottom = 0.0366667
+offset_left = -130.0
+offset_top = -30.0
+offset_right = -75.0
+offset_bottom = 32.0
+bbcode_enabled = true
+text = "[font_size=40][center]0"
+metadata/_edit_use_anchors_ = true
+
+[node name="(1, 1)" type="RichTextLabel" parent="MapTemp"]
+anchors_preset = -1
+anchor_bottom = 0.0333333
+offset_left = -29.0
+offset_top = -32.0
+offset_right = 26.0
+offset_bottom = 30.0
+bbcode_enabled = true
+text = "[font_size=40][center]0"
+metadata/_edit_use_anchors_ = true
+
+[node name="(1, 2)" type="RichTextLabel" parent="MapTemp"]
+anchors_preset = -1
+anchor_bottom = 0.0566667
+offset_left = 70.0
+offset_top = -31.0
+offset_right = 125.0
+offset_bottom = 31.0
+bbcode_enabled = true
+text = "[font_size=40][center]0"
+metadata/_edit_use_anchors_ = true
+
+[node name="(2, 0)" type="RichTextLabel" parent="MapTemp"]
+anchors_preset = -1
+anchor_bottom = 0.06
+offset_left = -128.0
+offset_top = -133.0
+offset_right = -73.0
+offset_bottom = -71.0
+bbcode_enabled = true
+text = "[font_size=40][center]0"
+metadata/_edit_use_anchors_ = true
+
+[node name="(2, 1)" type="RichTextLabel" parent="MapTemp"]
+anchors_preset = -1
+anchor_bottom = 0.06
+offset_left = -27.0
+offset_top = -135.0
+offset_right = 28.0
+offset_bottom = -73.0
+bbcode_enabled = true
+text = "[font_size=40][center]0"
+metadata/_edit_use_anchors_ = true
+
+[node name="(2, 2)" type="RichTextLabel" parent="MapTemp"]
+anchors_preset = -1
+anchor_bottom = 0.05
+offset_left = 72.0
+offset_top = -134.0
+offset_right = 127.0
+offset_bottom = -72.0
+bbcode_enabled = true
+text = "[font_size=40][center]0"
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(1, 1)
+offset_left = 30.0
+offset_top = 688.0
+offset_right = 1431.0
+offset_bottom = 1315.0
+
+[connection signal="event_log_updated" from="EventHandler" to="MainGame" method="_on_event_log_updated"]
+[connection signal="pressed" from="Characters/Characters/AddChar" to="Characters/Characters/AddChar" method="_on_pressed"]
+[connection signal="pressed" from="Characters/Characters/Button" to="Characters/Characters/AddChar" method="_on_button_pressed"]
+[connection signal="pressed" from="StartGame" to="MainGame" method="_on_start_game_pressed"]

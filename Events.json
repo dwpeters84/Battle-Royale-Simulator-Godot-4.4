@@ -1,0 +1,26 @@
+[
+  {
+	"id": "find_water",
+	"participants": 1,
+	"text": "{name1} found a fresh spring. {pronoun1_subj} quenched {pronoun1_poss} thirst.",
+	"effect_func": "apply_find_water"
+  },
+  {
+	"id": "minor_injury",
+	"participants": 1,
+	"text": "{name1} tripped over a root, scraping {pronoun1_poss} knee.",
+	"effect_func": "apply_minor_injury"
+  },
+  {
+	"id": "ring_around_the_rosie",
+	"participants": 4,
+	"text": "{name1}, {name2}, {name3} and {name4} play ring around the rosie...",
+	"effect_func": "apply_ring_around_rosie"
+  },
+  {
+	"id": "gang_attack",
+	"participants": 4,
+	"text": "{name1}, {name2}, {name3} gang up on {name4}, attempting to beat {pronoun4_poss} senseless",
+	"effect_func": "apply_gang_attack"
+  }
+]

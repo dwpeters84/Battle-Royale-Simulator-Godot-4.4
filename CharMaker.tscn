@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcq5g3w8sqqsa"]
+[gd_scene load_steps=10 format=3 uid="uid://dcq5g3w8sqqsa"]
 
 [ext_resource type="Script" uid="uid://edtlhuere4x0" path="res://character_info.gd" id="1_ie0yp"]
 [ext_resource type="Texture2D" uid="uid://bc0l8kpimoovl" path="res://char_icons/unknown.png" id="2_nolpt"]
@@ -7,26 +7,32 @@
 [ext_resource type="Texture2D" uid="uid://cd3t4etm7uoru" path="res://ui_icons/under.png" id="5_rku1n"]
 [ext_resource type="Texture2D" uid="uid://lrn86wakid5s" path="res://ui_icons/over.png" id="6_yvs2x"]
 [ext_resource type="Texture2D" uid="uid://e3ohkiiamuu6" path="res://ui_icons/progress.png" id="7_xn6mw"]
+[ext_resource type="Texture2D" uid="uid://cgjubft8k8u4n" path="res://ui_icons/trashcan.png" id="8_xn6mw"]
+[ext_resource type="Texture2D" uid="uid://c6l82vkbo5dyx" path="res://ui_icons/trashcanOpen.png" id="9_65qkp"]
 
 [node name="Character" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1.0
-offset_right = 1.0
+offset_left = 556.0
+offset_top = 319.0
+offset_right = 556.0
+offset_bottom = 319.0
 script = ExtResource("1_ie0yp")
 
 [node name="CharIcon" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = -83.0
 offset_top = -173.0
-offset_right = 87.0
+offset_right = 91.0
 offset_bottom = 1.0
+mouse_filter = 2
 texture = ExtResource("2_nolpt")
 expand_mode = 2
 stretch_mode = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="ChangeCharIcon" type="TextureButton" parent="."]
+z_index = 3
 layout_mode = 0
 offset_left = -76.0
 offset_top = -168.0
@@ -36,6 +42,19 @@ texture_normal = ExtResource("3_xpj6t")
 texture_pressed = ExtResource("4_d7fhg")
 texture_hover = ExtResource("3_xpj6t")
 metadata/_edit_use_anchors_ = true
+
+[node name="DeleteButton" type="TextureButton" parent="."]
+z_index = 3
+layout_mode = 0
+offset_left = 59.0
+offset_top = -170.0
+offset_right = 109.0
+offset_bottom = -120.0
+scale = Vector2(0.565, 0.565)
+tooltip_text = "Delete Character"
+texture_normal = ExtResource("8_xn6mw")
+texture_pressed = ExtResource("9_65qkp")
+texture_hover = ExtResource("9_65qkp")
 
 [node name="FileDialog" type="FileDialog" parent="."]
 title = "Open a File"
@@ -154,6 +173,13 @@ offset_bottom = 85.0
 text = "current pos: ?,?"
 horizontal_alignment = 1
 
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+initial_position = 2
+ok_button_text = "Delete"
+dialog_text = "Are you sure you want to delete?"
+
 [connection signal="pressed" from="ChangeCharIcon" to="." method="_on_change_char_icon_pressed"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_delete_button_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_img_picked"]
 [connection signal="text_changed" from="NameInput" to="." method="_on_name_input_text_changed"]
+[connection signal="confirmed" from="ConfirmationDialog" to="." method="confirm_delete"]
