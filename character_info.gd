@@ -56,18 +56,24 @@ var defense: int = 1
 var is_alive: bool
 var inventory: Array = [] # For items later
 
-@onready var name_input: TextEdit = $NameInput
-@onready var pronouns_button: OptionButton = $PronounsButton
-@onready var personality_button: OptionButton = $PersonalityButton
-@onready var builds_button: OptionButton = $BuildsButton
-@onready var health_label: RichTextLabel = $Health
-@onready var sanity_label: RichTextLabel = $Sanity
-@onready var health_bar = $HealthBar
-@onready var sanity_bar = $SanityBar
-@onready var texture_rect: TextureRect = $CharIcon
-@onready var file_dialog: FileDialog = $FileDialog
-@onready var change_img = $ChangeCharIcon
-@onready var delete_char = $DeleteButton
+@onready var name_input: LineEdit = %NameInput
+@onready var pronouns_button: OptionButton = %PronounsButton
+@onready var personality_button: OptionButton = %PersonalityButton
+@onready var builds_button: OptionButton = %BuildsButton
+@onready var name_label: RichTextLabel = %NameLabel
+@onready var health_label: RichTextLabel = %Health
+@onready var sanity_label: RichTextLabel = %Sanity
+@onready var health_bar = %HealthBar
+@onready var sanity_bar = %SanityBar
+@onready var texture_rect: TextureRect = %CharIcon
+@onready var file_dialog: FileDialog = %FileDialog
+@onready var confirmation_dialog: ConfirmationDialog = %ConfirmationDialog
+@onready var change_img = %ChangeCharIcon
+@onready var delete_char = %DeleteButton
+@onready var edit_controls = %EditControls
+@onready var bars = %Bars
+@onready var pos_label = %PosLabel
+
 @onready var MainGameController = get_tree().get_first_node_in_group("GameControllers")
 
 var pos = Vector2i(0,0)
@@ -80,7 +86,7 @@ func _ready() -> void:
 
 	pos.x = randi_range(0, MainGameController.map_size_maximum_x)
 	pos.y = randi_range(0, MainGameController.map_size_maximum_y)
-	$Label.text = "current pos: " + str(pos.x) + "," + str(pos.y)
+	pos_label.text = "current pos: " + str(pos.x) + "," + str(pos.y)
 
 	is_alive = true
 	unique_id = str(get_instance_id()) #just in case
@@ -116,6 +122,10 @@ func _ready() -> void:
 	personality_button.item_selected.connect(on_selection_changed)
 	builds_button.item_selected.connect(on_selection_changed)
 	name_input.text_changed.connect(_on_name_input_text_changed)
+	change_img.pressed.connect(_on_change_char_icon_pressed)
+	delete_char.pressed.connect(_on_delete_button_pressed)
+	confirmation_dialog.confirmed.connect(confirm_delete)
+	file_dialog.file_selected.connect(_on_img_picked)
 
 
 	calculate_stats()
@@ -125,7 +135,7 @@ func move(move_x, move_y):
 	if is_alive:
 		pos.x += move_x
 		pos.y += move_y
-		$Label.text = "current pos: " + str(pos.x) + "," + str(pos.y)
+		pos_label.text = "current pos: " + str(pos.x) + "," + str(pos.y)
 		print(char_name, " has moved ", pos)
 	else:
 		print(char_name + " cannot move because they're dead, lol.")
@@ -237,16 +247,16 @@ func remove_item(item_name: String):
 	return false
 
 # --- Signal Callbacks ---
-func _on_name_input_text_changed() -> void:
-	print("_on_name_input_text_changed: Input text is now:", name_input.text)
-	var current_input_text = name_input.text.strip_edges()
+func _on_name_input_text_changed(new_text) -> void:
+	print("_on_name_input_text_changed: Input text is now:", new_text)
+	var current_input_text = new_text.strip_edges()
 	if current_input_text.is_empty():
 		char_name = "Tribute"
 	else:
 		char_name = current_input_text
 	print("_on_name_input_text_changed: char_name updated to:", char_name)
 	
-	$RichTextLabel.text = "[center][font_size=22]" + $NameInput.text + "[/font_size][/center]"
+	name_label.text = "[center][font_size=22]" + new_text + "[/font_size][/center]"
 	
 func _on_pronoun_selected(index: int) -> void:
 	picked_pronoun_key = pronouns_button.get_item_text(index)
@@ -275,26 +285,17 @@ func _on_img_picked(path: String) -> void:
 	else:
 		printerr("Failed to load image for %s from: %s" % [char_name, path])
 
-func toggle_ui(bool):
-	
-	var charmakerui = [$ChangeCharIcon, $NameInput, $PronounsButton, $PersonalityButton, $BuildsButton, $DeleteButton]
-	for label in charmakerui:
-		if bool:
-			label.hide()
-		else:
-			label.show()
-	
-	var ingameui = [$Health, $Sanity, $RichTextLabel, $HealthBar, $SanityBar, $Label]
-	for label in ingameui:
-		if bool:
-			label.show()
-		else:
-			label.hide()
+func toggle_ui(toggle):
+	edit_controls.visible = not toggle
+	change_img.visible = not toggle
+	delete_char.visible = not toggle
+	bars.visible = toggle
+	name_label.visible = toggle
+	pos_label.visible = toggle
 
 
 func _on_delete_button_pressed() -> void:
-	$ConfirmationDialog.popup()
-	pass # Replace with function body.
+	confirmation_dialog.popup()
 
 func confirm_delete() -> void:
-	get_parent().queue_free()
+	queue_free()
