@@ -39,12 +39,12 @@ func sort_chars_by_pos():
 
 	var alive_characters = characters.filter(func(c): return c.is_alive)
 
-	for char in alive_characters:
-		var current_pos = char.pos
+	for chara in alive_characters:
+		var current_pos = chara.pos
 		if positions.has(current_pos):
-			positions[current_pos].append(char) 
+			positions[current_pos].append(chara) 
 		else:
-			positions[current_pos] = [char] 
+			positions[current_pos] = [chara] 
 			
 			
 			
@@ -59,9 +59,6 @@ func trigger_random_event():
 		main_game.character_movement()
 	else:
 		printerr("Could not find MainGame node or character_movement method.")
-
-	update_map_ui() 
-
 
 	var alive_characters = characters.filter(func(c): return c.is_alive)
 	
@@ -87,9 +84,9 @@ func trigger_random_event():
 		
 		# this is supposed to check if characters are in the same area
 		# and if they are it adds them to the "current group" variable instated above
-		for char in unacted_chars:
-			if char.pos == initiator_pos:
-				current_group.append(char)
+		for chara in unacted_chars:
+			if chara.pos == initiator_pos:
+				current_group.append(chara)
 		
 		
 		# this is where things get fucky. 
@@ -116,15 +113,15 @@ func trigger_random_event():
 			# show print pre-func call
 			var format_args = {}
 			for i in range(group_size):
-				var char = current_group[i]
+				var chara = current_group[i]
 				var prefix = "pronoun%d_" % (i + 1)
-				format_args["name%d" % (i + 1)] = char.char_name
-				format_args[prefix + "subj"] = char.pronouns.get("subj", "?") 
-				format_args[prefix + "obj"] = char.pronouns.get("obj", "?")
-				format_args[prefix + "poss"] = char.pronouns.get("poss", "?")
-				format_args[prefix + "possa"] = char.pronouns.get("possa", "?")
-				format_args[prefix + "ref"] = char.pronouns.get("ref", "?")
-				format_args["health%d" % (i+1)] = char.health 
+				format_args["name%d" % (i + 1)] = chara.char_name
+				format_args[prefix + "subj"] = chara.pronouns.get("subj", "?") 
+				format_args[prefix + "obj"] = chara.pronouns.get("obj", "?")
+				format_args[prefix + "poss"] = chara.pronouns.get("poss", "?")
+				format_args[prefix + "possa"] = chara.pronouns.get("possa", "?")
+				format_args[prefix + "ref"] = chara.pronouns.get("ref", "?")
+				format_args["health%d" % (i+1)] = chara.health 
 
 			# format the event
 			var formatted_text = picked_event.get("text", "Error: Event text missing").format(format_args, "{_}") 
@@ -140,16 +137,25 @@ func trigger_random_event():
 		print("    Removing group from unacted list: ", current_group.map(func(c): return c.char_name))
 		for participant in current_group:
 			unacted_chars.erase(participant)
+	
+	update_map_ui()
 
 
 func update_map_ui():
 	var string_trim_amnt = 28
-	for pos in $"../MapTemp".get_children():
-		var pos_string = str(pos).left(-string_trim_amnt)
-		var number_in_area = 0
-		var alive_characters = characters.filter(func(c): return c.is_alive)
+	var alive_characters = characters.filter(func(c): return c.is_alive)
+	for pos in %MapTemp.get_children():
+		var pos_string = pos.name.right(6)
+		print(pos_string)
+		var pos_container = pos.get_node("CharContainer")
+		for child in pos_container.get_children():
+			child.queue_free()
 
-		for char in alive_characters:
-				if char.is_alive and str(pos_string) == str(char.pos):
-					number_in_area += 1
-				pos.text = "[font_size=40][center]" + str(number_in_area)
+		for chara in alive_characters:
+			print(chara.pos)
+			if chara.is_alive and str(pos_string) == str(chara.pos):
+				var char_icon = TextureRect.new()
+				char_icon.custom_minimum_size = Vector2(24, 24)
+				char_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+				char_icon.texture = chara.texture_rect.texture
+				pos_container.add_child(char_icon)
