@@ -1,0 +1,273 @@
+[gd_scene load_steps=12 format=3 uid="uid://b3qowdelk5rb"]
+
+[ext_resource type="Script" uid="uid://edtlhuere4x0" path="res://character_info.gd" id="1_bccl1"]
+[ext_resource type="Texture2D" uid="uid://bc0l8kpimoovl" path="res://char_icons/unknown.png" id="2_3jt82"]
+[ext_resource type="Texture2D" uid="uid://uuc4pjl1w4tm" path="res://ui_icons/folder1.png" id="3_rwvws"]
+[ext_resource type="Texture2D" uid="uid://cw4k5166qr806" path="res://ui_icons/folder2.png" id="4_m632x"]
+[ext_resource type="Texture2D" uid="uid://cgjubft8k8u4n" path="res://ui_icons/trashcan.png" id="5_8m3cm"]
+[ext_resource type="Texture2D" uid="uid://c6l82vkbo5dyx" path="res://ui_icons/trashcanOpen.png" id="6_kjllp"]
+[ext_resource type="Texture2D" uid="uid://cqr3tyww7q6oj" path="res://ui_icons/import.png" id="7_3jt82"]
+[ext_resource type="Texture2D" uid="uid://cd3t4etm7uoru" path="res://ui_icons/under.png" id="7_a7mw5"]
+[ext_resource type="Texture2D" uid="uid://lrn86wakid5s" path="res://ui_icons/over.png" id="8_qok0g"]
+[ext_resource type="Texture2D" uid="uid://e3ohkiiamuu6" path="res://ui_icons/progress.png" id="9_nie48"]
+[ext_resource type="PackedScene" uid="uid://qrmdcea33ubf" path="res://StatSlider.tscn" id="10_2fxti"]
+
+[node name="Character" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -630.94
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bccl1")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MainPanel" type="HBoxContainer" parent="ScrollContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel"]
+layout_mode = 2
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+
+[node name="CharIcon" type="TextureRect" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(189.81, 189.81)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_3jt82")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="ChangeCharIcon" type="TextureButton" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon"]
+unique_name_in_owner = true
+z_index = 3
+layout_mode = 1
+offset_left = 164.0
+offset_top = 34.0
+offset_right = 184.0
+offset_bottom = 54.0
+texture_normal = ExtResource("3_rwvws")
+texture_pressed = ExtResource("4_m632x")
+texture_hover = ExtResource("3_rwvws")
+
+[node name="FileDialog" type="FileDialog" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/ChangeCharIcon"]
+unique_name_in_owner = true
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.jpg", "*png", "*jpeg")
+
+[node name="DeleteButton" type="TextureButton" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon"]
+unique_name_in_owner = true
+z_index = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.81
+offset_top = 1.0
+offset_right = 18.19
+offset_bottom = 51.0
+grow_horizontal = 0
+scale = Vector2(0.565, 0.565)
+tooltip_text = "Delete Character"
+texture_normal = ExtResource("5_8m3cm")
+texture_pressed = ExtResource("6_kjllp")
+texture_hover = ExtResource("6_kjllp")
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/DeleteButton"]
+unique_name_in_owner = true
+initial_position = 2
+size = Vector2i(270, 100)
+ok_button_text = "Delete"
+dialog_text = "Are you sure you want to delete?"
+
+[node name="StreamImage" type="TextureButton" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon"]
+visible = false
+layout_mode = 0
+offset_left = 159.47
+offset_top = 56.0
+offset_right = 209.47
+offset_bottom = 106.0
+scale = Vector2(0.605, 0.605)
+texture_normal = ExtResource("7_3jt82")
+texture_pressed = ExtResource("7_3jt82")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Bars" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+nine_patch_stretch = true
+stretch_margin_left = 8
+stretch_margin_top = 8
+stretch_margin_right = 8
+stretch_margin_bottom = 8
+texture_under = ExtResource("7_a7mw5")
+texture_over = ExtResource("8_qok0g")
+texture_progress = ExtResource("9_nie48")
+
+[node name="Health" type="RichTextLabel" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars/HealthBar"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]HP: ???/???[/center]"
+
+[node name="SanityBar" type="TextureProgressBar" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+nine_patch_stretch = true
+stretch_margin_left = 8
+stretch_margin_top = 8
+stretch_margin_right = 8
+stretch_margin_bottom = 8
+texture_under = ExtResource("7_a7mw5")
+texture_over = ExtResource("8_qok0g")
+texture_progress = ExtResource("9_nie48")
+
+[node name="Sanity" type="RichTextLabel" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars/SanityBar"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]SANITY: ???/???[/center]"
+
+[node name="PosLabel" type="Label" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "current pos: ?,?"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="NameLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer2/MainPanel"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+bbcode_enabled = true
+
+[node name="EditControls" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameInput" type="LineEdit" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Character Name"
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PronounsButton" type="OptionButton" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls"]
+layout_mode = 2
+
+[node name="EditStats" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FormSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("10_2fxti")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EnduranceSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("10_2fxti")]
+unique_name_in_owner = true
+layout_mode = 2
+modified_stat = "endurance"
+
+[node name="PerceptionSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("10_2fxti")]
+unique_name_in_owner = true
+layout_mode = 2
+modified_stat = "perception"
+
+[node name="IngenuitySlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("10_2fxti")]
+unique_name_in_owner = true
+layout_mode = 2
+modified_stat = "ingenuity"
+
+[node name="CharismaSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("10_2fxti")]
+unique_name_in_owner = true
+layout_mode = 2
+modified_stat = "charisma"
+
+[node name="CastEditorShit" type="HBoxContainer" parent="ScrollContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="RelationshipPanel" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit"]
+custom_minimum_size = Vector2(262.325, 149.225)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel"]
+layout_mode = 2
+
+[node name="RelationshipEditorLabel" type="Label" parent="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Relationship Editor"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120.63)
+layout_mode = 2
+
+[node name="RelationshipContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="InventoryPanel" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit"]
+custom_minimum_size = Vector2(262.325, 149.225)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit/InventoryPanel"]
+layout_mode = 2
+
+[node name="InventoryEditorLabel" type="Label" parent="ScrollContainer/VBoxContainer2/CastEditorShit/InventoryPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Inventory Editor"
+horizontal_alignment = 1
+
+[node name="lol" type="Label" parent="ScrollContainer/VBoxContainer2/CastEditorShit/InventoryPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "(there's no inventory yet lol)"
+horizontal_alignment = 1

@@ -9,6 +9,8 @@ signal health_changed(character, new_health, max_health)
 signal sanity_changed(character, new_sanity, max_sanity)
 # Signal emitted when stats are finalized after selection
 signal stats_finalized(character)
+# Signal emitted when icon is changed
+signal icon_changed
 
 # Basic Info
 var char_name: String = "Tribute" : set = set_char_name
@@ -49,6 +51,7 @@ var inventory: Array = [] # For items later
 @onready var health_bar = %HealthBar
 @onready var sanity_bar = %SanityBar
 @onready var texture_rect: TextureRect = %CharIcon
+@onready var icon_texture = %CharIcon.texture
 @onready var file_dialog: FileDialog = %FileDialog
 @onready var confirmation_dialog: ConfirmationDialog = %ConfirmationDialog
 @onready var change_img = %ChangeCharIcon
@@ -56,6 +59,8 @@ var inventory: Array = [] # For items later
 @onready var edit_controls = %EditControls
 @onready var bars = %Bars
 @onready var pos_label = %PosLabel
+
+@onready var editstats = %EditStats
 
 #stats
 @onready var form_slider = %FormSlider
@@ -69,14 +74,15 @@ var inventory: Array = [] # For items later
 
 var pos = Vector2i(0,0)
 var roll
-
-var delete_self: bool = false
 	
+@onready var relationship_container: Node = %RelationshipContainer
+var relationships: Dictionary = {}
+
 # --- Initialization ---
 func _ready() -> void:
 
-	pos.x = randi_range(0, MainGameController.map_size_maximum_x)
-	pos.y = randi_range(0, MainGameController.map_size_maximum_y)
+	#pos.x = randi_range(0, MainGameController.map_size_maximum_x)
+	#pos.y = randi_range(0, MainGameController.map_size_maximum_y)
 	pos_label.text = "current pos: " + str(pos.x) + "," + str(pos.y)
 
 	is_alive = true
@@ -255,6 +261,7 @@ func _on_img_picked(path: String) -> void:
 		var texture = ImageTexture.create_from_image(image)
 		texture_rect.texture = texture
 		print("Image loaded successfully for %s from: %s" % [char_name, path])
+		emit_signal("icon_changed")
 	else:
 		printerr("Failed to load image for %s from: %s" % [char_name, path])
 

@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://2ek1oh0xlqex"]
+
+[ext_resource type="Script" uid="uid://d2q0ansljawiu" path="res://relationship_editor.gd" id="1_hm312"]
+[ext_resource type="Texture2D" uid="uid://bc0l8kpimoovl" path="res://char_icons/unknown.png" id="1_sk5o7"]
+
+[node name="RelationshipEditor" type="HBoxContainer"]
+script = ExtResource("1_hm312")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(7.985, 0)
+layout_mode = 2
+
+[node name="charicon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("1_sk5o7")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "0"
+
+[node name="HSlider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(195.525, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = -10.0
+max_value = 10.0

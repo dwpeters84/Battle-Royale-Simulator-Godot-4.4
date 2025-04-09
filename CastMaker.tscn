@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://c62mvng83jemu"]
+
+[ext_resource type="PackedScene" uid="uid://b3qowdelk5rb" path="res://CharMaker2.tscn" id="1_rtv3l"]
+[ext_resource type="Script" uid="uid://5yrxr8v5bvv5" path="res://add_char2.gd" id="2_jr0kw"]
+[ext_resource type="Script" uid="uid://b076f1ryybqwd" path="res://add_character.gd" id="3_avln1"]
+[ext_resource type="Script" uid="uid://dekq6aob67m30" path="res://rand_icons.gd" id="3_jr0kw"]
+[ext_resource type="Script" uid="uid://cf2dlr2t1jbqi" path="res://rand_stats.gd" id="4_k0cod"]
+[ext_resource type="Script" uid="uid://rkbyl8nynyr7" path="res://rand_names.gd" id="5_q18fw"]
+[ext_resource type="Script" uid="uid://c41ativ1qnk7q" path="res://rand_all.gd" id="6_eb18u"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = -1.0
+offset_right = 1385.84
+offset_bottom = 823.745
+scale = Vector2(0.785, 0.785)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="CharacterContainer" type="HFlowContainer" parent="PanelContainer/ScrollContainer" groups=["CastMaker"]]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1061.48, 0)
+layout_mode = 2
+script = ExtResource("2_jr0kw")
+
+[node name="Character" parent="PanelContainer/ScrollContainer/CharacterContainer" instance=ExtResource("1_rtv3l")]
+clip_contents = true
+custom_minimum_size = Vector2(0, 356.425)
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 298.88
+offset_bottom = 647.475
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer2"]
+layout_mode = 2
+
+[node name="Start Game" type="Button" parent="PanelContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="Add Character" type="Button" parent="PanelContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Add Character"
+script = ExtResource("3_avln1")
+
+[node name="RandIcons" type="Button" parent="PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 10
+text = "Randomize Character Icons"
+script = ExtResource("3_jr0kw")
+
+[node name="RandStats" type="Button" parent="PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Randomize Character Stats"
+script = ExtResource("4_k0cod")
+
+[node name="RandNames" type="Button" parent="PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+text = "Randomize Character Names"
+script = ExtResource("5_q18fw")
+
+[node name="RandAll" type="Button" parent="PanelContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Randomize All"
+script = ExtResource("6_eb18u")
+
+[connection signal="pressed" from="PanelContainer2/VBoxContainer/Add Character" to="PanelContainer/ScrollContainer/CharacterContainer" method="_on_add_character_pressed"]
+[connection signal="pressed" from="PanelContainer2/VBoxContainer/Add Character" to="PanelContainer2/VBoxContainer/Add Character" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer2/VBoxContainer/RandIcons" to="PanelContainer2/VBoxContainer/RandIcons" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer2/VBoxContainer/RandStats" to="PanelContainer2/VBoxContainer/RandStats" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer2/VBoxContainer/RandNames" to="PanelContainer2/VBoxContainer/RandNames" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer2/VBoxContainer/RandAll" to="PanelContainer2/VBoxContainer/RandAll" method="_on_pressed"]
