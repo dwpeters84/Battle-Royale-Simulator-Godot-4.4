@@ -17,12 +17,12 @@ func randomize_names():
 	for char in %CharacterContainer.get_children():
 		if not picked_names.has(picked_name):
 			picked_name = names.pick_random()
-			char.name_input.text = picked_name
 			picked_names.append(picked_name)
 		else:
 			names.shuffle()
 			picked_name = names.pick_random()
-			char.name_input.text = picked_name
+		char.name_input.text = picked_name
+		char.name_input.text_changed.emit(picked_name)
 
 
 func _on_pressed() -> void:

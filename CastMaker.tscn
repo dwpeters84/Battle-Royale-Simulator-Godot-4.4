@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c62mvng83jemu"]
+[gd_scene load_steps=15 format=3 uid="uid://c62mvng83jemu"]
 
 [ext_resource type="Script" uid="uid://dsq7mbcr56orw" path="res://cast_maker.gd" id="1_2hpj6"]
 [ext_resource type="Script" uid="uid://5yrxr8v5bvv5" path="res://add_char_button.gd" id="2_jr0kw"]
@@ -7,11 +7,17 @@
 [ext_resource type="Script" uid="uid://dekq6aob67m30" path="res://rand_icons.gd" id="3_jr0kw"]
 [ext_resource type="Script" uid="uid://bxmk1kywhut43" path="res://bulk_add_characters.gd" id="3_x7ypp"]
 [ext_resource type="Texture2D" uid="uid://bs6gyyfnjn112" path="res://ui_icons/KFR.png" id="4_2i1q7"]
+[ext_resource type="Script" uid="uid://n7clvw6aqpsm" path="res://bulk_slider.gd" id="4_f17vn"]
 [ext_resource type="Script" uid="uid://cf2dlr2t1jbqi" path="res://rand_stats.gd" id="4_k0cod"]
 [ext_resource type="Script" uid="uid://dn8q0x0dk133l" path="res://clear_cast.gd" id="4_pga40"]
 [ext_resource type="Script" uid="uid://rkbyl8nynyr7" path="res://rand_names.gd" id="5_q18fw"]
 [ext_resource type="Script" uid="uid://c41ativ1qnk7q" path="res://rand_all.gd" id="6_eb18u"]
 [ext_resource type="AudioStream" uid="uid://dplrjswfsr1a" path="res://castbuilder.mp3" id="7_avln1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2hpj6"]
+font_color = Color(1, 1, 1, 0.666667)
+outline_size = 8
+outline_color = Color(0, 0, 0, 0.670588)
 
 [node name="CastMaker" type="Control"]
 layout_mode = 3
@@ -35,8 +41,9 @@ layout_mode = 2
 
 [node name="CharacterContainer" type="HFlowContainer" parent="PanelContainer/ScrollContainer" groups=["CastMaker"]]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(1061.48, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("2_jr0kw")
 
 [node name="PanelContainer2" type="PanelContainer" parent="."]
@@ -67,11 +74,25 @@ text = "Add Character"
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/VBoxContainer"]
 layout_mode = 2
 
-[node name="BulkLabel" type="TextEdit" parent="PanelContainer2/VBoxContainer/HBoxContainer"]
+[node name="BulkSlider" type="HSlider" parent="PanelContainer2/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(127.8, 43.345)
 layout_mode = 2
-placeholder_text = "Type # Here"
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 1.0
+value = 1.0
+script = ExtResource("4_f17vn")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer/HBoxContainer/BulkSlider"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+label_settings = SubResource("LabelSettings_2hpj6")
+horizontal_alignment = 1
 
 [node name="Bulk Add Characters" type="Button" parent="PanelContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -79,6 +100,7 @@ text = "Bulk Add Characters"
 script = ExtResource("3_x7ypp")
 
 [node name="CharacterCounter" type="Label" parent="PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Current Characters: 0"
 horizontal_alignment = 1
@@ -129,6 +151,53 @@ size_flags_vertical = 8
 text = "Randomize All"
 script = ExtResource("6_eb18u")
 
+[node name="BlockInputRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.156863)
+
+[node name="CenterContainer" type="CenterContainer" parent="BlockInputRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="BlockInputRect/CenterContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="BlockInputRect/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BlockInputRect/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="BlockInputLabel" type="RichTextLabel" parent="BlockInputRect/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/outline_size = 8
+text = "Adding Characters..."
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BlockInterruptButton" type="Button" parent="BlockInputRect/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Interrupt"
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_avln1")
 autoplay = true
@@ -136,6 +205,7 @@ autoplay = true
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/Start Game" to="PanelContainer2/VBoxContainer/Start Game" method="_on_pressed"]
 [connection signal="confirmed" from="PanelContainer2/VBoxContainer/Start Game/StartGameDialog" to="." method="_on_start_game_dialog_confirmed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/Add Character" to="PanelContainer/ScrollContainer/CharacterContainer" method="_on_add_character_pressed"]
+[connection signal="value_changed" from="PanelContainer2/VBoxContainer/HBoxContainer/BulkSlider" to="PanelContainer2/VBoxContainer/HBoxContainer/BulkSlider" method="_on_value_changed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/HBoxContainer/Bulk Add Characters" to="PanelContainer2/VBoxContainer/HBoxContainer/Bulk Add Characters" method="_on_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/Clear Cast" to="PanelContainer2/VBoxContainer/Clear Cast" method="_on_pressed"]
 [connection signal="confirmed" from="PanelContainer2/VBoxContainer/Clear Cast/AcceptDialog" to="PanelContainer2/VBoxContainer/Clear Cast" method="_on_accept_dialog_confirmed"]
@@ -143,3 +213,4 @@ autoplay = true
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/RandStats" to="PanelContainer2/VBoxContainer/RandStats" method="_on_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/RandNames" to="PanelContainer2/VBoxContainer/RandNames" method="_on_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/RandAll" to="PanelContainer2/VBoxContainer/RandAll" method="_on_pressed"]
+[connection signal="pressed" from="BlockInputRect/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/BlockInterruptButton" to="PanelContainer2/VBoxContainer/HBoxContainer/Bulk Add Characters" method="_on_block_interrupt_button_pressed"]

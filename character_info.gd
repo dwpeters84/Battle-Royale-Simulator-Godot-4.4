@@ -62,6 +62,8 @@ var inventory: Array = [] # For items later
 
 @onready var editstats = %EditStats
 
+@onready var relationship_window = %RelationshipWindow
+
 #stats
 @onready var form_slider = %FormSlider
 @onready var endurance_slider = %EnduranceSlider
@@ -136,14 +138,14 @@ func move(move_x, move_y):
 		print(char_name + " cannot move because they're dead, lol.")
 	
 func set_char_name(new_name: String):
-	print("set_char_name: Received:", new_name) 
 	var potential_name = new_name.strip_edges() 
 	if potential_name.is_empty():
 		potential_name = "Tribute" # Default if empty
 
 	if char_name != potential_name:
 		char_name = potential_name
-		print("set_char_name: char_name is now:", char_name)
+
+	name_label.text = "[center][font_size=22]" + char_name + "[/font_size][/center]"
 
 func set_health(value: int):
 	var previous_health = health
@@ -226,15 +228,7 @@ func remove_item(item_name: String):
 
 # --- Signal Callbacks ---
 func _on_name_input_text_changed(new_text) -> void:
-	print("_on_name_input_text_changed: Input text is now:", new_text)
-	var current_input_text = new_text.strip_edges()
-	if current_input_text.is_empty():
-		char_name = "Tribute"
-	else:
-		char_name = current_input_text
-	print("_on_name_input_text_changed: char_name updated to:", char_name)
-	
-	name_label.text = "[center][font_size=22]" + new_text + "[/font_size][/center]"
+	set_char_name(new_text)
 	
 func _on_pronoun_selected(index: int) -> void:
 	picked_pronoun_key = pronouns_button.get_item_text(index)
@@ -277,3 +271,8 @@ func _on_delete_button_pressed() -> void:
 func confirm_delete() -> void:
 	Cast.current_cast.erase(self)
 	queue_free()
+
+
+func _on_relationship_editor_pressed() -> void:
+	relationship_window.popup()
+	relationship_window.title = "Relationships for " + char_name
