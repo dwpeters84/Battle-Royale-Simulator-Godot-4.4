@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://c62mvng83jemu"]
 
 [ext_resource type="Script" uid="uid://dsq7mbcr56orw" path="res://cast_maker.gd" id="1_2hpj6"]
-[ext_resource type="Script" uid="uid://5yrxr8v5bvv5" path="res://add_char2.gd" id="2_jr0kw"]
-[ext_resource type="Script" uid="uid://dn3f6jan32q6f" path="res://label.gd" id="2_rc6ke"]
+[ext_resource type="Script" uid="uid://5yrxr8v5bvv5" path="res://add_char_button.gd" id="2_jr0kw"]
+[ext_resource type="Script" uid="uid://dn3f6jan32q6f" path="res://current_characters_label.gd" id="2_rc6ke"]
 [ext_resource type="Script" uid="uid://cqini18hvpyfi" path="res://start_game.gd" id="3_f17vn"]
 [ext_resource type="Script" uid="uid://dekq6aob67m30" path="res://rand_icons.gd" id="3_jr0kw"]
 [ext_resource type="Script" uid="uid://bxmk1kywhut43" path="res://bulk_add_characters.gd" id="3_x7ypp"]

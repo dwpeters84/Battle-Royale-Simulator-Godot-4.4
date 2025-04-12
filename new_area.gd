@@ -1,6 +1,6 @@
 extends Button
 
-var new_area_scene = preload("res://AreaMaker.tscn")
+var new_area_scene = preload("res://AreaDefiner.tscn")
 
 func _on_pressed() -> void:
 	var new_area = new_area_scene.instantiate()

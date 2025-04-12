@@ -1,6 +1,6 @@
 extends HFlowContainer
 
-@onready var new_char = preload("res://CharMaker2.tscn")
+@onready var new_char = preload("res://FighterCreator.tscn")
 
 func _on_add_character_pressed() -> void:
 	var character = new_char.instantiate()

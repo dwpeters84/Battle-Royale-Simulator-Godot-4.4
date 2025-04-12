@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c36oouwxqfmui"]
 
-[ext_resource type="Script" uid="uid://bl7afyy546t51" path="res://node.gd" id="1_03owx"]
+[ext_resource type="Script" uid="uid://bl7afyy546t51" path="res://character.gd" id="1_03owx"]
 [ext_resource type="Script" uid="uid://c4vivp3qor3ot" path="res://EventHandler.gd" id="2_20pc6"]
 [ext_resource type="Script" uid="uid://c1yd0upacm3vi" path="res://EventFunctions.gd" id="2_wkp8b"]
 

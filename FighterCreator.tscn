@@ -1,18 +1,18 @@
 [gd_scene load_steps=14 format=3 uid="uid://b3qowdelk5rb"]
 
-[ext_resource type="Script" uid="uid://edtlhuere4x0" path="res://character_info.gd" id="1_bccl1"]
-[ext_resource type="Texture2D" uid="uid://bc0l8kpimoovl" path="res://char_icons/unknown.png" id="2_3jt82"]
-[ext_resource type="Texture2D" uid="uid://uuc4pjl1w4tm" path="res://ui_icons/folder1.png" id="3_rwvws"]
-[ext_resource type="Texture2D" uid="uid://cw4k5166qr806" path="res://ui_icons/folder2.png" id="4_m632x"]
-[ext_resource type="Texture2D" uid="uid://cgjubft8k8u4n" path="res://ui_icons/trashcan.png" id="5_8m3cm"]
-[ext_resource type="Texture2D" uid="uid://c6l82vkbo5dyx" path="res://ui_icons/trashcanOpen.png" id="6_kjllp"]
-[ext_resource type="Texture2D" uid="uid://cqr3tyww7q6oj" path="res://ui_icons/import.png" id="7_3jt82"]
-[ext_resource type="Texture2D" uid="uid://cd3t4etm7uoru" path="res://ui_icons/under.png" id="7_a7mw5"]
-[ext_resource type="Texture2D" uid="uid://lrn86wakid5s" path="res://ui_icons/over.png" id="8_qok0g"]
-[ext_resource type="Texture2D" uid="uid://e3ohkiiamuu6" path="res://ui_icons/progress.png" id="9_nie48"]
-[ext_resource type="PackedScene" uid="uid://qrmdcea33ubf" path="res://StatSlider.tscn" id="10_2fxti"]
-[ext_resource type="Script" uid="uid://bhcgdrhm756np" path="res://relationship_manager.gd" id="12_m632x"]
-[ext_resource type="Script" uid="uid://chgrkhxnr7fid" path="res://add_relationship.gd" id="12_rwvws"]
+[ext_resource type="Script" uid="uid://edtlhuere4x0" path="res://character_info.gd" id="1_1v8qw"]
+[ext_resource type="Texture2D" uid="uid://bc0l8kpimoovl" path="res://char_icons/unknown.png" id="2_tu13v"]
+[ext_resource type="Texture2D" uid="uid://uuc4pjl1w4tm" path="res://ui_icons/folder1.png" id="3_ocgop"]
+[ext_resource type="Texture2D" uid="uid://cw4k5166qr806" path="res://ui_icons/folder2.png" id="4_r0qbq"]
+[ext_resource type="Texture2D" uid="uid://cgjubft8k8u4n" path="res://ui_icons/trashcan.png" id="5_xwi74"]
+[ext_resource type="Texture2D" uid="uid://c6l82vkbo5dyx" path="res://ui_icons/trashcanOpen.png" id="6_i84df"]
+[ext_resource type="Texture2D" uid="uid://cqr3tyww7q6oj" path="res://ui_icons/import.png" id="7_fp2lq"]
+[ext_resource type="Texture2D" uid="uid://cd3t4etm7uoru" path="res://ui_icons/under.png" id="8_mu5n3"]
+[ext_resource type="Texture2D" uid="uid://lrn86wakid5s" path="res://ui_icons/over.png" id="9_o68jn"]
+[ext_resource type="Texture2D" uid="uid://e3ohkiiamuu6" path="res://ui_icons/progress.png" id="10_e814e"]
+[ext_resource type="PackedScene" uid="uid://qrmdcea33ubf" path="res://StatSlider.tscn" id="11_h3phi"]
+[ext_resource type="Script" uid="uid://bhcgdrhm756np" path="res://relationship_manager.gd" id="12_71vk2"]
+[ext_resource type="Script" uid="uid://chgrkhxnr7fid" path="res://add_relationship.gd" id="13_agfup"]
 
 [node name="Character" type="PanelContainer"]
 anchors_preset = 15
@@ -21,7 +21,7 @@ anchor_bottom = 1.0
 offset_right = -630.94
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_bccl1")
+script = ExtResource("1_1v8qw")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 2
@@ -46,7 +46,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(189.81, 189.81)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("2_3jt82")
+texture = ExtResource("2_tu13v")
 expand_mode = 2
 stretch_mode = 5
 
@@ -58,9 +58,9 @@ offset_left = 164.0
 offset_top = 34.0
 offset_right = 184.0
 offset_bottom = 54.0
-texture_normal = ExtResource("3_rwvws")
-texture_pressed = ExtResource("4_m632x")
-texture_hover = ExtResource("3_rwvws")
+texture_normal = ExtResource("3_ocgop")
+texture_pressed = ExtResource("4_r0qbq")
+texture_hover = ExtResource("3_ocgop")
 
 [node name="FileDialog" type="FileDialog" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/ChangeCharIcon"]
 unique_name_in_owner = true
@@ -84,9 +84,9 @@ offset_bottom = 51.0
 grow_horizontal = 0
 scale = Vector2(0.565, 0.565)
 tooltip_text = "Delete Character"
-texture_normal = ExtResource("5_8m3cm")
-texture_pressed = ExtResource("6_kjllp")
-texture_hover = ExtResource("6_kjllp")
+texture_normal = ExtResource("5_xwi74")
+texture_pressed = ExtResource("6_i84df")
+texture_hover = ExtResource("6_i84df")
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/DeleteButton"]
 unique_name_in_owner = true
@@ -103,8 +103,8 @@ offset_top = 56.0
 offset_right = 209.47
 offset_bottom = 106.0
 scale = Vector2(0.605, 0.605)
-texture_normal = ExtResource("7_3jt82")
-texture_pressed = ExtResource("7_3jt82")
+texture_normal = ExtResource("7_fp2lq")
+texture_pressed = ExtResource("7_fp2lq")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
 layout_mode = 2
@@ -123,9 +123,9 @@ stretch_margin_left = 8
 stretch_margin_top = 8
 stretch_margin_right = 8
 stretch_margin_bottom = 8
-texture_under = ExtResource("7_a7mw5")
-texture_over = ExtResource("8_qok0g")
-texture_progress = ExtResource("9_nie48")
+texture_under = ExtResource("8_mu5n3")
+texture_over = ExtResource("9_o68jn")
+texture_progress = ExtResource("10_e814e")
 
 [node name="Health" type="RichTextLabel" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars/HealthBar"]
 unique_name_in_owner = true
@@ -148,9 +148,9 @@ stretch_margin_left = 8
 stretch_margin_top = 8
 stretch_margin_right = 8
 stretch_margin_bottom = 8
-texture_under = ExtResource("7_a7mw5")
-texture_over = ExtResource("8_qok0g")
-texture_progress = ExtResource("9_nie48")
+texture_under = ExtResource("8_mu5n3")
+texture_over = ExtResource("9_o68jn")
+texture_progress = ExtResource("10_e814e")
 
 [node name="Sanity" type="RichTextLabel" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars/SanityBar"]
 unique_name_in_owner = true
@@ -207,26 +207,26 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="FormSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("10_2fxti")]
+[node name="FormSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("11_h3phi")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="EnduranceSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("10_2fxti")]
+[node name="EnduranceSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("11_h3phi")]
 unique_name_in_owner = true
 layout_mode = 2
 modified_stat = "endurance"
 
-[node name="PerceptionSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("10_2fxti")]
+[node name="PerceptionSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("11_h3phi")]
 unique_name_in_owner = true
 layout_mode = 2
 modified_stat = "perception"
 
-[node name="IngenuitySlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("10_2fxti")]
+[node name="IngenuitySlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("11_h3phi")]
 unique_name_in_owner = true
 layout_mode = 2
 modified_stat = "ingenuity"
 
-[node name="CharismaSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("10_2fxti")]
+[node name="CharismaSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("11_h3phi")]
 unique_name_in_owner = true
 layout_mode = 2
 modified_stat = "charisma"
@@ -254,7 +254,7 @@ layout_mode = 2
 [node name="RelationshipContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-script = ExtResource("12_m632x")
+script = ExtResource("12_71vk2")
 
 [node name="AddRelationship" type="Button" parent="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer/ScrollContainer/RelationshipContainer"]
 custom_minimum_size = Vector2(262.095, 0)
@@ -262,7 +262,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
 text = "add relationship"
-script = ExtResource("12_rwvws")
+script = ExtResource("13_agfup")
 
 [node name="InventoryPanel" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit"]
 custom_minimum_size = Vector2(262.325, 149.225)
