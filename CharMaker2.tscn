@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b3qowdelk5rb"]
+[gd_scene load_steps=14 format=3 uid="uid://b3qowdelk5rb"]
 
 [ext_resource type="Script" uid="uid://edtlhuere4x0" path="res://character_info.gd" id="1_bccl1"]
 [ext_resource type="Texture2D" uid="uid://bc0l8kpimoovl" path="res://char_icons/unknown.png" id="2_3jt82"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://lrn86wakid5s" path="res://ui_icons/over.png" id="8_qok0g"]
 [ext_resource type="Texture2D" uid="uid://e3ohkiiamuu6" path="res://ui_icons/progress.png" id="9_nie48"]
 [ext_resource type="PackedScene" uid="uid://qrmdcea33ubf" path="res://StatSlider.tscn" id="10_2fxti"]
+[ext_resource type="Script" uid="uid://bhcgdrhm756np" path="res://relationship_manager.gd" id="12_m632x"]
+[ext_resource type="Script" uid="uid://chgrkhxnr7fid" path="res://add_relationship.gd" id="12_rwvws"]
 
 [node name="Character" type="PanelContainer"]
 anchors_preset = 15
@@ -252,6 +254,15 @@ layout_mode = 2
 [node name="RelationshipContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+script = ExtResource("12_m632x")
+
+[node name="AddRelationship" type="Button" parent="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer/ScrollContainer/RelationshipContainer"]
+custom_minimum_size = Vector2(262.095, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+text = "add relationship"
+script = ExtResource("12_rwvws")
 
 [node name="InventoryPanel" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit"]
 custom_minimum_size = Vector2(262.325, 149.225)
@@ -271,3 +282,5 @@ layout_mode = 2
 size_flags_vertical = 0
 text = "(there's no inventory yet lol)"
 horizontal_alignment = 1
+
+[connection signal="pressed" from="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer/ScrollContainer/RelationshipContainer/AddRelationship" to="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer/ScrollContainer/RelationshipContainer/AddRelationship" method="_on_pressed"]

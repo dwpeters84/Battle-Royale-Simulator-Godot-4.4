@@ -76,7 +76,6 @@ var pos = Vector2i(0,0)
 var roll
 	
 @onready var relationship_container: Node = %RelationshipContainer
-var relationships: Dictionary = {}
 
 # --- Initialization ---
 func _ready() -> void:
@@ -276,4 +275,5 @@ func _on_delete_button_pressed() -> void:
 	confirmation_dialog.popup()
 
 func confirm_delete() -> void:
+	Cast.current_cast.erase(self)
 	queue_free()

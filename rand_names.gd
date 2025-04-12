@@ -7,13 +7,22 @@ var names = [
   "Alexis", "Darian", "Bailey", "August", "Reed", "Maxwell", "Esme", "Roan",
   "Elis", "Stormy", "Delta", "Sam", "Sage", "Jeryn", "Freddie", "Meredith",
   "Avery", "Jaime", "Remy", "Shirley", "London", "Hailey", "Gray", "Kerry",
-  "Kenzie", "Toby"
+  "Kenzie", "Toby", "Benji"
 ];
 
 func randomize_names():
+	var picked_name
+	var picked_names: Array
 	names.shuffle()
 	for char in %CharacterContainer.get_children():
-		char.name_input.text = names.pick_random()
+		if not picked_names.has(picked_name):
+			picked_name = names.pick_random()
+			char.name_input.text = picked_name
+			picked_names.append(picked_name)
+		else:
+			names.shuffle()
+			picked_name = names.pick_random()
+			char.name_input.text = picked_name
 
 
 func _on_pressed() -> void:

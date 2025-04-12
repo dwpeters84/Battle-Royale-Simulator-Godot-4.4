@@ -14,6 +14,14 @@ config/name="brsim2"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Cast="*res://cast.gd"
+
+[display]
+
+window/stretch/mode="viewport"
+
 [editor_plugins]
 
 enabled=PackedStringArray()
@@ -28,3 +36,4 @@ folder_colors={
 
 GameControllers=""
 CastMaker=""
+FileDialogs=""
