@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c62mvng83jemu"]
+[gd_scene load_steps=13 format=3 uid="uid://c62mvng83jemu"]
 
+[ext_resource type="Script" uid="uid://dsq7mbcr56orw" path="res://cast_maker.gd" id="1_2hpj6"]
 [ext_resource type="Script" uid="uid://5yrxr8v5bvv5" path="res://add_char2.gd" id="2_jr0kw"]
 [ext_resource type="Script" uid="uid://dn3f6jan32q6f" path="res://label.gd" id="2_rc6ke"]
-[ext_resource type="Script" uid="uid://b076f1ryybqwd" path="res://add_character.gd" id="3_avln1"]
+[ext_resource type="Script" uid="uid://cqini18hvpyfi" path="res://start_game.gd" id="3_f17vn"]
 [ext_resource type="Script" uid="uid://dekq6aob67m30" path="res://rand_icons.gd" id="3_jr0kw"]
 [ext_resource type="Script" uid="uid://bxmk1kywhut43" path="res://bulk_add_characters.gd" id="3_x7ypp"]
 [ext_resource type="Texture2D" uid="uid://bs6gyyfnjn112" path="res://ui_icons/KFR.png" id="4_2i1q7"]
@@ -12,13 +13,14 @@
 [ext_resource type="Script" uid="uid://c41ativ1qnk7q" path="res://rand_all.gd" id="6_eb18u"]
 [ext_resource type="AudioStream" uid="uid://dplrjswfsr1a" path="res://castbuilder.mp3" id="7_avln1"]
 
-[node name="Control" type="Control"]
+[node name="CastMaker" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_2hpj6")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -48,11 +50,19 @@ layout_mode = 2
 [node name="Start Game" type="Button" parent="PanelContainer2/VBoxContainer"]
 layout_mode = 2
 text = "Start Game"
+script = ExtResource("3_f17vn")
+
+[node name="StartGameDialog" type="ConfirmationDialog" parent="PanelContainer2/VBoxContainer/Start Game"]
+auto_translate_mode = 1
+title = "Start the game?"
+initial_position = 1
+ok_button_text = "YES!!!"
+dialog_text = "Are you sure you're ready to RUMBLE?!!"
+cancel_button_text = "no... not yet."
 
 [node name="Add Character" type="Button" parent="PanelContainer2/VBoxContainer"]
 layout_mode = 2
 text = "Add Character"
-script = ExtResource("3_avln1")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer2/VBoxContainer"]
 layout_mode = 2
@@ -79,11 +89,12 @@ layout_mode = 2
 text = "Clear Cast"
 script = ExtResource("4_pga40")
 
-[node name="AcceptDialog" type="AcceptDialog" parent="PanelContainer2/VBoxContainer/Clear Cast"]
+[node name="AcceptDialog" type="ConfirmationDialog" parent="PanelContainer2/VBoxContainer/Clear Cast"]
 title = "Clear all characters?"
 initial_position = 1
 ok_button_text = "Yes, kill them all!"
 dialog_text = "Are you sure you want to delete all current cast characters?"
+cancel_button_text = "No! Spare them!"
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer2/VBoxContainer"]
 layout_mode = 2
@@ -120,10 +131,11 @@ script = ExtResource("6_eb18u")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_avln1")
-parameters/looping = false
+autoplay = true
 
+[connection signal="pressed" from="PanelContainer2/VBoxContainer/Start Game" to="PanelContainer2/VBoxContainer/Start Game" method="_on_pressed"]
+[connection signal="confirmed" from="PanelContainer2/VBoxContainer/Start Game/StartGameDialog" to="." method="_on_start_game_dialog_confirmed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/Add Character" to="PanelContainer/ScrollContainer/CharacterContainer" method="_on_add_character_pressed"]
-[connection signal="pressed" from="PanelContainer2/VBoxContainer/Add Character" to="PanelContainer2/VBoxContainer/Add Character" method="_on_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/HBoxContainer/Bulk Add Characters" to="PanelContainer2/VBoxContainer/HBoxContainer/Bulk Add Characters" method="_on_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/Clear Cast" to="PanelContainer2/VBoxContainer/Clear Cast" method="_on_pressed"]
 [connection signal="confirmed" from="PanelContainer2/VBoxContainer/Clear Cast/AcceptDialog" to="PanelContainer2/VBoxContainer/Clear Cast" method="_on_accept_dialog_confirmed"]

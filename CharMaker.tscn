@@ -38,6 +38,7 @@ stretch_mode = 5
 
 [node name="ChangeCharIcon" type="TextureButton" parent="ScrollContainer/MainPanel/CharIcon"]
 unique_name_in_owner = true
+visible = false
 z_index = 3
 layout_mode = 1
 offset_right = 25.0
@@ -56,6 +57,7 @@ filters = PackedStringArray("*.jpg", "*png", "*jpeg")
 
 [node name="DeleteButton" type="TextureButton" parent="ScrollContainer/MainPanel/CharIcon"]
 unique_name_in_owner = true
+visible = false
 z_index = 3
 layout_mode = 1
 anchors_preset = 1
@@ -80,7 +82,6 @@ dialog_text = "Are you sure you want to delete?"
 
 [node name="NameLabel" type="RichTextLabel" parent="ScrollContainer/MainPanel"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 bbcode_enabled = true
@@ -141,6 +142,7 @@ text = "[center]SANITY: ???/???[/center]"
 
 [node name="EditControls" type="VBoxContainer" parent="ScrollContainer/MainPanel"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="NameInput" type="LineEdit" parent="ScrollContainer/MainPanel/EditControls"]
