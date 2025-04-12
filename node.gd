@@ -6,7 +6,7 @@ var map_size_minimum_x: int = 0
 @export var map_size_maximum_x: int = 2
 @export var move_check = 15
 
-@onready var character_container = $"../Characters"
+@onready var character_container = %Characters
 @onready var event_handler = %EventHandler
 @onready var trigger_button: Button = %TriggerEventButton
 @onready var event_log: RichTextLabel = %GameLog

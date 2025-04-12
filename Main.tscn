@@ -1,14 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://c36oouwxqfmui"]
+[gd_scene load_steps=6 format=3 uid="uid://c36oouwxqfmui"]
 
 [ext_resource type="Script" uid="uid://bl7afyy546t51" path="res://node.gd" id="1_03owx"]
 [ext_resource type="Script" uid="uid://c4vivp3qor3ot" path="res://EventHandler.gd" id="2_20pc6"]
 [ext_resource type="Script" uid="uid://c1yd0upacm3vi" path="res://EventFunctions.gd" id="2_wkp8b"]
-[ext_resource type="PackedScene" uid="uid://dcq5g3w8sqqsa" path="res://CharMaker.tscn" id="3_20pc6"]
-[ext_resource type="Script" uid="uid://cmmckut05nnn4" path="res://add_char.gd" id="4_5vvyt"]
-[ext_resource type="Texture2D" uid="uid://bt1f4fsw734dg" path="res://bgs/1.jpg" id="5_c6i3y"]
-[ext_resource type="Texture2D" uid="uid://dq4i3ay5bqbt" path="res://bgs/2.png" id="6_c2ibq"]
-[ext_resource type="Texture2D" uid="uid://dqe58vtsxoe7s" path="res://bgs/3.png" id="7_j4qnp"]
-[ext_resource type="Texture2D" uid="uid://vlwmxfauyumn" path="res://bgs/4.png" id="8_fpfj3"]
 
 [sub_resource type="FontVariation" id="FontVariation_03owx"]
 variation_transform = Transform2D(1, 0.25, 0, 1, 0, 0)
@@ -52,7 +46,7 @@ unique_name_in_owner = true
 layout_mode = 2
 bbcode_enabled = true
 
-[node name="Characters" type="ScrollContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 clip_contents = false
 custom_minimum_size = Vector2(1073.11, 4.695)
 anchors_preset = 8
@@ -72,46 +66,12 @@ follow_focus = true
 horizontal_scroll_mode = 2
 vertical_scroll_mode = 0
 
-[node name="Characters" type="HBoxContainer" parent="Characters"]
+[node name="Characters" type="HBoxContainer" parent="ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 3
 alignment = 1
-
-[node name="Character" parent="Characters/Characters" instance=ExtResource("3_20pc6")]
-layout_mode = 2
-
-[node name="AddChar" type="Button" parent="Characters/Characters"]
-custom_minimum_size = Vector2(18, 281)
-layout_mode = 2
-text = "+"
-script = ExtResource("4_5vvyt")
-
-[node name="Areas" type="Node" parent="."]
-
-[node name="Area1" type="TextureRect" parent="Areas"]
-visible = false
-offset_right = 1152.0
-offset_bottom = 647.0
-texture = ExtResource("5_c6i3y")
-
-[node name="Area2" type="TextureRect" parent="Areas"]
-visible = false
-offset_right = 1152.0
-offset_bottom = 647.0
-texture = ExtResource("6_c2ibq")
-
-[node name="Area3" type="TextureRect" parent="Areas"]
-visible = false
-offset_right = 1152.0
-offset_bottom = 647.0
-texture = ExtResource("7_j4qnp")
-
-[node name="Area4" type="TextureRect" parent="Areas"]
-visible = false
-offset_right = 1152.0
-offset_bottom = 647.0
-texture = ExtResource("8_fpfj3")
 
 [node name="TriggerEventButton" type="Button" parent="."]
 unique_name_in_owner = true
@@ -407,5 +367,4 @@ label_settings = SubResource("LabelSettings_wkp8b")
 vertical_alignment = 2
 
 [connection signal="event_log_updated" from="EventHandler" to="MainGame" method="_on_event_log_updated"]
-[connection signal="pressed" from="Characters/Characters/AddChar" to="Characters/Characters/AddChar" method="_on_pressed"]
 [connection signal="pressed" from="StartGame" to="MainGame" method="_on_start_game_pressed"]
