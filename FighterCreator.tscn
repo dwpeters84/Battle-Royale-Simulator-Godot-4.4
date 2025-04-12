@@ -15,10 +15,10 @@
 [ext_resource type="Script" uid="uid://chgrkhxnr7fid" path="res://add_relationship.gd" id="13_agfup"]
 
 [node name="Character" type="PanelContainer"]
+custom_minimum_size = Vector2(520, 270)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -630.94
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1v8qw")
@@ -30,6 +30,7 @@ horizontal_scroll_mode = 0
 [node name="VBoxContainer2" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="MainPanel" type="HBoxContainer" parent="ScrollContainer/VBoxContainer2"]
 layout_mode = 2
@@ -111,7 +112,6 @@ layout_mode = 2
 
 [node name="Bars" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 
 [node name="HealthBar" type="TextureProgressBar" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars"]
@@ -231,56 +231,48 @@ unique_name_in_owner = true
 layout_mode = 2
 modified_stat = "charisma"
 
-[node name="CastEditorShit" type="HBoxContainer" parent="ScrollContainer/VBoxContainer2"]
-layout_mode = 2
-
-[node name="RelationshipPanel" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit"]
-custom_minimum_size = Vector2(262.325, 149.225)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel"]
-layout_mode = 2
-
-[node name="RelationshipEditorLabel" type="Label" parent="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Relationship Editor"
-horizontal_alignment = 1
-
-[node name="ScrollContainer" type="ScrollContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 120.63)
-layout_mode = 2
-
-[node name="RelationshipContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer/ScrollContainer"]
+[node name="RelationshipEditor" type="Button" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls"]
 unique_name_in_owner = true
 layout_mode = 2
-script = ExtResource("12_71vk2")
+text = "Relationship Editor"
 
-[node name="AddRelationship" type="Button" parent="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer/ScrollContainer/RelationshipContainer"]
+[node name="RelationshipWindow" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+title = "Relationship Editor"
+initial_position = 1
+size = Vector2i(400, 400)
+ok_button_text = "Done"
+
+[node name="RelationshipPanel" type="PanelContainer" parent="RelationshipWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RelationshipWindow/RelationshipPanel"]
+layout_mode = 2
+
+[node name="AddRelationship" type="Button" parent="RelationshipWindow/RelationshipPanel/VBoxContainer"]
 custom_minimum_size = Vector2(262.095, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
+size_flags_vertical = 0
 text = "add relationship"
 script = ExtResource("13_agfup")
 
-[node name="InventoryPanel" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit"]
-custom_minimum_size = Vector2(262.325, 149.225)
+[node name="ScrollContainer" type="ScrollContainer" parent="RelationshipWindow/RelationshipPanel/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/CastEditorShit/InventoryPanel"]
+[node name="RelationshipContainer" type="VBoxContainer" parent="RelationshipWindow/RelationshipPanel/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("12_71vk2")
 
-[node name="InventoryEditorLabel" type="Label" parent="ScrollContainer/VBoxContainer2/CastEditorShit/InventoryPanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Inventory Editor"
-horizontal_alignment = 1
-
-[node name="lol" type="Label" parent="ScrollContainer/VBoxContainer2/CastEditorShit/InventoryPanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 0
-text = "(there's no inventory yet lol)"
-horizontal_alignment = 1
-
-[connection signal="pressed" from="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer/ScrollContainer/RelationshipContainer/AddRelationship" to="ScrollContainer/VBoxContainer2/CastEditorShit/RelationshipPanel/VBoxContainer/ScrollContainer/RelationshipContainer/AddRelationship" method="_on_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer2/MainPanel/EditControls/RelationshipEditor" to="." method="_on_relationship_editor_pressed"]
+[connection signal="pressed" from="RelationshipWindow/RelationshipPanel/VBoxContainer/AddRelationship" to="RelationshipWindow/RelationshipPanel/VBoxContainer/AddRelationship" method="_on_pressed"]
