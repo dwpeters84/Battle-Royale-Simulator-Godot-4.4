@@ -14,6 +14,9 @@ var gamestarted: bool
 
 var characters: Array[Character] = []
 
+
+
+
 func add_log_entry(text: String):
 	if gamestarted:
 		event_log.append_text(text + "\n")

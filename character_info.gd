@@ -11,6 +11,11 @@ signal sanity_changed(character, new_sanity, max_sanity)
 signal stats_finalized(character)
 # Signal emitted when icon is changed
 signal icon_changed
+# Signal emitted when name is changed
+signal name_changed(new_name)
+# Signal emitted when stats are changed
+signal stats_changed
+
 
 # Basic Info
 var char_name: String = "Tribute" : set = set_char_name
@@ -145,7 +150,7 @@ func set_char_name(new_name: String):
 	if char_name != potential_name:
 		char_name = potential_name
 
-	name_label.text = "[center][font_size=22]" + char_name + "[/font_size][/center]"
+#	name_label.text = "[center][font_size=22]" + char_name + "[/font_size][/center]"
 
 func set_health(value: int):
 	var previous_health = health
@@ -186,6 +191,7 @@ func calculate_stats():
 	if sanity == max_sanity or sanity > max_sanity:
 		set_sanity(max_sanity) # Use setter
 
+	emit_signal("stats_changed")
 	stats_finalized.emit(self) # Notify parent potentially
 
 func update_ui_labels():
@@ -229,6 +235,7 @@ func remove_item(item_name: String):
 # --- Signal Callbacks ---
 func _on_name_input_text_changed(new_text) -> void:
 	set_char_name(new_text)
+	emit_signal("name_changed")
 	
 func _on_pronoun_selected(index: int) -> void:
 	picked_pronoun_key = pronouns_button.get_item_text(index)
