@@ -6,17 +6,22 @@ var save_file_name = "PlayerSave.Tres"
 var playerData = CastData.new()
 
 func _on_pressed() -> void:
-	
-	print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-	print("BEFORE LOAD: ", playerData.cast)
-	
 	verify_save_directory(save_file_path)
-	loadcast()
-	
+	playerData.clear_cast(true)
+	for child in %CharacterContainer.get_children():
+		playerData.add_character(child)
 	print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-	print("BEFORE LOAD: ", playerData.cast)
+	print(playerData.cast)
 	print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+
+func verify_save_directory(path : String):
+	DirAccess.make_dir_absolute(path)
 	
+func save():
+	ResourceSaver.save(playerData, save_file_path + save_file_name)
+
+
+func _on_load_cast_pressed() -> void:
 	for char in %CharacterContainer.get_children():
 		char.queue_free()
 		
@@ -26,15 +31,12 @@ func _on_pressed() -> void:
 		%CharacterContainer.add_child(instance)
 		
 		instance.name_input.text = char["name"]
-		#instance.texture_rect.texture = char["imgpath"]
+		instance.texture_rect.texture = char["imgpath"]
 		instance.form = char["form"]
 		instance.endurance = char["endurance"]
 		instance.perception = char["perception"]
 		instance.ingenuity = char["ingenuity"]
 		instance.charisma = char["charisma"]
-
-func verify_save_directory(path : String):
-	DirAccess.make_dir_absolute(path)
 	
 func loadcast():
 	var full_path = save_file_path + save_file_name

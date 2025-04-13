@@ -2,11 +2,17 @@ extends Resource
 class_name CastData
 
 @export var cast: Array = []
-@export var cast_info: Dictionary = {}
+
+func clear_cast(bool):
+	if true:
+		cast.clear()
+	else:
+		print("Fuck you")
 
 func add_character(chara):
-	cast.append(chara)
-	cast_info[chara.char_name] = {
+	var cast_info: Dictionary = {}
+	cast_info = {
+		"name": chara.char_name,
 		"imgpath": chara.texture_rect.texture,
 		"form": chara.form,
 		"endurance": chara.endurance,
@@ -14,3 +20,4 @@ func add_character(chara):
 		"ingenuity": chara.ingenuity,
 		"charisma": chara.charisma
 	}
+	cast.append(cast_info)

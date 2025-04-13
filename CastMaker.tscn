@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c62mvng83jemu"]
+[gd_scene load_steps=16 format=3 uid="uid://c62mvng83jemu"]
 
 [ext_resource type="Script" uid="uid://dsq7mbcr56orw" path="res://cast_maker.gd" id="1_2hpj6"]
 [ext_resource type="Script" uid="uid://5yrxr8v5bvv5" path="res://add_char_button.gd" id="2_jr0kw"]
@@ -13,8 +13,7 @@
 [ext_resource type="Script" uid="uid://rkbyl8nynyr7" path="res://rand_names.gd" id="5_q18fw"]
 [ext_resource type="Script" uid="uid://c41ativ1qnk7q" path="res://rand_all.gd" id="6_eb18u"]
 [ext_resource type="AudioStream" uid="uid://dplrjswfsr1a" path="res://castbuilder.mp3" id="7_avln1"]
-[ext_resource type="Script" uid="uid://dhjqaql2eftrp" path="res://debug.gd" id="8_ubthq"]
-[ext_resource type="Script" uid="uid://coe1hgxx0b3xu" path="res://load_cast.gd" id="9_h2ex8"]
+[ext_resource type="Script" uid="uid://dhjqaql2eftrp" path="res://cast_saver.gd" id="8_ubthq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2hpj6"]
 font_color = Color(1, 1, 1, 0.666667)
@@ -133,7 +132,6 @@ script = ExtResource("8_ubthq")
 layout_mode = 2
 size_flags_horizontal = 6
 text = "Load Cast"
-script = ExtResource("9_h2ex8")
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer2/VBoxContainer"]
 layout_mode = 2
@@ -226,6 +224,7 @@ stream = ExtResource("7_avln1")
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/Clear Cast" to="PanelContainer2/VBoxContainer/Clear Cast" method="_on_pressed"]
 [connection signal="confirmed" from="PanelContainer2/VBoxContainer/Clear Cast/AcceptDialog" to="PanelContainer2/VBoxContainer/Clear Cast" method="_on_accept_dialog_confirmed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/HBoxContainer2/SaveCast" to="PanelContainer2/VBoxContainer/HBoxContainer2/SaveCast" method="_on_pressed"]
+[connection signal="pressed" from="PanelContainer2/VBoxContainer/HBoxContainer2/LoadCast" to="PanelContainer2/VBoxContainer/HBoxContainer2/SaveCast" method="_on_load_cast_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/HBoxContainer2/LoadCast" to="PanelContainer2/VBoxContainer/HBoxContainer2/LoadCast" method="_on_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/RandIcons" to="PanelContainer2/VBoxContainer/RandIcons" method="_on_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/RandStats" to="PanelContainer2/VBoxContainer/RandStats" method="_on_pressed"]
