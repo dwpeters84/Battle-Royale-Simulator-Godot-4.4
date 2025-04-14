@@ -128,10 +128,37 @@ size_flags_horizontal = 6
 text = "Save Cast"
 script = ExtResource("8_ubthq")
 
+[node name="Saver" type="AcceptDialog" parent="PanelContainer2/VBoxContainer/HBoxContainer2/SaveCast"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+title = "Type in a cast name!"
+initial_position = 2
+size = Vector2i(361, 97)
+ok_button_text = "Save"
+
+[node name="SaveName" type="TextEdit" parent="PanelContainer2/VBoxContainer/HBoxContainer2/SaveCast/Saver"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40.41)
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 353.0
+offset_bottom = 48.41
+size_flags_vertical = 8
+placeholder_text = "Paste link here..."
+
 [node name="LoadCast" type="Button" parent="PanelContainer2/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 6
 text = "Load Cast"
+
+[node name="Loader" type="FileDialog" parent="PanelContainer2/VBoxContainer/HBoxContainer2/LoadCast"]
+unique_name_in_owner = true
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+option_count = 1
+option_0/name = "*.tres"
 
 [node name="TextureRect" type="TextureRect" parent="PanelContainer2/VBoxContainer"]
 layout_mode = 2
@@ -224,8 +251,10 @@ stream = ExtResource("7_avln1")
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/Clear Cast" to="PanelContainer2/VBoxContainer/Clear Cast" method="_on_pressed"]
 [connection signal="confirmed" from="PanelContainer2/VBoxContainer/Clear Cast/AcceptDialog" to="PanelContainer2/VBoxContainer/Clear Cast" method="_on_accept_dialog_confirmed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/HBoxContainer2/SaveCast" to="PanelContainer2/VBoxContainer/HBoxContainer2/SaveCast" method="_on_pressed"]
+[connection signal="confirmed" from="PanelContainer2/VBoxContainer/HBoxContainer2/SaveCast/Saver" to="PanelContainer2/VBoxContainer/HBoxContainer2/SaveCast" method="_on_saver_confirmed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/HBoxContainer2/LoadCast" to="PanelContainer2/VBoxContainer/HBoxContainer2/SaveCast" method="_on_load_cast_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/HBoxContainer2/LoadCast" to="PanelContainer2/VBoxContainer/HBoxContainer2/LoadCast" method="_on_pressed"]
+[connection signal="file_selected" from="PanelContainer2/VBoxContainer/HBoxContainer2/LoadCast/Loader" to="PanelContainer2/VBoxContainer/HBoxContainer2/SaveCast" method="_on_loader_file_selected"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/RandIcons" to="PanelContainer2/VBoxContainer/RandIcons" method="_on_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/RandStats" to="PanelContainer2/VBoxContainer/RandStats" method="_on_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/RandNames" to="PanelContainer2/VBoxContainer/RandNames" method="_on_pressed"]

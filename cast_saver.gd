@@ -1,25 +1,45 @@
 extends Button
 
-var save_file_path = "user://save/"
-var save_file_name = "PlayerSave.Tres"
+var save_file_path = "res://saves/"
+var save_file_name
+var load_file_name
 
 var playerData = CastData.new()
 var FuckYou
 
 func _on_pressed() -> void:
+	%Saver.popup()
+
+func verify_save_directory(path : String):
+	DirAccess.make_dir_absolute(path)
+	
+func save():
+	print(save_file_path + save_file_name)
+	ResourceSaver.save(playerData, save_file_path + save_file_name)
+
+func _on_load_cast_pressed() -> void:
+	%Loader.popup()
+	
+func loadcast():
+	load_file_name = %Loader.get_current_file()
+	var full_path = save_file_path + load_file_name
+	if ResourceLoader.exists(full_path):
+		playerData = ResourceLoader.load(full_path).duplicate(true)
+		FuckYou = true
+	else:
+		print("Save file not found at path: ", full_path)
+		FuckYou = false
+		
+func _on_saver_confirmed() -> void:
+	save_file_name = %SaveName.text + ".tres"
 	verify_save_directory(save_file_path)
 	playerData.clear_cast(true)
 	for child in %CharacterContainer.get_children():
 		playerData.add_character(child)
 	save()
 
-func verify_save_directory(path : String):
-	DirAccess.make_dir_absolute(path)
+func _on_loader_file_selected(path: String) -> void:
 	
-func save():
-	ResourceSaver.save(playerData, save_file_path + save_file_name)
-
-func _on_load_cast_pressed() -> void:
 	for char in %CharacterContainer.get_children():
 		char.queue_free()
 	
@@ -40,12 +60,4 @@ func _on_load_cast_pressed() -> void:
 			instance.charisma_slider._on_value_changed(char["charisma"])
 	elif not FuckYou:
 		print("Fuck you")
-	
-func loadcast():
-	var full_path = save_file_path + save_file_name
-	if ResourceLoader.exists(full_path):
-		playerData = ResourceLoader.load(full_path).duplicate(true)
-		FuckYou = true
-	else:
-		print("Save file not found at path: ", full_path)
-		FuckYou = false
+	pass # Replace with function body.

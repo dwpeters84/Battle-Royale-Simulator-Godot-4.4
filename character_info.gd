@@ -267,6 +267,7 @@ func toggle_ui(toggle):
 	edit_controls.visible = not toggle
 	change_img.visible = not toggle
 	delete_char.visible = not toggle
+	%StreamImage.visible = not toggle
 	
 	Nametag.text = char_name
 	Nametag.visible = toggle

@@ -1,13 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://b3qowdelk5rb"]
+[gd_scene load_steps=15 format=3 uid="uid://b3qowdelk5rb"]
 
 [ext_resource type="Script" uid="uid://edtlhuere4x0" path="res://character_info.gd" id="1_1v8qw"]
 [ext_resource type="Texture2D" uid="uid://bc0l8kpimoovl" path="res://char_icons/unknown.png" id="2_tu13v"]
 [ext_resource type="Texture2D" uid="uid://uuc4pjl1w4tm" path="res://ui_icons/folder1.png" id="3_ocgop"]
+[ext_resource type="Script" uid="uid://caya2gw70f7kx" path="res://char_icon.gd" id="3_tu13v"]
 [ext_resource type="Texture2D" uid="uid://cw4k5166qr806" path="res://ui_icons/folder2.png" id="4_r0qbq"]
 [ext_resource type="Texture2D" uid="uid://cgjubft8k8u4n" path="res://ui_icons/trashcan.png" id="5_xwi74"]
 [ext_resource type="Texture2D" uid="uid://c6l82vkbo5dyx" path="res://ui_icons/trashcanOpen.png" id="6_i84df"]
-[ext_resource type="Texture2D" uid="uid://cqr3tyww7q6oj" path="res://ui_icons/import.png" id="7_fp2lq"]
 [ext_resource type="Texture2D" uid="uid://cd3t4etm7uoru" path="res://ui_icons/under.png" id="8_mu5n3"]
+[ext_resource type="Texture2D" uid="uid://be0mw1saxl6b6" path="res://ui_icons/cloudUpload.png" id="8_ocgop"]
 [ext_resource type="Texture2D" uid="uid://lrn86wakid5s" path="res://ui_icons/over.png" id="9_o68jn"]
 [ext_resource type="Texture2D" uid="uid://e3ohkiiamuu6" path="res://ui_icons/progress.png" id="10_e814e"]
 [ext_resource type="PackedScene" uid="uid://qrmdcea33ubf" path="res://StatSlider.tscn" id="11_h3phi"]
@@ -50,6 +51,7 @@ mouse_filter = 2
 texture = ExtResource("2_tu13v")
 expand_mode = 2
 stretch_mode = 5
+script = ExtResource("3_tu13v")
 
 [node name="ChangeCharIcon" type="TextureButton" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon"]
 unique_name_in_owner = true
@@ -97,15 +99,37 @@ ok_button_text = "Delete"
 dialog_text = "Are you sure you want to delete?"
 
 [node name="StreamImage" type="TextureButton" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon"]
-visible = false
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 159.47
-offset_top = 56.0
-offset_right = 209.47
-offset_bottom = 106.0
+offset_left = 157.0
+offset_top = 55.0
+offset_right = 207.0
+offset_bottom = 105.0
 scale = Vector2(0.605, 0.605)
-texture_normal = ExtResource("7_fp2lq")
-texture_pressed = ExtResource("7_fp2lq")
+texture_normal = ExtResource("8_ocgop")
+texture_pressed = ExtResource("8_ocgop")
+
+[node name="StreamImgPromp" type="AcceptDialog" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage"]
+unique_name_in_owner = true
+title = "Insert direct image link"
+initial_position = 2
+size = Vector2i(566, 166)
+ok_button_text = "Upload"
+dialog_text = "Make sure that the image you're linking to is a png, otherwise
+this may not work properly! The image will appear blank if it breaks."
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage/StreamImgPromp"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 558.0
+offset_bottom = 117.0
+
+[node name="LinkInput" type="TextEdit" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage/StreamImgPromp/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40.41)
+layout_mode = 2
+size_flags_vertical = 8
+placeholder_text = "Paste link here..."
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
 layout_mode = 2
@@ -274,5 +298,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("12_71vk2")
 
+[connection signal="pressed" from="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage" to="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon" method="_on_stream_image_pressed"]
+[connection signal="confirmed" from="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage/StreamImgPromp" to="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon" method="_on_accept_dialog_confirmed"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer2/MainPanel/EditControls/RelationshipEditor" to="." method="_on_relationship_editor_pressed"]
 [connection signal="pressed" from="RelationshipWindow/RelationshipPanel/VBoxContainer/AddRelationship" to="RelationshipWindow/RelationshipPanel/VBoxContainer/AddRelationship" method="_on_pressed"]
