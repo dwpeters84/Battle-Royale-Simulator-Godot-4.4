@@ -164,11 +164,11 @@ grow_vertical = 2
 bbcode_enabled = true
 text = "[center]SANITY: ???/???[/center]"
 
-[node name="PosLabel" type="Label" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
+[node name="Nametag" type="Label" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-text = "current pos: ?,?"
+text = "Name"
 horizontal_alignment = 1
 
 [node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]

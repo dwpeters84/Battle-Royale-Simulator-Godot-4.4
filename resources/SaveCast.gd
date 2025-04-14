@@ -14,10 +14,10 @@ func add_character(chara):
 	cast_info = {
 		"name": chara.char_name,
 		"imgpath": chara.texture_rect.texture,
-		"form": chara.form,
-		"endurance": chara.endurance,
-		"perception": chara.perception,
-		"ingenuity": chara.ingenuity,
-		"charisma": chara.charisma
+		"form": chara.form_slider.stat_value,
+		"endurance": chara.endurance_slider.stat_value,
+		"perception": chara.perception_slider.stat_value,
+		"ingenuity": chara.ingenuity_slider.stat_value,
+		"charisma": chara.charisma_slider.stat_value
 	}
 	cast.append(cast_info)

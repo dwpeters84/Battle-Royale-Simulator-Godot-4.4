@@ -15,7 +15,7 @@ signal value_changed(value: int)
 		return stat_value
 	set(value):
 		stat_value = value
-	#	slider.set_value_no_signal(float(stat_value))
+		slider.set_value_no_signal(float(stat_value))
 		update_label()
 		value_changed.emit(stat_value)
 
@@ -32,6 +32,7 @@ func _ready():
 
 
 func _on_value_changed(value: int):
+	print("Stat value attempting to change")
 	stat_value = int(value)
 	update_label()
 
