@@ -103,7 +103,7 @@ func trigger_random_event():
 
 		var suitable_events = []
 		for event_dict in event_data:
-			if event_dict.has("participants") and event_dict["participants"] is float and event_dict.get("participants", -1) == group_size:
+			if event_dict.has("participants") and event_dict["participants"] is float and event_dict.get("participants", -1) <= group_size:
 				suitable_events.append(event_dict)
 
 		if not suitable_events.is_empty():
