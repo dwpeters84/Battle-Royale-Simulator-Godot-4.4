@@ -19,8 +19,6 @@ script = ExtResource("1_cm0pq")
 
 [node name="MainGame" type="Node" parent="." groups=["GameControllers"]]
 script = ExtResource("1_03owx")
-map_size_maximum_y = 1
-map_size_maximum_x = 1
 
 [node name="EventHandler" type="Node" parent="." groups=["GameControllers"]]
 unique_name_in_owner = true

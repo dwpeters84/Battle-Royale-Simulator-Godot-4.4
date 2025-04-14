@@ -3,6 +3,7 @@ extends Node2D
 var save_file_path = "user://save/"
 var save_file_name = "Temp.Tres"
 var cast = CastData.new()
+@onready var MainGameController = get_tree().get_first_node_in_group("GameControllers")
 
 func _ready():
 	for char in %Characters.get_children():
@@ -24,6 +25,8 @@ func _ready():
 		instance.perception_slider._on_value_changed(char["perception"])
 		instance.ingenuity_slider._on_value_changed(char["ingenuity"])
 		instance.charisma_slider._on_value_changed(char["charisma"])
+		instance.pos.x = randi_range(0, MainGameController.map_size_maximum_x)
+		instance.pos.y = randi_range(0, MainGameController.map_size_maximum_y)
 		
 	
 func loadcast():
