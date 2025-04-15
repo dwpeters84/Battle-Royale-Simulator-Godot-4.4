@@ -13,7 +13,7 @@ func add_character(chara):
 	var cast_info: Dictionary = {}
 	cast_info = {
 		"name": chara.char_name,
-		"imgpath": chara.texture_rect.texture,
+		"imgpath": chara.texture_rect.texture.resource_path,
 		"form": chara.form_slider.stat_value,
 		"endurance": chara.endurance_slider.stat_value,
 		"perception": chara.perception_slider.stat_value,
