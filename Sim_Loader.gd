@@ -19,7 +19,9 @@ func _ready():
 		instance.custom_minimum_size.x = 190
 		instance.set_char_name(char["name"])
 		instance.toggle_ui(true)
-		instance.texture_rect.texture = char["imgpath"]
+		var image = Image.load_from_file(char["imgpath"])
+		instance.texture_rect.texture = ImageTexture.create_from_image(image)
+		instance.texture_rect.texture.resource_path = char["imgpath"]
 		instance.form_slider._on_value_changed(char["form"])
 		instance.endurance_slider._on_value_changed(char["endurance"])
 		instance.perception_slider._on_value_changed(char["perception"])

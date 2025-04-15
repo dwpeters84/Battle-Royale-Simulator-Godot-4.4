@@ -258,6 +258,7 @@ func _on_img_picked(path: String) -> void:
 	if image:
 		var texture = ImageTexture.create_from_image(image)
 		texture_rect.texture = texture
+		texture_rect.texture.resource_path = path
 		print("Image loaded successfully for %s from: %s" % [char_name, path])
 		emit_signal("icon_changed")
 	else:
