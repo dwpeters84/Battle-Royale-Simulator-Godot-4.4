@@ -28,5 +28,17 @@
 	"participants": 2,
 	"text": "{name1} attacks {name2}!",
 	"effect_func": "apply_fight"
-  }
+  },
+  {
+	"id": "heal",
+	"participants": 1,
+	"text": "{name1} attempts to heal by wrapping up {pronoun1_possa} their wounds.",
+	"effect_func": "attempt_heal"
+  },
+  {
+	"id": "manipulate",
+	"participants": 3,
+	"text": "{name1} attempts to manipulate {name2} into fighting {name3}!",
+	"effect_func": "attempt_to_manipulate"
+  },
 ]

@@ -158,6 +158,57 @@ func apply_gang_attack(participants):
 		# Call adjust_health last so if the defender dies, the damage source message comes first in the log
 		defender.adjust_health(-damage_taken)
 
+func attempt_heal(participants):
+	if participants.size() < 1: return
+	var healer = participants[0]
+	
+	var diceroll1 = rng.randi_range(1, 20)
+	var diceroll2 = rng.randi_range(1, 20)
+	
+	if diceroll1 + healer.perception >= 10:
+		var successmsg = healer.char_name + " finds something to use as a bandage. They wonder how to use it..."
+		event_handler.emit_signal("event_log_updated", successmsg)
+		if diceroll2 + healer.ingenuity >= 20:
+			var successmsg2 = healer.char_name + " is able to wrap up their wounds quite tightly! They recover a lot of health!!!"
+			healer.adjust_health(10)
+			event_handler.emit_signal("event_log_updated", successmsg2)
+		elif diceroll2 + healer.ingenuity >= 15:
+			var successmsg2 = healer.char_name + " is able to wrap up their wounds sloppily, recovering a little health!"
+			healer.adjust_health(4)
+			event_handler.emit_signal("event_log_updated", successmsg2)
+		elif diceroll2 + healer.ingenuity < 15:
+			var failmsg = healer.char_name + " wasn't able to use the supplies they found effectively."
+			event_handler.emit_signal("event_log_updated", failmsg)
+	else:
+		var failmsg = healer.char_name + " seemingly couldn't find anything to heal with!"
+		event_handler.emit_signal("event_log_updated", failmsg)
+	
+func attempt_to_manipulate(participants):
+	if participants.size() < 3: return
+	
+	var manipulator = participants[0]
+	var manipulated = participants[1]
+	var victim = participants[2]
+	
+	var diceroll1 = rng.randi_range(1, 20)
+	var diceroll2 = rng.randi_range(1, 20)
+	
+	if diceroll1 + manipulator.charisma > diceroll2 + manipulated.charisma:
+		var fightmsg = manipulator.char_name + " successfully convinces " + manipulated.char_name + " to attack " + victim.char_name + "!!!"
+		event_handler.emit_signal("event_log_updated", fightmsg)
+		apply_fight([manipulated, victim])
+	elif diceroll1 + manipulator.charisma < diceroll2 + manipulated.charisma:
+		var fightmsg = manipulated.char_name + " sees through " + manipulator.char_name + "'s lies!"
+		event_handler.emit_signal("event_log_updated", fightmsg)
+		var diceroll3 = rng.randi_range(1, 20) 
+		var diceroll4 = rng.randi_range(1, 20) 
+		if diceroll3 + manipulated.form > diceroll4 + manipulator.charisma:
+			var fightmsg2 = manipulator.char_name + " tries to convince " + manipulated.char_name + " to calm down, but they attack in retaliation!"
+			event_handler.emit_signal("event_log_updated", fightmsg2)
+			apply_fight([manipulated, manipulator])
+		if diceroll3 + manipulated.form < diceroll4 + manipulator.charisma:
+			var fightmsg2 = manipulator.char_name + " tries to convince " + manipulated.char_name + " to calm down, and they thankfully do."
+			event_handler.emit_signal("event_log_updated", fightmsg2)
 
 # ================================================================
 # --- OPTIONAL: DEFINE EVENT CONDITION FUNCTIONS HERE ---
