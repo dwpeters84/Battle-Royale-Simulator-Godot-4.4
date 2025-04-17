@@ -15,9 +15,13 @@ run/main_scene="uid://c62mvng83jemu"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://assets/default_bus_layout.tres"
+
 [autoload]
 
-Cast="*res://cast.gd"
+Cast="*res://src/autoloads/cast.gd"
 
 [display]
 
@@ -30,7 +34,7 @@ enabled=PackedStringArray()
 [file_customization]
 
 folder_colors={
-"res://char_icons/": "purple"
+"res://assets/textures/char_icons/": "purple"
 }
 
 [global_group]
