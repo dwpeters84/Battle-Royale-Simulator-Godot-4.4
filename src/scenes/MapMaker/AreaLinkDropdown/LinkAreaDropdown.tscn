@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://2wbapkkm8d5j"]
+
+[ext_resource type="Texture2D" uid="uid://ccuf5k0s281ih" path="res://assets/textures/ui_icons/grey_crossWhite.png" id="1_ckdub"]
+[ext_resource type="Script" uid="uid://bwxcm2vlnw41b" path="res://src/scenes/MapMaker/AreaLinkDropdown/delete_self.gd" id="2_kdipr"]
+
+[node name="Control" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -847.0
+offset_bottom = -614.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(191.99, 0)
+layout_mode = 2
+
+[node name="DeleteSelf" type="TextureButton" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("1_ckdub")
+script = ExtResource("2_kdipr")
+
+[connection signal="pressed" from="HBoxContainer/DeleteSelf" to="HBoxContainer/DeleteSelf" method="_on_pressed"]

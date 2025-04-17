@@ -1,0 +1,304 @@
+[gd_scene load_steps=15 format=3 uid="uid://b3qowdelk5rb"]
+
+[ext_resource type="Script" uid="uid://edtlhuere4x0" path="res://src/scenes/FighterCreator/character_info.gd" id="1_1v8qw"]
+[ext_resource type="Texture2D" uid="uid://bc0l8kpimoovl" path="res://assets/textures/char_icons/unknown.png" id="2_tu13v"]
+[ext_resource type="Texture2D" uid="uid://uuc4pjl1w4tm" path="res://assets/textures/ui_icons/folder1.png" id="3_ocgop"]
+[ext_resource type="Script" uid="uid://caya2gw70f7kx" path="res://src/scenes/FighterCreator/char_icon.gd" id="3_tu13v"]
+[ext_resource type="Texture2D" uid="uid://cw4k5166qr806" path="res://assets/textures/ui_icons/folder2.png" id="4_r0qbq"]
+[ext_resource type="Texture2D" uid="uid://cgjubft8k8u4n" path="res://assets/textures/ui_icons/trashcan.png" id="5_xwi74"]
+[ext_resource type="Texture2D" uid="uid://c6l82vkbo5dyx" path="res://assets/textures/ui_icons/trashcanOpen.png" id="6_i84df"]
+[ext_resource type="Texture2D" uid="uid://cd3t4etm7uoru" path="res://assets/textures/ui_icons/under.png" id="8_mu5n3"]
+[ext_resource type="Texture2D" uid="uid://be0mw1saxl6b6" path="res://assets/textures/ui_icons/cloudUpload.png" id="8_ocgop"]
+[ext_resource type="Texture2D" uid="uid://lrn86wakid5s" path="res://assets/textures/ui_icons/over.png" id="9_o68jn"]
+[ext_resource type="Texture2D" uid="uid://e3ohkiiamuu6" path="res://assets/textures/ui_icons/progress.png" id="10_e814e"]
+[ext_resource type="PackedScene" uid="uid://qrmdcea33ubf" path="res://src/scenes/FighterCreator/StatSlider/StatSlider.tscn" id="11_h3phi"]
+[ext_resource type="Script" uid="uid://bhcgdrhm756np" path="res://src/scenes/FighterCreator/relationship_manager.gd" id="12_71vk2"]
+[ext_resource type="Script" uid="uid://chgrkhxnr7fid" path="res://src/scenes/FighterCreator/add_relationship.gd" id="13_agfup"]
+
+[node name="Character" type="PanelContainer"]
+custom_minimum_size = Vector2(520, 270)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1v8qw")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MainPanel" type="HBoxContainer" parent="ScrollContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel"]
+layout_mode = 2
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+
+[node name="CharIcon" type="TextureRect" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_tu13v")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("3_tu13v")
+
+[node name="ChangeCharIcon" type="TextureButton" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon"]
+unique_name_in_owner = true
+z_index = 3
+layout_mode = 1
+offset_left = 164.0
+offset_top = 34.0
+offset_right = 184.0
+offset_bottom = 54.0
+texture_normal = ExtResource("3_ocgop")
+texture_pressed = ExtResource("4_r0qbq")
+texture_hover = ExtResource("3_ocgop")
+
+[node name="FileDialog" type="FileDialog" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/ChangeCharIcon"]
+unique_name_in_owner = true
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.jpg", "*png", "*jpeg")
+
+[node name="DeleteButton" type="TextureButton" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon"]
+unique_name_in_owner = true
+z_index = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -31.81
+offset_top = 1.0
+offset_right = 18.19
+offset_bottom = 51.0
+grow_horizontal = 0
+scale = Vector2(0.565, 0.565)
+tooltip_text = "Delete Character"
+texture_normal = ExtResource("5_xwi74")
+texture_pressed = ExtResource("6_i84df")
+texture_hover = ExtResource("6_i84df")
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/DeleteButton"]
+unique_name_in_owner = true
+initial_position = 2
+size = Vector2i(270, 100)
+ok_button_text = "Delete"
+dialog_text = "Are you sure you want to delete?"
+
+[node name="StreamImage" type="TextureButton" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 157.0
+offset_top = 55.0
+offset_right = 207.0
+offset_bottom = 105.0
+scale = Vector2(0.605, 0.605)
+texture_normal = ExtResource("8_ocgop")
+texture_pressed = ExtResource("8_ocgop")
+
+[node name="StreamImgPromp" type="AcceptDialog" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage"]
+unique_name_in_owner = true
+title = "Insert direct image link"
+initial_position = 2
+size = Vector2i(566, 166)
+ok_button_text = "Upload"
+dialog_text = "Make sure that the image you're linking to is a png, otherwise
+this may not work properly! The image will appear blank if it breaks."
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage/StreamImgPromp"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 558.0
+offset_bottom = 117.0
+
+[node name="LinkInput" type="TextEdit" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage/StreamImgPromp/PanelContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 40.41)
+layout_mode = 2
+size_flags_vertical = 8
+placeholder_text = "Paste link here..."
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Bars" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+nine_patch_stretch = true
+stretch_margin_left = 8
+stretch_margin_top = 8
+stretch_margin_right = 8
+stretch_margin_bottom = 8
+texture_under = ExtResource("8_mu5n3")
+texture_over = ExtResource("9_o68jn")
+texture_progress = ExtResource("10_e814e")
+
+[node name="Health" type="RichTextLabel" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars/HealthBar"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]HP: ???/???[/center]"
+
+[node name="SanityBar" type="TextureProgressBar" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+nine_patch_stretch = true
+stretch_margin_left = 8
+stretch_margin_top = 8
+stretch_margin_right = 8
+stretch_margin_bottom = 8
+texture_under = ExtResource("8_mu5n3")
+texture_over = ExtResource("9_o68jn")
+texture_progress = ExtResource("10_e814e")
+
+[node name="Sanity" type="RichTextLabel" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars/SanityBar"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center]SANITY: ???/???[/center]"
+
+[node name="Nametag" type="Label" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="NameLabel" type="RichTextLabel" parent="ScrollContainer/VBoxContainer2/MainPanel"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+bbcode_enabled = true
+
+[node name="EditControls" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameInput" type="LineEdit" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Character Name"
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PronounsButton" type="OptionButton" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls"]
+layout_mode = 2
+
+[node name="EditStats" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FormSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("11_h3phi")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="EnduranceSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("11_h3phi")]
+unique_name_in_owner = true
+layout_mode = 2
+modified_stat = "endurance"
+
+[node name="PerceptionSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("11_h3phi")]
+unique_name_in_owner = true
+layout_mode = 2
+modified_stat = "perception"
+
+[node name="IngenuitySlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("11_h3phi")]
+unique_name_in_owner = true
+layout_mode = 2
+modified_stat = "ingenuity"
+
+[node name="CharismaSlider" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/PanelContainer/EditStats" instance=ExtResource("11_h3phi")]
+unique_name_in_owner = true
+layout_mode = 2
+modified_stat = "charisma"
+
+[node name="RelationshipEditor" type="Button" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Relationship Editor"
+
+[node name="RelationshipWindow" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+title = "Relationship Editor"
+initial_position = 1
+size = Vector2i(400, 400)
+ok_button_text = "Done"
+
+[node name="RelationshipPanel" type="PanelContainer" parent="RelationshipWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RelationshipWindow/RelationshipPanel"]
+layout_mode = 2
+
+[node name="AddRelationship" type="Button" parent="RelationshipWindow/RelationshipPanel/VBoxContainer"]
+custom_minimum_size = Vector2(262.095, 0)
+layout_mode = 2
+size_flags_vertical = 0
+text = "add relationship"
+script = ExtResource("13_agfup")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="RelationshipWindow/RelationshipPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RelationshipContainer" type="VBoxContainer" parent="RelationshipWindow/RelationshipPanel/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("12_71vk2")
+
+[connection signal="pressed" from="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage" to="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon" method="_on_stream_image_pressed"]
+[connection signal="confirmed" from="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage/StreamImgPromp" to="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon" method="_on_accept_dialog_confirmed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer2/MainPanel/EditControls/RelationshipEditor" to="." method="_on_relationship_editor_pressed"]
+[connection signal="pressed" from="RelationshipWindow/RelationshipPanel/VBoxContainer/AddRelationship" to="RelationshipWindow/RelationshipPanel/VBoxContainer/AddRelationship" method="_on_pressed"]

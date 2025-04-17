@@ -1,0 +1,370 @@
+[gd_scene load_steps=7 format=3 uid="uid://c36oouwxqfmui"]
+
+[ext_resource type="Script" uid="uid://bl7afyy546t51" path="res://src/scenes/MainSim/character.gd" id="1_03owx"]
+[ext_resource type="Script" uid="uid://b80spals1g7p1" path="res://src/scenes/MainSim/Sim_Loader.gd" id="1_cm0pq"]
+[ext_resource type="Script" uid="uid://c4vivp3qor3ot" path="res://src/scenes/MainSim/EventHandler.gd" id="2_20pc6"]
+[ext_resource type="Script" uid="uid://c1yd0upacm3vi" path="res://src/scenes/MainSim/EventFunctions.gd" id="2_wkp8b"]
+
+[sub_resource type="FontVariation" id="FontVariation_03owx"]
+variation_transform = Transform2D(1, 0.25, 0, 1, 0, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wkp8b"]
+font = SubResource("FontVariation_03owx")
+font_size = 12
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_cm0pq")
+
+[node name="MainGame" type="Node" parent="." groups=["GameControllers"]]
+script = ExtResource("1_03owx")
+
+[node name="EventHandler" type="Node" parent="." groups=["GameControllers"]]
+unique_name_in_owner = true
+script = ExtResource("2_20pc6")
+
+[node name="EventFunctions" type="Node" parent="." groups=["GameControllers"]]
+script = ExtResource("2_wkp8b")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_left = 31.0
+offset_top = 48.0
+offset_right = 830.0
+offset_bottom = 293.0
+metadata/_edit_group_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 7
+
+[node name="GameLog" type="RichTextLabel" parent="PanelContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+bbcode_enabled = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+clip_contents = false
+custom_minimum_size = Vector2(1073.11, 4.695)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = 305.0
+offset_right = 1150.0
+offset_bottom = 646.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+follow_focus = true
+horizontal_scroll_mode = 2
+vertical_scroll_mode = 0
+
+[node name="Characters" type="HBoxContainer" parent="ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TriggerEventButton" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 558.0
+offset_top = 6.0
+offset_right = 719.0
+offset_bottom = 39.0
+text = "Trigger Event"
+
+[node name="StartGame" type="Button" parent="."]
+offset_left = 404.0
+offset_top = 6.0
+offset_right = 556.0
+offset_bottom = 39.0
+text = "Start Game"
+
+[node name="MapTemp" type="GridContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 861.0
+offset_top = 40.0
+offset_right = 1109.0
+offset_bottom = 288.0
+columns = 3
+
+[node name="(0, 0)" type="ColorRect" parent="MapTemp"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+color = Color(0.337255, 0.380392, 0.584314, 1)
+metadata/_edit_group_ = true
+
+[node name="CharContainer" type="HFlowContainer" parent="MapTemp/(0, 0)"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+alignment = 1
+
+[node name="PosLabel" type="Label" parent="MapTemp/(0, 0)"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "0,0"
+label_settings = SubResource("LabelSettings_wkp8b")
+vertical_alignment = 2
+
+[node name="(0, 1)" type="ColorRect" parent="MapTemp"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+color = Color(0.607843, 0.47451, 0.87451, 1)
+metadata/_edit_group_ = true
+
+[node name="CharContainer" type="HFlowContainer" parent="MapTemp/(0, 1)"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+alignment = 1
+
+[node name="PosLabel" type="Label" parent="MapTemp/(0, 1)"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "0,1"
+label_settings = SubResource("LabelSettings_wkp8b")
+vertical_alignment = 2
+
+[node name="(0, 2)" type="ColorRect" parent="MapTemp"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+color = Color(0.337255, 0.380392, 0.584314, 1)
+metadata/_edit_group_ = true
+
+[node name="CharContainer" type="HFlowContainer" parent="MapTemp/(0, 2)"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+alignment = 1
+
+[node name="PosLabel" type="Label" parent="MapTemp/(0, 2)"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "0,2"
+label_settings = SubResource("LabelSettings_wkp8b")
+vertical_alignment = 2
+
+[node name="(1, 0)" type="ColorRect" parent="MapTemp"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+color = Color(0.607843, 0.47451, 0.87451, 1)
+metadata/_edit_group_ = true
+
+[node name="CharContainer" type="HFlowContainer" parent="MapTemp/(1, 0)"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+alignment = 1
+
+[node name="PosLabel" type="Label" parent="MapTemp/(1, 0)"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "1,0"
+label_settings = SubResource("LabelSettings_wkp8b")
+vertical_alignment = 2
+
+[node name="(1, 1)" type="ColorRect" parent="MapTemp"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+color = Color(0.337255, 0.380392, 0.584314, 1)
+metadata/_edit_group_ = true
+
+[node name="CharContainer" type="HFlowContainer" parent="MapTemp/(1, 1)"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+alignment = 1
+
+[node name="PosLabel" type="Label" parent="MapTemp/(1, 1)"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "1,1"
+label_settings = SubResource("LabelSettings_wkp8b")
+vertical_alignment = 2
+
+[node name="(1, 2)" type="ColorRect" parent="MapTemp"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+color = Color(0.607843, 0.47451, 0.87451, 1)
+metadata/_edit_group_ = true
+
+[node name="CharContainer" type="HFlowContainer" parent="MapTemp/(1, 2)"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+alignment = 1
+
+[node name="PosLabel" type="Label" parent="MapTemp/(1, 2)"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "1,2"
+label_settings = SubResource("LabelSettings_wkp8b")
+vertical_alignment = 2
+
+[node name="(2, 0)" type="ColorRect" parent="MapTemp"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+color = Color(0.337255, 0.380392, 0.584314, 1)
+metadata/_edit_group_ = true
+
+[node name="CharContainer" type="HFlowContainer" parent="MapTemp/(2, 0)"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+alignment = 1
+
+[node name="PosLabel" type="Label" parent="MapTemp/(2, 0)"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "2,0"
+label_settings = SubResource("LabelSettings_wkp8b")
+vertical_alignment = 2
+
+[node name="(2, 1)" type="ColorRect" parent="MapTemp"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+color = Color(0.607843, 0.47451, 0.87451, 1)
+metadata/_edit_group_ = true
+
+[node name="CharContainer" type="HFlowContainer" parent="MapTemp/(2, 1)"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+alignment = 1
+
+[node name="PosLabel" type="Label" parent="MapTemp/(2, 1)"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "2,1"
+label_settings = SubResource("LabelSettings_wkp8b")
+vertical_alignment = 2
+
+[node name="(2, 2)" type="ColorRect" parent="MapTemp"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+color = Color(0.337255, 0.380392, 0.584314, 1)
+metadata/_edit_group_ = true
+
+[node name="CharContainer" type="HFlowContainer" parent="MapTemp/(2, 2)"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+alignment = 1
+
+[node name="PosLabel" type="Label" parent="MapTemp/(2, 2)"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "2,2"
+label_settings = SubResource("LabelSettings_wkp8b")
+vertical_alignment = 2
+
+[connection signal="event_log_updated" from="EventHandler" to="MainGame" method="_on_event_log_updated"]
+[connection signal="pressed" from="StartGame" to="MainGame" method="_on_start_game_pressed"]
