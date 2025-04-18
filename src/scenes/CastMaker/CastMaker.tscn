@@ -115,6 +115,7 @@ script = ExtResource("7_elr6l")
 [node name="AcceptDialog" type="ConfirmationDialog" parent="PanelContainer2/VBoxContainer/Clear Cast"]
 title = "Clear all characters?"
 initial_position = 1
+size = Vector2i(475, 100)
 ok_button_text = "Yes, kill them all!"
 dialog_text = "Are you sure you want to delete all current cast characters?"
 cancel_button_text = "No! Spare them!"
@@ -154,6 +155,7 @@ text = "Load Cast"
 [node name="Loader" type="FileDialog" parent="PanelContainer2/VBoxContainer/HBoxContainer2/LoadCast"]
 unique_name_in_owner = true
 title = "Open a File"
+initial_position = 1
 ok_button_text = "Open"
 file_mode = 0
 access = 2
@@ -166,6 +168,16 @@ size_flags_horizontal = 4
 size_flags_vertical = 14
 size_flags_stretch_ratio = 1.76
 texture = ExtResource("9_ys3wu")
+
+[node name="Label" type="Label" parent="PanelContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.521141, 0.521141, 0.521141, 1)
+theme_override_font_sizes/font_size = 10
+text = "developed by: onebigparadox
+with contributions by crystalwarrior
+special thanks to gerr74 (lol)
+random char icons from dough's Ascended Z"
+horizontal_alignment = 1
 
 [node name="RandIcons" type="Button" parent="PanelContainer2/VBoxContainer"]
 unique_name_in_owner = true

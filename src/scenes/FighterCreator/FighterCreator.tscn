@@ -114,7 +114,6 @@ unique_name_in_owner = true
 title = "Insert direct image link"
 initial_position = 2
 size = Vector2i(621, 206)
-visible = true
 ok_button_text = "Upload"
 dialog_text = "All streamed images will be saved inside the game. There is currently
 not a way to clear your cache. Just keep that in mind!
