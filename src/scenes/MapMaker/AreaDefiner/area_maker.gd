@@ -18,6 +18,30 @@ var items: Array
 	"items": items,
 	}
 
+func _ready():
+	# This is fucking insane. Delete this at some point LMFAO. Or come up with a better way of storing the colors at least LMFAO
+	var colors = [
+  Color.AQUA, Color.AQUAMARINE, Color.BLACK, Color.BLUE, Color.BROWN,
+  Color.CADET_BLUE, Color.CHARTREUSE, Color.CRIMSON, Color.CYAN,
+  Color.DARK_BLUE, Color.DARK_CYAN, Color.DARK_GREEN, Color.DARK_ORANGE,
+  Color.DARK_RED, Color.DARK_VIOLET, Color.DEEP_PINK, Color.DEEP_SKY_BLUE,
+  Color.DODGER_BLUE, Color.FIREBRICK, Color.FUCHSIA, Color.GOLD,
+  Color.GREEN, Color.HOT_PINK, Color.INDIAN_RED, Color.INDIGO,
+  Color.LIME, Color.MAGENTA, Color.MAROON, Color.MEDIUM_BLUE,
+  Color.MEDIUM_VIOLET_RED, Color.MIDNIGHT_BLUE, Color.NAVY_BLUE,
+  Color.OLIVE, Color.ORANGE, Color.ORANGE_RED, Color.ORCHID,
+  Color.PINK, Color.PLUM, Color.PURPLE, Color.RED, Color.ROSY_BROWN,
+  Color.ROYAL_BLUE, Color.SALMON, Color.SIENNA, Color.SKY_BLUE,
+  Color.SLATE_BLUE, Color.SPRING_GREEN, Color.STEEL_BLUE, Color.TEAL,
+  Color.TOMATO, Color.TURQUOISE, Color.VIOLET, Color.YELLOW, Color.YELLOW_GREEN
+]
+
+	var random_color = colors.pick_random()
+	print("random color should be ", str(random_color))
+	%AreaBG.color = random_color
+	
+	pass
+
 func _on_area_name_input_text_changed() -> void:
 	areaname = %AreaNameInput.text
 	print(areaname)

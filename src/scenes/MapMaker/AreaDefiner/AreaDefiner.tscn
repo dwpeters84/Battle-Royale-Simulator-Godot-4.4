@@ -17,6 +17,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 0
 script = ExtResource("1_wqt65")
 
+[node name="AreaBG" type="ColorRect" parent="."]
+unique_name_in_owner = true
+z_index = -2
+layout_mode = 2
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
@@ -51,9 +56,16 @@ size_flags_horizontal = 3
 
 [node name="NewAreaLink" type="Button" parent="HBoxContainer/HFlowContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
-text = "Add new area link"
+text = "Link to another area"
 script = ExtResource("4_nct1h")
+
+[node name="LinkConfirm" type="Button" parent="HBoxContainer/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+text = "Link to this area!"
 
 [connection signal="update_map" from="." to="." method="_on_update_map"]
 [connection signal="text_changed" from="HBoxContainer/VBoxContainer/AreaNameInput" to="." method="_on_area_name_input_text_changed"]
