@@ -9,12 +9,11 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -504.0
+offset_right = -2.0
 offset_bottom = -392.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-size_flags_vertical = 0
 script = ExtResource("1_wqt65")
 
 [node name="AreaBG" type="ColorRect" parent="."]
@@ -29,6 +28,7 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="AreaNameInput" type="TextEdit" parent="HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -50,25 +50,35 @@ layout_mode = 2
 texture = ExtResource("3_oexlg")
 expand_mode = 2
 
-[node name="HFlowContainer" type="HFlowContainer" parent="HBoxContainer"]
+[node name="AreaLinkContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="NewAreaLink" type="Button" parent="HBoxContainer/HFlowContainer"]
+[node name="NewAreaLink" type="Button" parent="HBoxContainer/AreaLinkContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Link to another area"
 script = ExtResource("4_nct1h")
 
-[node name="LinkConfirm" type="Button" parent="HBoxContainer/HFlowContainer"]
+[node name="TagContainer" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 0
-text = "Link to this area!"
+
+[node name="AddTag" type="Button" parent="HBoxContainer/TagContainer"]
+layout_mode = 2
+text = "Add area tag"
+
+[node name="ItemContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AddItem" type="Button" parent="HBoxContainer/ItemContainer"]
+layout_mode = 2
+text = "Add area tag"
 
 [connection signal="update_map" from="." to="." method="_on_update_map"]
 [connection signal="text_changed" from="HBoxContainer/VBoxContainer/AreaNameInput" to="." method="_on_area_name_input_text_changed"]
 [connection signal="background_passer" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="." method="_on_change_bg_image_background_passer"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="HBoxContainer/VBoxContainer/ChangeBgImage" method="_on_pressed"]
-[connection signal="pressed" from="HBoxContainer/HFlowContainer/NewAreaLink" to="HBoxContainer/HFlowContainer/NewAreaLink" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/AreaLinkContainer/NewAreaLink" to="HBoxContainer/AreaLinkContainer/NewAreaLink" method="_on_pressed"]
