@@ -11,6 +11,9 @@ func get_images():
 	var folder_path = "res://assets/textures/char_icons/"
 	var dir = DirAccess.open(folder_path)
 	
+	for file in folder_path:
+		print(file)
+	
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
@@ -24,12 +27,14 @@ func get_images():
 			file_name = dir.get_next()
 		dir.list_dir_end()
 
+###################################################################
+
+func _on_pressed() -> void:
+	randomize_images()
+
 func randomize_images():
 	textures.shuffle()
 	for child in charcontainer.get_children():
 		if child is Character:
 			child.texture_rect.texture = textures.pick_random()
 			pass
-
-func _on_pressed() -> void:
-	randomize_images()

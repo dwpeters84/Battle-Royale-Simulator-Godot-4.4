@@ -32,7 +32,6 @@ func _ready():
 
 
 func _on_value_changed(value: int):
-	print("Stat value attempting to change")
 	stat_value = int(value)
 	update_label()
 
