@@ -13,26 +13,38 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_40rcr")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_right = 1151.0
+offset_bottom = 66.0
+size_flags_horizontal = 3
 
-[node name="AreaContainer" type="VBoxContainer" parent="ScrollContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(1152.07, 0)
-layout_mode = 2
-
-[node name="NewArea" type="Button" parent="ScrollContainer/AreaContainer"]
+[node name="NewArea" type="Button" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "Add New Area"
 script = ExtResource("2_xywia")
 
-[node name="PrintMap" type="Button" parent="ScrollContainer/AreaContainer"]
+[node name="PrintMap" type="Button" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "Debug (Print Map)"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+offset_top = 72.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="AreaContainer" type="HFlowContainer" parent="ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1151.42, 0)
+layout_mode = 2
+alignment = 1
 
 [node name="BGLoader" type="FileDialog" parent="." groups=["FileDialogs"]]
 unique_name_in_owner = true
@@ -46,9 +58,9 @@ option_1/name = "*.jpg"
 option_2/name = "*.jpeg"
 script = ExtResource("3_kkfgx")
 
-[connection signal="area_passer" from="ScrollContainer/AreaContainer/NewArea" to="." method="_on_new_area_area_passer"]
-[connection signal="map_updater" from="ScrollContainer/AreaContainer/NewArea" to="." method="_on_new_area_map_updater"]
-[connection signal="pressed" from="ScrollContainer/AreaContainer/NewArea" to="ScrollContainer/AreaContainer/NewArea" method="_on_pressed"]
-[connection signal="pressed" from="ScrollContainer/AreaContainer/PrintMap" to="." method="_on_print_map_pressed"]
-[connection signal="pressed" from="ScrollContainer/AreaContainer/PrintMap" to="ScrollContainer/AreaContainer/PrintMap" method="_on_pressed"]
+[connection signal="area_passer" from="HBoxContainer/NewArea" to="." method="_on_new_area_area_passer"]
+[connection signal="map_updater" from="HBoxContainer/NewArea" to="." method="_on_new_area_map_updater"]
+[connection signal="pressed" from="HBoxContainer/NewArea" to="HBoxContainer/NewArea" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/PrintMap" to="." method="_on_print_map_pressed"]
+[connection signal="pressed" from="HBoxContainer/PrintMap" to="HBoxContainer/PrintMap" method="_on_pressed"]
 [connection signal="file_selected" from="BGLoader" to="BGLoader" method="_on_file_selected"]

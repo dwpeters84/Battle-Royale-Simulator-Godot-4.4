@@ -9,10 +9,11 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -504.0
 offset_bottom = -392.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 3
 size_flags_vertical = 0
 script = ExtResource("1_wqt65")
 
@@ -45,8 +46,8 @@ texture = ExtResource("3_oexlg")
 expand_mode = 2
 
 [node name="HFlowContainer" type="HFlowContainer" parent="HBoxContainer"]
-custom_minimum_size = Vector2(862.04, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="NewAreaLink" type="Button" parent="HBoxContainer/HFlowContainer"]
 layout_mode = 2
