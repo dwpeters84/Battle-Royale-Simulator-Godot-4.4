@@ -55,5 +55,6 @@ text = "Add new area link"
 script = ExtResource("4_nct1h")
 
 [connection signal="text_changed" from="HBoxContainer/VBoxContainer/AreaNameInput" to="." method="_on_area_name_input_text_changed"]
+[connection signal="background_passer" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="." method="_on_change_bg_image_background_passer"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="HBoxContainer/VBoxContainer/ChangeBgImage" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/HFlowContainer/NewAreaLink" to="HBoxContainer/HFlowContainer/NewAreaLink" method="_on_pressed"]

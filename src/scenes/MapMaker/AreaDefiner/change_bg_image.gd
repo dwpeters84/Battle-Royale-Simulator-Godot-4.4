@@ -1,6 +1,8 @@
 extends Button
 signal load_bg
+signal background_passer(bg)
 
+var change_bg_toggle: bool
 
 func _ready():
 	var bgloader = get_tree().get_first_node_in_group("FileDialogs")
@@ -9,9 +11,14 @@ func _ready():
 
 func _on_pressed() -> void:
 	emit_signal("load_bg")
+	change_bg_toggle = true
 	pass # Replace with function body.
 
 func change_bg(received_texture: Texture2D):
-	print("WOOHOO")
-	%BgPreview.texture = received_texture
-	pass
+	if change_bg_toggle:
+		print("WOOHOO")
+		%BgPreview.texture = received_texture
+		emit_signal("background_passer", received_texture)
+		change_bg_toggle = false
+	else:
+		print("Cannot change bg image")
