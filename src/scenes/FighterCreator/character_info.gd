@@ -286,3 +286,8 @@ func confirm_delete() -> void:
 func _on_relationship_editor_pressed() -> void:
 	relationship_window.popup()
 	relationship_window.title = "Relationships for " + char_name
+
+func _on_inventory_editor_pressed() -> void:
+	%ItemWindow.popup()
+	%ItemWindow.title = "Items for " + char_name
+	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b3qowdelk5rb"]
+[gd_scene load_steps=16 format=3 uid="uid://b3qowdelk5rb"]
 
 [ext_resource type="Script" uid="uid://edtlhuere4x0" path="res://src/scenes/FighterCreator/character_info.gd" id="1_1v8qw"]
 [ext_resource type="Texture2D" uid="uid://bc0l8kpimoovl" path="res://assets/textures/char_icons/unknown.png" id="2_tu13v"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://qrmdcea33ubf" path="res://src/scenes/FighterCreator/StatSlider/StatSlider.tscn" id="11_h3phi"]
 [ext_resource type="Script" uid="uid://bhcgdrhm756np" path="res://src/scenes/FighterCreator/relationship_manager.gd" id="12_71vk2"]
 [ext_resource type="Script" uid="uid://chgrkhxnr7fid" path="res://src/scenes/FighterCreator/add_relationship.gd" id="13_agfup"]
+[ext_resource type="Script" uid="uid://4g7yvuxongwe" path="res://src/scenes/FighterCreator/add_item_button.gd" id="15_p712o"]
 
 [node name="Character" type="PanelContainer"]
 custom_minimum_size = Vector2(520, 270)
@@ -191,6 +192,7 @@ bbcode_enabled = true
 text = "[center]SANITY: ???/???[/center]"
 
 [node name="InventoryLabel" type="Label" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars"]
+visible = false
 layout_mode = 2
 text = "Inventory:"
 horizontal_alignment = 1
@@ -267,7 +269,7 @@ unique_name_in_owner = true
 layout_mode = 2
 modified_stat = "charisma"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls"]
+[node name="HBoxContainer" type="VBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls"]
 layout_mode = 2
 
 [node name="RelationshipEditor" type="Button" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/HBoxContainer"]
@@ -320,7 +322,40 @@ layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("12_71vk2")
 
+[node name="ItemWindow" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+title = "Item Editor"
+initial_position = 2
+size = Vector2i(265, 290)
+ok_button_text = "Done"
+
+[node name="ItemPanel" type="PanelContainer" parent="ItemWindow"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 257.0
+offset_bottom = 241.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemWindow/ItemPanel"]
+layout_mode = 2
+
+[node name="AddItemButton" type="Button" parent="ItemWindow/ItemPanel/VBoxContainer"]
+layout_mode = 2
+text = "Add Item"
+script = ExtResource("15_p712o")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ItemWindow/ItemPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemContainer" type="VBoxContainer" parent="ItemWindow/ItemPanel/VBoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [connection signal="pressed" from="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage" to="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon" method="_on_stream_image_pressed"]
 [connection signal="confirmed" from="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage/StreamImgPromp" to="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon" method="_on_accept_dialog_confirmed"]
 [connection signal="pressed" from="ScrollContainer/VBoxContainer2/MainPanel/EditControls/HBoxContainer/RelationshipEditor" to="." method="_on_relationship_editor_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer2/MainPanel/EditControls/HBoxContainer/InventoryEditor" to="." method="_on_inventory_editor_pressed"]
 [connection signal="pressed" from="RelationshipWindow/RelationshipPanel/VBoxContainer/AddRelationship" to="RelationshipWindow/RelationshipPanel/VBoxContainer/AddRelationship" method="_on_pressed"]
+[connection signal="pressed" from="ItemWindow/ItemPanel/VBoxContainer/AddItemButton" to="ItemWindow/ItemPanel/VBoxContainer/AddItemButton" method="_on_pressed"]
