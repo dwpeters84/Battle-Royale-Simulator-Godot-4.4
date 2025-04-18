@@ -11,9 +11,6 @@ func get_images():
 	var folder_path = "res://assets/textures/char_icons/"
 	var dir = DirAccess.open(folder_path)
 	
-	for file in folder_path:
-		print(file)
-	
 	if dir:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()

@@ -17,5 +17,3 @@ func add_character(chara: Character):
 	chara_dict["ingenuity"] = chara.ingenuity
 	chara_dict["charisma"] = chara.charisma
 	current_cast.append(chara)
-	print(chara_dict)
-	print(current_cast)
