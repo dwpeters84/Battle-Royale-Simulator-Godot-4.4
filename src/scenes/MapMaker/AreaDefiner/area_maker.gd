@@ -29,3 +29,5 @@ func _on_change_bg_image_background_passer(bg: Variant) -> void:
 
 func send_map_update():
 	emit_signal("update_map", area_info)
+
+	
