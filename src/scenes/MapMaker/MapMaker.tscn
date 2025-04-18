@@ -46,4 +46,6 @@ script = ExtResource("3_kkfgx")
 
 [connection signal="area_passer" from="ScrollContainer/AreaContainer/NewArea" to="." method="_on_new_area_area_passer"]
 [connection signal="pressed" from="ScrollContainer/AreaContainer/NewArea" to="ScrollContainer/AreaContainer/NewArea" method="_on_pressed"]
+[connection signal="pressed" from="ScrollContainer/AreaContainer/PrintMap" to="." method="_on_print_map_pressed"]
+[connection signal="pressed" from="ScrollContainer/AreaContainer/PrintMap" to="ScrollContainer/AreaContainer/PrintMap" method="_on_pressed"]
 [connection signal="file_selected" from="BGLoader" to="BGLoader" method="_on_file_selected"]
