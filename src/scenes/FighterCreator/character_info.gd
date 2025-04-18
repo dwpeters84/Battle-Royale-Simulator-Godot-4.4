@@ -48,6 +48,7 @@ var defense: int = 1
 var is_alive: bool
 var inventory: Array = [] # For items later
 
+
 @onready var name_input: LineEdit = %NameInput
 @onready var pronouns_button: OptionButton = %PronounsButton
 @onready var name_label: RichTextLabel = %NameLabel
