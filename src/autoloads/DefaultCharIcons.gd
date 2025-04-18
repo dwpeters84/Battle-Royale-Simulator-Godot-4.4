@@ -1,0 +1,20 @@
+extends Node
+
+var char_icons: Array
+
+func _ready():
+	var folder_path = "res://assets/textures/char_icons/"
+	var dir = DirAccess.open(folder_path)
+	
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".png"):
+				var file_path = folder_path + "/" + file_name
+				var texture = Image.load_from_file(file_path)
+				var itemtexture = ImageTexture.create_from_image(texture)	
+				char_icons.append(itemtexture)
+			file_name = dir.get_next()
+		dir.list_dir_end()

@@ -23,6 +23,7 @@ buses/default_bus_layout="res://assets/default_bus_layout.tres"
 
 Cast="*res://src/autoloads/cast.gd"
 Items="*res://src/autoloads/items.gd"
+DefaultCharIcons="*res://src/autoloads/DefaultCharIcons.gd"
 
 [display]
 
