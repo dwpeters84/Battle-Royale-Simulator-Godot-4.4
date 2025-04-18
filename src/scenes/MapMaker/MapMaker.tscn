@@ -24,11 +24,13 @@ custom_minimum_size = Vector2(1152.07, 0)
 layout_mode = 2
 
 [node name="NewArea" type="Button" parent="ScrollContainer/AreaContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Add New Area"
 script = ExtResource("2_xywia")
 
 [node name="PrintMap" type="Button" parent="ScrollContainer/AreaContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Debug (Print Map)"
 

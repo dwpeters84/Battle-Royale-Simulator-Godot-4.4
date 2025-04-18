@@ -11,8 +11,13 @@ func _on_print_map_pressed() -> void:
 	print(map)
 
 func update_map():
-	print("Attempting to update map")
-
+	map.clear()
+	for child in %AreaContainer.get_children():
+		if child == %NewArea or child == %PrintMap:
+			print("thats a button you fucker.")
+			continue
+		map.append(child.area_info)
+	
 func _on_new_area_map_updater(area_info: Variant) -> void:
 	update_map()
 	pass # Replace with function body.

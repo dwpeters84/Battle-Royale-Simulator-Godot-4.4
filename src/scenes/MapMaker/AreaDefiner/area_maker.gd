@@ -28,6 +28,11 @@ func _on_change_bg_image_background_passer(bg: Variant) -> void:
 	send_map_update()
 
 func send_map_update():
+	area_info["name"] = areaname
+	area_info["bg"] = bg_img
+	area_info["links"] = links
+	area_info["tags"] = tags
+	area_info["items"] = items
 	emit_signal("update_map", area_info)
 
 	
