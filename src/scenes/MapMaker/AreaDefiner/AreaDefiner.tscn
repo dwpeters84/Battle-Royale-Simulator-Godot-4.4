@@ -25,6 +25,7 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="AreaNameInput" type="TextEdit" parent="HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(280.59, 44.485)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -53,5 +54,6 @@ size_flags_vertical = 0
 text = "Add new area link"
 script = ExtResource("4_nct1h")
 
+[connection signal="text_changed" from="HBoxContainer/VBoxContainer/AreaNameInput" to="." method="_on_area_name_input_text_changed"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="HBoxContainer/VBoxContainer/ChangeBgImage" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/HFlowContainer/NewAreaLink" to="HBoxContainer/HFlowContainer/NewAreaLink" method="_on_pressed"]
