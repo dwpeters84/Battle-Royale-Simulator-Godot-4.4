@@ -190,6 +190,12 @@ grow_vertical = 2
 bbcode_enabled = true
 text = "[center]SANITY: ???/???[/center]"
 
+[node name="InventoryLabel" type="Label" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars"]
+layout_mode = 2
+text = "Inventory:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Inventory" type="HFlowContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/Bars"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -261,10 +267,20 @@ unique_name_in_owner = true
 layout_mode = 2
 modified_stat = "charisma"
 
-[node name="RelationshipEditor" type="Button" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls"]
+layout_mode = 2
+
+[node name="RelationshipEditor" type="Button" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Relationship Editor"
+
+[node name="InventoryEditor" type="Button" parent="ScrollContainer/VBoxContainer2/MainPanel/EditControls/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Inventory Editor"
 
 [node name="RelationshipWindow" type="AcceptDialog" parent="."]
 unique_name_in_owner = true
@@ -306,5 +322,5 @@ script = ExtResource("12_71vk2")
 
 [connection signal="pressed" from="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage" to="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon" method="_on_stream_image_pressed"]
 [connection signal="confirmed" from="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage/StreamImgPromp" to="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon" method="_on_accept_dialog_confirmed"]
-[connection signal="pressed" from="ScrollContainer/VBoxContainer2/MainPanel/EditControls/RelationshipEditor" to="." method="_on_relationship_editor_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer2/MainPanel/EditControls/HBoxContainer/RelationshipEditor" to="." method="_on_relationship_editor_pressed"]
 [connection signal="pressed" from="RelationshipWindow/RelationshipPanel/VBoxContainer/AddRelationship" to="RelationshipWindow/RelationshipPanel/VBoxContainer/AddRelationship" method="_on_pressed"]

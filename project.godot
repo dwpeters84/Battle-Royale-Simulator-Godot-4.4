@@ -22,6 +22,7 @@ buses/default_bus_layout="res://assets/default_bus_layout.tres"
 [autoload]
 
 Cast="*res://src/autoloads/cast.gd"
+Items="*res://src/autoloads/items.gd"
 
 [display]
 
@@ -34,7 +35,12 @@ enabled=PackedStringArray()
 [file_customization]
 
 folder_colors={
-"res://assets/textures/char_icons/": "purple"
+"res://assets/textures/char_icons/": "purple",
+"res://src/autoloads/": "purple",
+"res://src/resources/": "blue",
+"res://src/scenes/": "purple",
+"res://src/scenes/CastMaker/": "blue",
+"res://src/scenes/MainSim/": "blue"
 }
 
 [global_group]
