@@ -113,16 +113,19 @@ texture_pressed = ExtResource("8_ocgop")
 unique_name_in_owner = true
 title = "Insert direct image link"
 initial_position = 2
-size = Vector2i(566, 166)
+size = Vector2i(621, 206)
+visible = true
 ok_button_text = "Upload"
-dialog_text = "Make sure that the image you're linking to is a png, otherwise
-this may not work properly! The image will appear blank if it breaks."
+dialog_text = "All streamed images will be saved inside the game. There is currently
+not a way to clear your cache. Just keep that in mind!
+(Also, JPGs do not play nice with image streaming. The game may crash if you
+try it.)"
 
 [node name="PanelContainer" type="PanelContainer" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage/StreamImgPromp"]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 558.0
-offset_bottom = 117.0
+offset_right = 613.0
+offset_bottom = 157.0
 
 [node name="LinkInput" type="TextEdit" parent="ScrollContainer/VBoxContainer2/MainPanel/VBoxContainer/CharIcon/StreamImage/StreamImgPromp/PanelContainer"]
 unique_name_in_owner = true
