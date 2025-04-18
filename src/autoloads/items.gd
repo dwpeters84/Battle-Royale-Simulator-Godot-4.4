@@ -17,5 +17,4 @@ func _ready():
 				var itemtexture = ImageTexture.create_from_image(texture)	
 				items[file_name.trim_suffix(".png")] = itemtexture
 			file_name = dir.get_next()
-		print(items)
 		dir.list_dir_end()
