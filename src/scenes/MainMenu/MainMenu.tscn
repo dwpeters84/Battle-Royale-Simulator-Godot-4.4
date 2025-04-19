@@ -1,7 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://csktetlggsbph"]
+[gd_scene load_steps=11 format=3 uid="uid://csktetlggsbph"]
 
 [ext_resource type="Script" uid="uid://dlf1uqgrk7ar1" path="res://src/scenes/MainMenu/menu_directories.gd" id="1_xlm6w"]
-[ext_resource type="Texture2D" uid="uid://bs6gyyfnjn112" path="res://assets/textures/ui_icons/KFR.png" id="2_tt3q5"]
 [ext_resource type="Texture2D" uid="uid://sx3hwttlfp2p" path="res://assets/textures/ui_icons/castbuilder.png" id="3_idgsi"]
 [ext_resource type="Texture2D" uid="uid://0tqnyxuwy76p" path="res://assets/textures/ui_icons/castbuilder_pressed.png" id="4_1o8ne"]
 [ext_resource type="Texture2D" uid="uid://b7otroraa4ryv" path="res://assets/textures/ui_icons/castbuilder_hover.png" id="5_feloa"]
@@ -24,12 +23,15 @@ script = ExtResource("1_xlm6w")
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
-custom_minimum_size = Vector2(500, 298.755)
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("2_tt3q5")
+theme_override_colors/font_color = Color(1, 0.215686, 0.215686, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 5
+theme_override_font_sizes/font_size = 66
+text = "KILLING FEVER ROYALE"
+horizontal_alignment = 1
 
 [node name="CastBuilder" type="TextureButton" parent="VBoxContainer"]
 layout_mode = 2
