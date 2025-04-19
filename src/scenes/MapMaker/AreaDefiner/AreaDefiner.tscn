@@ -50,35 +50,53 @@ layout_mode = 2
 texture = ExtResource("3_oexlg")
 expand_mode = 2
 
-[node name="AreaLinkContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="LinkSection" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="NewAreaLink" type="Button" parent="HBoxContainer/AreaLinkContainer"]
+[node name="NewAreaLink" type="Button" parent="HBoxContainer/LinkSection"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 text = "Link to another area"
 script = ExtResource("4_nct1h")
 
-[node name="TagContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="AddedLinks" type="ScrollContainer" parent="HBoxContainer/LinkSection"]
+layout_mode = 2
+
+[node name="LinkContainer" type="VBoxContainer" parent="HBoxContainer/LinkSection/AddedLinks"]
+layout_mode = 2
+
+[node name="TagSection" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AddTag" type="Button" parent="HBoxContainer/TagContainer"]
+[node name="AddTag" type="Button" parent="HBoxContainer/TagSection"]
 layout_mode = 2
 text = "Add area tag"
 
-[node name="ItemContainer" type="VBoxContainer" parent="HBoxContainer"]
+[node name="AddedTags" type="ScrollContainer" parent="HBoxContainer/TagSection"]
+layout_mode = 2
+
+[node name="TagContainer" type="VBoxContainer" parent="HBoxContainer/TagSection/AddedTags"]
+layout_mode = 2
+
+[node name="ItemSection" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="AddItem" type="Button" parent="HBoxContainer/ItemContainer"]
+[node name="AddItem" type="Button" parent="HBoxContainer/ItemSection"]
 layout_mode = 2
-text = "Add area tag"
+text = "Add area items"
+
+[node name="AddedItems" type="ScrollContainer" parent="HBoxContainer/ItemSection"]
+layout_mode = 2
+
+[node name="ItemContainer" type="VBoxContainer" parent="HBoxContainer/ItemSection/AddedItems"]
+layout_mode = 2
 
 [connection signal="update_map" from="." to="." method="_on_update_map"]
 [connection signal="text_changed" from="HBoxContainer/VBoxContainer/AreaNameInput" to="." method="_on_area_name_input_text_changed"]
 [connection signal="background_passer" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="." method="_on_change_bg_image_background_passer"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="HBoxContainer/VBoxContainer/ChangeBgImage" method="_on_pressed"]
-[connection signal="pressed" from="HBoxContainer/AreaLinkContainer/NewAreaLink" to="HBoxContainer/AreaLinkContainer/NewAreaLink" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/LinkSection/NewAreaLink" to="HBoxContainer/LinkSection/NewAreaLink" method="_on_pressed"]
