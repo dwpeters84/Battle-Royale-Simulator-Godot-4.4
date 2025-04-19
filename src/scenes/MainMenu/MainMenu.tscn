@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://csktetlggsbph"]
+[gd_scene load_steps=12 format=3 uid="uid://csktetlggsbph"]
 
 [ext_resource type="Script" uid="uid://dlf1uqgrk7ar1" path="res://src/scenes/MainMenu/menu_directories.gd" id="1_xlm6w"]
 [ext_resource type="Texture2D" uid="uid://bs6gyyfnjn112" path="res://assets/textures/ui_icons/KFR.png" id="2_tt3q5"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://by0vvgbo1txap" path="res://assets/textures/ui_icons/mapbuilder.png" id="6_5t3ln"]
 [ext_resource type="Texture2D" uid="uid://c38o7yd5302g4" path="res://assets/textures/ui_icons/mapbuilder_pressed.png" id="7_srx7o"]
 [ext_resource type="Texture2D" uid="uid://tg7napqj7yww" path="res://assets/textures/ui_icons/mapbuilder_hover.png" id="8_m60qx"]
+[ext_resource type="Texture2D" uid="uid://bvwojf6epe6vf" path="res://assets/textures/ui_icons/roadmap.png" id="9_tt3q5"]
+[ext_resource type="Texture2D" uid="uid://bycu23ti6mof3" path="res://assets/textures/ui_icons/roadmap_pressed.png" id="10_1o8ne"]
+[ext_resource type="Texture2D" uid="uid://dd8pk2sutt2wt" path="res://assets/textures/ui_icons/roadmap_hover.png" id="11_feloa"]
 
 [node name="Menu" type="PanelContainer"]
 anchors_preset = 15
@@ -46,5 +49,16 @@ texture_normal = ExtResource("6_5t3ln")
 texture_pressed = ExtResource("7_srx7o")
 texture_hover = ExtResource("8_m60qx")
 
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="RoadMap" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture_normal = ExtResource("9_tt3q5")
+texture_pressed = ExtResource("10_1o8ne")
+texture_hover = ExtResource("11_feloa")
+
 [connection signal="pressed" from="VBoxContainer/CastBuilder" to="." method="_on_cast_builder_pressed"]
 [connection signal="pressed" from="VBoxContainer/MapBuilder" to="." method="_on_map_builder_pressed"]
+[connection signal="pressed" from="VBoxContainer/RoadMap" to="." method="_on_road_map_pressed"]

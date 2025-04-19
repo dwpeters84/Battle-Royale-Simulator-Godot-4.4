@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c62mvng83jemu"]
+[gd_scene load_steps=16 format=3 uid="uid://c62mvng83jemu"]
 
 [ext_resource type="Script" uid="uid://dsq7mbcr56orw" path="res://src/scenes/CastMaker/cast_maker.gd" id="1_wnga0"]
 [ext_resource type="Script" uid="uid://5yrxr8v5bvv5" path="res://src/scenes/CastMaker/add_char_button.gd" id="2_e88xy"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://dn8q0x0dk133l" path="res://src/scenes/CastMaker/clear_cast.gd" id="7_elr6l"]
 [ext_resource type="Script" uid="uid://dhjqaql2eftrp" path="res://src/scenes/CastMaker/cast_saver.gd" id="8_vmnoi"]
 [ext_resource type="Texture2D" uid="uid://bs6gyyfnjn112" path="res://assets/textures/ui_icons/KFR.png" id="9_ys3wu"]
-[ext_resource type="Script" uid="uid://dhk3jtl4f7eic" path="res://src/scenes/CastMaker/roadmap.gd" id="10_e88xy"]
 [ext_resource type="Script" uid="uid://dekq6aob67m30" path="res://src/scenes/CastMaker/rand_icons.gd" id="10_j1t4n"]
 [ext_resource type="Script" uid="uid://cf2dlr2t1jbqi" path="res://src/scenes/CastMaker/rand_stats.gd" id="11_ol3cs"]
 [ext_resource type="Script" uid="uid://rkbyl8nynyr7" path="res://src/scenes/CastMaker/rand_names.gd" id="12_podef"]
@@ -180,12 +179,6 @@ special thanks to gerr74 (lol)
 random char icons from dough's Ascended Z"
 horizontal_alignment = 1
 
-[node name="Roadmap" type="Button" parent="PanelContainer2/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 6
-text = "Roadmap"
-script = ExtResource("10_e88xy")
-
 [node name="RandIcons" type="Button" parent="PanelContainer2/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -274,7 +267,6 @@ stream = ExtResource("14_xpefu")
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/HBoxContainer2/LoadCast" to="PanelContainer2/VBoxContainer/HBoxContainer2/SaveCast" method="_on_load_cast_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/HBoxContainer2/LoadCast" to="PanelContainer2/VBoxContainer/HBoxContainer2/LoadCast" method="_on_pressed"]
 [connection signal="file_selected" from="PanelContainer2/VBoxContainer/HBoxContainer2/LoadCast/Loader" to="PanelContainer2/VBoxContainer/HBoxContainer2/SaveCast" method="_on_loader_file_selected"]
-[connection signal="pressed" from="PanelContainer2/VBoxContainer/Roadmap" to="PanelContainer2/VBoxContainer/Roadmap" method="_on_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/RandIcons" to="PanelContainer2/VBoxContainer/RandIcons" method="_on_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/RandStats" to="PanelContainer2/VBoxContainer/RandStats" method="_on_pressed"]
 [connection signal="pressed" from="PanelContainer2/VBoxContainer/RandNames" to="PanelContainer2/VBoxContainer/RandNames" method="_on_pressed"]
