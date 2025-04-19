@@ -1,20 +1,22 @@
 extends Node
 
-var items: Dictionary
+@export var items: Dictionary
 
 func _ready():
 	var folder_path = "res://assets/textures/items/"
-	var dir = DirAccess.open(folder_path)
-	
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
+	for file_name in DirAccess.get_files_at(folder_path):
+		
+		if file_name.get_extension() == "import":
+			file_name = file_name.trim_suffix(".import")
+		
+		if file_name.get_extension() == "png":
+			var texture := load(folder_path + file_name)
+			if texture is Texture2D:
+				var key := file_name.get_basename()
+				items[key] = texture
 
-		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with(".png"):
-				var file_path = folder_path + "/" + file_name
-				var texture = Image.load_from_file(file_path)
-				var itemtexture = ImageTexture.create_from_image(texture)	
-				items[file_name.trim_suffix(".png")] = itemtexture
-			file_name = dir.get_next()
-		dir.list_dir_end()
+		elif file_name.get_extension() in ["res", "tres"]:
+			var resource := load(folder_path + file_name)
+			if resource is Texture2D:
+				var key := file_name.get_basename()
+				items[key] = resource

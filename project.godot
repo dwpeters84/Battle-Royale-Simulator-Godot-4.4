@@ -49,3 +49,7 @@ folder_colors={
 GameControllers=""
 CastMaker=""
 FileDialogs=""
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true
