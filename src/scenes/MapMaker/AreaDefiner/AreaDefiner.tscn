@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://xseu36qbixsb"]
+[gd_scene load_steps=6 format=3 uid="uid://xseu36qbixsb"]
 
 [ext_resource type="Script" uid="uid://u8g80ymgwcp4" path="res://src/scenes/MapMaker/AreaDefiner/area_maker.gd" id="1_wqt65"]
 [ext_resource type="Script" uid="uid://ck6do5xda2rxu" path="res://src/scenes/MapMaker/AreaDefiner/change_bg_image.gd" id="2_agvtm"]
 [ext_resource type="Texture2D" uid="uid://chpympjbsbdqf" path="res://assets/textures/ui_icons/ef_mt.png" id="3_oexlg"]
 [ext_resource type="Script" uid="uid://d1bo5kshifflh" path="res://src/scenes/MapMaker/AreaDefiner/new_area_link.gd" id="4_nct1h"]
+[ext_resource type="Script" uid="uid://c5jc7hq5gi2od" path="res://src/scenes/MapMaker/AreaDefiner/AddItemToArea.gd" id="5_agvtm"]
 
 [node name="Area" type="PanelContainer"]
 anchors_preset = 15
@@ -18,7 +19,7 @@ script = ExtResource("1_wqt65")
 
 [node name="AreaBG" type="ColorRect" parent="."]
 unique_name_in_owner = true
-z_index = -2
+z_index = -10
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
@@ -63,9 +64,12 @@ script = ExtResource("4_nct1h")
 
 [node name="AddedLinks" type="ScrollContainer" parent="HBoxContainer/LinkSection"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="LinkContainer" type="VBoxContainer" parent="HBoxContainer/LinkSection/AddedLinks"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="TagSection" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -77,9 +81,12 @@ text = "Add area tag"
 
 [node name="AddedTags" type="ScrollContainer" parent="HBoxContainer/TagSection"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="TagContainer" type="VBoxContainer" parent="HBoxContainer/TagSection/AddedTags"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="ItemSection" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -88,15 +95,22 @@ size_flags_horizontal = 3
 [node name="AddItem" type="Button" parent="HBoxContainer/ItemSection"]
 layout_mode = 2
 text = "Add area items"
+script = ExtResource("5_agvtm")
 
 [node name="AddedItems" type="ScrollContainer" parent="HBoxContainer/ItemSection"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="ItemContainer" type="VBoxContainer" parent="HBoxContainer/ItemSection/AddedItems"]
+unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [connection signal="update_map" from="." to="." method="_on_update_map"]
 [connection signal="text_changed" from="HBoxContainer/VBoxContainer/AreaNameInput" to="." method="_on_area_name_input_text_changed"]
 [connection signal="background_passer" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="." method="_on_change_bg_image_background_passer"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="HBoxContainer/VBoxContainer/ChangeBgImage" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/LinkSection/NewAreaLink" to="HBoxContainer/LinkSection/NewAreaLink" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/ItemSection/AddItem" to="HBoxContainer/ItemSection/AddItem" method="_on_pressed"]
+[connection signal="update_item" from="HBoxContainer/ItemSection/AddItem" to="." method="_on_add_item_update_item"]

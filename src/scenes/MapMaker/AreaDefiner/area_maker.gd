@@ -50,7 +50,13 @@ func _on_area_name_input_text_changed() -> void:
 func _on_change_bg_image_background_passer(bg: Variant) -> void:
 	bg_img = bg 
 	send_map_update()
-
+	
+func _on_add_item_update_item(item: Variant) -> void:
+	items.clear()
+	for child in %ItemContainer.get_children():
+		items.append(child.get_child(0).get_selected())
+	
+	
 func send_map_update():
 	area_info["name"] = areaname
 	area_info["bg"] = bg_img
@@ -58,5 +64,3 @@ func send_map_update():
 	area_info["tags"] = tags
 	area_info["items"] = items
 	emit_signal("update_map", area_info)
-
-	
