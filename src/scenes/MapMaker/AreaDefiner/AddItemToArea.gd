@@ -8,6 +8,5 @@ func _on_pressed() -> void:
 	pass # Replace with function body.
 
 func add_item_to_area(item):
-	print("Item index: ", item)
 	emit_signal("update_item", item)
 	pass

@@ -37,14 +37,12 @@ func _ready():
 ]
 
 	var random_color = colors.pick_random()
-	print("random color should be ", str(random_color))
 	%AreaBG.color = random_color
 	
 	pass
 
 func _on_area_name_input_text_changed() -> void:
 	areaname = %AreaNameInput.text
-	print(areaname)
 	send_map_update()
 
 func _on_change_bg_image_background_passer(bg: Variant) -> void:

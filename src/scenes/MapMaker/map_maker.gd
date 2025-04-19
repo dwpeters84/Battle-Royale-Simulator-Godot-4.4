@@ -14,7 +14,6 @@ func update_map():
 	map.clear()
 	for child in %AreaContainer.get_children():
 		if child == %NewArea or child == %PrintMap:
-			print("thats a button you fucker.")
 			continue
 		map.append(child.area_info)
 	
