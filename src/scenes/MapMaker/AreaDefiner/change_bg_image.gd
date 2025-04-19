@@ -15,10 +15,9 @@ func _on_pressed() -> void:
 	pass # Replace with function body.
 
 func change_bg(received_texture: Texture2D):
+	
 	if change_bg_toggle:
-		print("WOOHOO")
 		%BgPreview.texture = received_texture
 		emit_signal("background_passer", received_texture)
 		change_bg_toggle = false
-	else:
-		print("Cannot change bg image")
+		
