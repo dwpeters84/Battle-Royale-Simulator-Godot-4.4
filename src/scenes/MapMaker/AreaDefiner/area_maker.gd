@@ -50,15 +50,15 @@ func _on_change_bg_image_background_passer(bg: Variant) -> void:
 	send_map_update()
 	
 func _on_add_item_update_item(item: Variant) -> void:
+	print("Items updated!")
 	items.clear()
 	for child in %ItemContainer.get_children():
 		items.append(child.get_child(0).get_selected())
 	
 func _on_add_tag_update_tag(tag: Variant) -> void:
+	print("Tags updated!")
 	tags.clear()
-	print("Attempting to print tag children.")
 	for child in %TagContainer.get_children():
-		print(child)
 		tags.append(child.get_child(0).get_selected())
 
 func send_map_update():

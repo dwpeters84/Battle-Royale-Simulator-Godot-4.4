@@ -13,9 +13,9 @@ var options = [
 ]
 
 func _ready():
-	emit_signal("pass_tag", %OptionButton.get_selected())
 	for tag in options:
 		%OptionButton.add_item(tag)
+	emit_signal("pass_tag", %OptionButton.get_selected())
 
 func _on_delete_self_pressed() -> void:
 	queue_free()
