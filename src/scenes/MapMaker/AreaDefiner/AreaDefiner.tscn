@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://xseu36qbixsb"]
+[gd_scene load_steps=7 format=3 uid="uid://xseu36qbixsb"]
 
 [ext_resource type="Script" uid="uid://u8g80ymgwcp4" path="res://src/scenes/MapMaker/AreaDefiner/area_maker.gd" id="1_wqt65"]
 [ext_resource type="Script" uid="uid://ck6do5xda2rxu" path="res://src/scenes/MapMaker/AreaDefiner/change_bg_image.gd" id="2_agvtm"]
 [ext_resource type="Texture2D" uid="uid://crg322j82sej" path="res://assets/textures/bgs/defaultbg.png" id="3_agvtm"]
 [ext_resource type="Script" uid="uid://d1bo5kshifflh" path="res://src/scenes/MapMaker/AreaDefiner/new_area_link.gd" id="4_nct1h"]
 [ext_resource type="Script" uid="uid://c5jc7hq5gi2od" path="res://src/scenes/MapMaker/AreaDefiner/AddItemToArea.gd" id="5_agvtm"]
+[ext_resource type="Script" uid="uid://c1sgnbmsp4tat" path="res://src/scenes/MapMaker/AreaDefiner/add_tag_to_area.gd" id="5_oexlg"]
 
 [node name="Area" type="PanelContainer"]
 anchors_preset = 15
@@ -78,6 +79,7 @@ size_flags_horizontal = 3
 [node name="AddTag" type="Button" parent="HBoxContainer/TagSection"]
 layout_mode = 2
 text = "Add area tag"
+script = ExtResource("5_oexlg")
 
 [node name="AddedTags" type="ScrollContainer" parent="HBoxContainer/TagSection"]
 layout_mode = 2
@@ -112,5 +114,6 @@ size_flags_vertical = 3
 [connection signal="background_passer" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="." method="_on_change_bg_image_background_passer"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="HBoxContainer/VBoxContainer/ChangeBgImage" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/LinkSection/NewAreaLink" to="HBoxContainer/LinkSection/NewAreaLink" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/TagSection/AddTag" to="HBoxContainer/TagSection/AddTag" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/ItemSection/AddItem" to="HBoxContainer/ItemSection/AddItem" method="_on_pressed"]
 [connection signal="update_item" from="HBoxContainer/ItemSection/AddItem" to="." method="_on_add_item_update_item"]
