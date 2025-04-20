@@ -8,6 +8,7 @@ func _ready():
 	emit_signal("pass_item", %ItemButton.get_selected())
 
 func _on_delete_self_pressed() -> void:
+	await emit_signal("pass_item", null)
 	queue_free()
 
 

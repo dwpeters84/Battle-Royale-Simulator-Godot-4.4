@@ -53,13 +53,21 @@ func _on_add_item_update_item(item: Variant) -> void:
 	print("Items updated!")
 	items.clear()
 	for child in %ItemContainer.get_children():
-		items.append(child.get_child(0).get_selected())
+		if child == null :
+			print("Child is null!")
+			continue
+		else:
+			print("Child is ", child, "!")
+			items.append(child.get_child(0).get_selected())
 	
 func _on_add_tag_update_tag(tag: Variant) -> void:
 	print("Tags updated!")
 	tags.clear()
 	for child in %TagContainer.get_children():
-		tags.append(child.get_child(0).get_selected())
+		if child == null:
+			continue
+		else:
+			tags.append(child.get_child(0).get_selected())
 
 func send_map_update():
 	area_info["name"] = areaname

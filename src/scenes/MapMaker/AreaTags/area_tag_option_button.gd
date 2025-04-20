@@ -18,6 +18,7 @@ func _ready():
 	emit_signal("pass_tag", %OptionButton.get_selected())
 
 func _on_delete_self_pressed() -> void:
+	await emit_signal("pass_tag", null)
 	queue_free()
 	pass # Replace with function body.
 
