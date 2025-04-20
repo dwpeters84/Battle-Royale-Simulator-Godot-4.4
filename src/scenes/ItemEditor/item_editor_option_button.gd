@@ -11,6 +11,5 @@ func _on_delete_self_pressed() -> void:
 	emit_signal("pass_item", null)
 	queue_free()
 
-
 func _on_item_button_item_selected(index: int) -> void:
 	emit_signal("pass_item", index)
