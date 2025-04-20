@@ -5,10 +5,10 @@ func _ready():
 	for item in Items.items:
 		var itemimg = Items.items[item]
 		%ItemButton.add_icon_item(itemimg, item)
-	emit_signal("pass_item", %ItemButton.get_selected())
+	emit_signal("pass_item", $ItemButton.get_selected())
 
 func _on_delete_self_pressed() -> void:
-	await emit_signal("pass_item", null)
+	emit_signal("pass_item", null)
 	queue_free()
 
 

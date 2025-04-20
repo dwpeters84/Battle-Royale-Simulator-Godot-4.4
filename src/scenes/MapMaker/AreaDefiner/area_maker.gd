@@ -51,23 +51,27 @@ func _on_change_bg_image_background_passer(bg: Variant) -> void:
 	
 func _on_add_item_update_item(item: Variant) -> void:
 	print("Items updated!")
-	items.clear()
-	for child in %ItemContainer.get_children():
-		if child == null :
-			print("Child is null!")
-			continue
-		else:
-			print("Child is ", child, "!")
-			items.append(child.get_child(0).get_selected())
+	
+	if item == null:
+		items.clear()
+	else:
+		items.clear()
+		for child in %ItemContainer.get_children():
+				print("Child is ", child, "!")
+				items.append(child.get_child(0).get_selected())
+	send_map_update()
 	
 func _on_add_tag_update_tag(tag: Variant) -> void:
 	print("Tags updated!")
-	tags.clear()
-	for child in %TagContainer.get_children():
-		if child == null:
-			continue
-		else:
+	
+	if tag == null:
+		tags.clear()
+	else:
+		tags.clear()
+		for child in %TagContainer.get_children():
+			print("Child is ", child, "!")
 			tags.append(child.get_child(0).get_selected())
+	send_map_update()
 
 func send_map_update():
 	area_info["name"] = areaname
