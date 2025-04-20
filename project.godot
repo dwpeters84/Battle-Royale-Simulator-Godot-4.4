@@ -50,6 +50,7 @@ GameControllers=""
 CastMaker=""
 FileDialogs=""
 AreaLinks=""
+CurrentlyLinking=""
 
 [rendering]
 

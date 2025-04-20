@@ -6,14 +6,14 @@ signal update_map(area_info)
 
 var areaname: String
 var bg_img: Resource
-var links: Array 
+var area_links: Array 
 var tags: Array
 var items: Array
 
 @onready var area_info = {
 	"name": areaname,
 	"bg": bg_img,
-	"links": links,
+	"links": area_links,
 	"tags": tags,
 	"items": items,
 	}
@@ -74,10 +74,18 @@ func _on_add_tag_update_tag(tag: Variant) -> void:
 			tags.append(child.get_child(0).get_selected())
 	send_map_update()
 
+func _on_new_area_link_pass_links(links: Variant) -> void:
+	for link in links:
+		if link == %NewAreaLink:
+			continue
+		area_links.append(link)
+	pass # Replace with function body.
+
+
 func send_map_update():
 	area_info["name"] = areaname
 	area_info["bg"] = bg_img
-	area_info["links"] = links
+	area_info["links"] = area_links
 	area_info["tags"] = tags
 	area_info["items"] = items
 	emit_signal("update_map", area_info)	

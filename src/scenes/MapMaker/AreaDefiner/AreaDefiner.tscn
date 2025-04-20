@@ -57,6 +57,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="NewAreaLink" type="Button" parent="HBoxContainer/LinkSection"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -65,15 +66,18 @@ script = ExtResource("4_nct1h")
 
 [node name="LinkOptions" type="HBoxContainer" parent="HBoxContainer/LinkSection" groups=["Areas"]]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 
 [node name="LinkConfirm" type="Button" parent="HBoxContainer/LinkSection/LinkOptions"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Link to me!"
 
-[node name="LinkConfirm2" type="Button" parent="HBoxContainer/LinkSection/LinkOptions"]
+[node name="LinkCancel" type="Button" parent="HBoxContainer/LinkSection/LinkOptions"]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cancel linking"
@@ -88,6 +92,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="LinkContainer" type="VBoxContainer" parent="HBoxContainer/LinkSection/AddedLinks"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -134,7 +139,10 @@ size_flags_vertical = 3
 [connection signal="text_changed" from="HBoxContainer/VBoxContainer/AreaNameInput" to="." method="_on_area_name_input_text_changed"]
 [connection signal="background_passer" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="." method="_on_change_bg_image_background_passer"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="HBoxContainer/VBoxContainer/ChangeBgImage" method="_on_pressed"]
+[connection signal="pass_links" from="HBoxContainer/LinkSection/NewAreaLink" to="." method="_on_new_area_link_pass_links"]
 [connection signal="pressed" from="HBoxContainer/LinkSection/NewAreaLink" to="HBoxContainer/LinkSection/NewAreaLink" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/LinkSection/LinkOptions/LinkConfirm" to="HBoxContainer/LinkSection/NewAreaLink" method="_on_link_confirm_pressed"]
+[connection signal="pressed" from="HBoxContainer/LinkSection/LinkOptions/LinkCancel" to="HBoxContainer/LinkSection/NewAreaLink" method="_on_link_cancel_pressed"]
 [connection signal="pressed" from="HBoxContainer/TagSection/AddTag" to="HBoxContainer/TagSection/AddTag" method="_on_pressed"]
 [connection signal="update_tag" from="HBoxContainer/TagSection/AddTag" to="." method="_on_add_tag_update_tag"]
 [connection signal="pressed" from="HBoxContainer/ItemSection/AddItem" to="HBoxContainer/ItemSection/AddItem" method="_on_pressed"]
