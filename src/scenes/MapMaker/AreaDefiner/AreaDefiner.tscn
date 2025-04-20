@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://u8g80ymgwcp4" path="res://src/scenes/MapMaker/AreaDefiner/area_maker.gd" id="1_wqt65"]
 [ext_resource type="Script" uid="uid://ck6do5xda2rxu" path="res://src/scenes/MapMaker/AreaDefiner/change_bg_image.gd" id="2_agvtm"]
-[ext_resource type="Texture2D" uid="uid://chpympjbsbdqf" path="res://assets/textures/ui_icons/ef_mt.png" id="3_oexlg"]
+[ext_resource type="Texture2D" uid="uid://crg322j82sej" path="res://assets/textures/bgs/defaultbg.png" id="3_agvtm"]
 [ext_resource type="Script" uid="uid://d1bo5kshifflh" path="res://src/scenes/MapMaker/AreaDefiner/new_area_link.gd" id="4_nct1h"]
 [ext_resource type="Script" uid="uid://c5jc7hq5gi2od" path="res://src/scenes/MapMaker/AreaDefiner/AddItemToArea.gd" id="5_agvtm"]
 
@@ -48,7 +48,7 @@ script = ExtResource("2_agvtm")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 173.325)
 layout_mode = 2
-texture = ExtResource("3_oexlg")
+texture = ExtResource("3_agvtm")
 expand_mode = 2
 
 [node name="LinkSection" type="VBoxContainer" parent="HBoxContainer"]
