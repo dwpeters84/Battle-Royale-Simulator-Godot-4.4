@@ -22,4 +22,5 @@ layout_mode = 2
 texture_normal = ExtResource("2_ida3i")
 texture_hover = ExtResource("3_mdkg6")
 
+[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]
 [connection signal="pressed" from="DeleteSelf" to="." method="_on_delete_self_pressed"]

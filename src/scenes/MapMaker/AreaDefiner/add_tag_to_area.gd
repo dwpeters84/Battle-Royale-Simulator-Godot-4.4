@@ -1,8 +1,12 @@
 extends Button
-
-@onready var tag_scene = preload("uid://cu5klpau7awvd")
+signal update_tag(tag)
 
 func _on_pressed() -> void:
-	var newtag = tag_scene.instantiate()
-	$"../AddedTags/TagContainer".add_child(newtag)
-	pass # Replace with function body.
+	var tag_scene = preload("uid://cu5klpau7awvd").instantiate()
+	$"../AddedTags/TagContainer".add_child(tag_scene)
+	tag_scene.pass_tag.connect(add_tag_to_area)
+
+func add_tag_to_area(tag):
+	emit_signal("update_tag", tag)
+
+	

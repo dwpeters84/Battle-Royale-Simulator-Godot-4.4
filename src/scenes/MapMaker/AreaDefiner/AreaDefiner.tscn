@@ -86,6 +86,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="TagContainer" type="VBoxContainer" parent="HBoxContainer/TagSection/AddedTags"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -115,5 +116,6 @@ size_flags_vertical = 3
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="HBoxContainer/VBoxContainer/ChangeBgImage" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/LinkSection/NewAreaLink" to="HBoxContainer/LinkSection/NewAreaLink" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/TagSection/AddTag" to="HBoxContainer/TagSection/AddTag" method="_on_pressed"]
+[connection signal="update_tag" from="HBoxContainer/TagSection/AddTag" to="." method="_on_add_tag_update_tag"]
 [connection signal="pressed" from="HBoxContainer/ItemSection/AddItem" to="HBoxContainer/ItemSection/AddItem" method="_on_pressed"]
 [connection signal="update_item" from="HBoxContainer/ItemSection/AddItem" to="." method="_on_add_item_update_item"]
