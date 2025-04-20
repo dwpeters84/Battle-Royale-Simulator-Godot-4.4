@@ -14,3 +14,7 @@ var options = [
 func _ready():
 	for tag in options:
 		%OptionButton.add_item(tag)
+
+
+func _on_delete_self_pressed() -> void:
+	pass # Replace with function body.
