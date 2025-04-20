@@ -15,6 +15,6 @@ func _ready():
 	for tag in options:
 		%OptionButton.add_item(tag)
 
-
 func _on_delete_self_pressed() -> void:
+	queue_free()
 	pass # Replace with function body.
