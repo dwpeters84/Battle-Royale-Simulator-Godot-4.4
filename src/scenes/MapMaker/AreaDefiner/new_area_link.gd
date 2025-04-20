@@ -30,6 +30,7 @@ func begin_linking():
 
 
 func _on_link_confirm_pressed() -> void:
+	currently_linking = false
 	if not currently_linking:
 		add_to_group("CurrentlyLinking")
 		
@@ -37,8 +38,8 @@ func _on_link_confirm_pressed() -> void:
 	get_tree().call_group("CurrentlyLinking", "connect_links")
 
 
-
 func _on_link_cancel_pressed() -> void:
+	currently_linking = false
 	get_tree().call_group("AreaLinks", "stop_linking")
 	
 func stop_linking():
