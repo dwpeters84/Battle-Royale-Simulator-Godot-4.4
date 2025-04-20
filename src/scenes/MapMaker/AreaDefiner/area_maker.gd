@@ -19,6 +19,7 @@ var items: Array
 	}
 
 func _ready():
+	
 	# This is fucking insane. Delete this at some point LMFAO. Or come up with a better way of storing the colors at least LMFAO
 	var colors = [
   Color.AQUA, Color.AQUAMARINE, Color.BLACK, Color.BLUE, Color.BROWN,

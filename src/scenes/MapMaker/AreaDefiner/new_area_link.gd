@@ -1,10 +1,17 @@
 extends Button
 
-var area_link_scene = preload("uid://2wbapkkm8d5j")
+var currently_linking: bool
+
+signal start_link()
+
+func _ready():
+	add_to_group("AreaLinks")
+
 
 func _on_pressed() -> void:
+	currently_linking = true
+	get_tree().call_group("AreaLinks", "begin_linking")
 	
-	var new_area_link = area_link_scene.instantiate()
-	new_area_link.custom_minimum_size = Vector2(150,30)
-	add_sibling(new_area_link)
-	pass # Replace with function body.
+func begin_linking():
+	%LinkOptions.show()
+	pass

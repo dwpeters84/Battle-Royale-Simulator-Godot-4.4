@@ -63,6 +63,26 @@ size_flags_vertical = 0
 text = "Link to another area"
 script = ExtResource("4_nct1h")
 
+[node name="LinkOptions" type="HBoxContainer" parent="HBoxContainer/LinkSection" groups=["Areas"]]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="LinkConfirm" type="Button" parent="HBoxContainer/LinkSection/LinkOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Link to me!"
+
+[node name="LinkConfirm2" type="Button" parent="HBoxContainer/LinkSection/LinkOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel linking"
+
+[node name="CurrentLinksLabel" type="Label" parent="HBoxContainer/LinkSection"]
+layout_mode = 2
+text = "Current Links:"
+horizontal_alignment = 1
+
 [node name="AddedLinks" type="ScrollContainer" parent="HBoxContainer/LinkSection"]
 layout_mode = 2
 size_flags_vertical = 3
