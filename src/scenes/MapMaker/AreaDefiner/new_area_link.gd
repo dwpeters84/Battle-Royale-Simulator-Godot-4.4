@@ -3,7 +3,6 @@ extends Button
 var currently_linking: bool
 @onready var option_nodes: Array = [%LinkConfirm, %LinkCancel]
 
-@onready var areaname = %AreaNameInput
 signal pass_links(links)
 
 func _ready():
@@ -24,6 +23,7 @@ func begin_linking():
 		option_nodes[0].disabled = true
 	elif not currently_linking:
 		option_nodes[1].disabled = true
+	disabled = true
 		
 	for node in option_nodes:
 		node.show()
@@ -43,6 +43,7 @@ func _on_link_cancel_pressed() -> void:
 	
 func stop_linking():
 	currently_linking = false
+	disabled = false
 	
 	for node in option_nodes:
 		node.disabled = false
@@ -52,6 +53,6 @@ func connect_links():
 	for node in get_tree().get_nodes_in_group("CurrentlyLinking"):
 		var newlabel = Label.new()
 		%LinkContainer.add_child(newlabel)
-		newlabel.text =	node.areaname.text
+		newlabel.text =	"Area linked!"
 	emit_signal("pass_links", get_tree().get_nodes_in_group("CurrentlyLinking"))
 	remove_from_group("CurrentlyLinking")
