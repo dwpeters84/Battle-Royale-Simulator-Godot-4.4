@@ -10,6 +10,9 @@ var area_links: Array
 var tags: Array
 var items: Array
 
+var currently_linking: bool
+signal link_areas(link)
+
 @onready var area_info = {
 	"name": areaname,
 	"bg": bg_img,
@@ -19,6 +22,9 @@ var items: Array
 	}
 
 func _ready():
+	add_to_group("AreaBaseNode")
+	var node = get_tree().get_first_node_in_group("NewAreaButton")
+	node.link_passer.connect(connect_link_areas)
 	
 	# This is fucking insane. Delete this at some point LMFAO. Or come up with a better way of storing the colors at least LMFAO
 	var colors = [
@@ -74,13 +80,28 @@ func _on_add_tag_update_tag(tag: Variant) -> void:
 			tags.append(child.get_child(0).get_selected())
 	send_map_update()
 
-func _on_new_area_link_pass_links(links: Variant) -> void:
-	for link in links:
-		if link == %NewAreaLink:
-			continue
-		area_links.append(link)
+func _on_link_section_linker() -> void:
+	currently_linking = true
+	emit_signal("link_areas", self)
 	pass # Replace with function body.
 
+func connect_link_areas(link):
+	print("Linker: ", link.areaname, " Linked: ", areaname)
+	#area_links.append(link)
+	#var link_label = Label.new()
+	#%LinkContainer.add_child(link_label)
+	#link_label.text = link.areaname
+	#send_map_update()
+	#pass
+	
+func receive_link(other_area):
+	area_links.append(other_area.areaname)
+	print("Linked to:", other_area.areaname)
+	var link_label = Label.new()
+	%LinkContainer.add_child(link_label)
+	link_label.text = str(other_area.areaname)
+	send_map_update()
+	pass
 
 func send_map_update():
 	area_info["name"] = areaname

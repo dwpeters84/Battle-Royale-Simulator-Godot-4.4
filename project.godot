@@ -51,6 +51,9 @@ CastMaker=""
 FileDialogs=""
 AreaLinks=""
 CurrentlyLinking=""
+AreaBaseNode=""
+AreaContainer=""
+NewAreaButton=""
 
 [rendering]
 
