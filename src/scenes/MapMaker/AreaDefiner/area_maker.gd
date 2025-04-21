@@ -22,6 +22,8 @@ signal link_areas(link)
 	}
 
 func _ready():
+	
+	areaname = "Unnamed Area " + Codewords.codewords.pick_random()
 	add_to_group("AreaBaseNode")
 	var node = get_tree().get_first_node_in_group("NewAreaButton")
 	node.link_passer.connect(connect_link_areas)
