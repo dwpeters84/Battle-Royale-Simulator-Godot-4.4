@@ -25,10 +25,9 @@ func _ready():
 	
 	areaname = "Unnamed Area " + Codewords.codewords.pick_random()
 	%AreaNameInput.placeholder_text = areaname
-	
+
 	add_to_group("AreaBaseNode")
 	var node = get_tree().get_first_node_in_group("NewAreaButton")
-	node.link_passer.connect(connect_link_areas)
 	
 	# This is fucking insane. Delete this at some point LMFAO. Or come up with a better way of storing the colors at least LMFAO
 	var colors = [
@@ -88,24 +87,18 @@ func _on_link_section_linker() -> void:
 	currently_linking = true
 	emit_signal("link_areas", self)
 	pass # Replace with function body.
-
-func connect_link_areas(link):
-	print("Linker: ", link.areaname, " Linked: ", areaname)
-	#area_links.append(link)
-	#var link_label = Label.new()
-	#%LinkContainer.add_child(link_label)
-	#link_label.text = link.areaname
-	#send_map_update()
-	#pass
 	
 func receive_link(other_area):
-	area_links.append(other_area.areaname)
-	print("Linked to:", other_area.areaname)
-	var link_label = Label.new()
-	%LinkContainer.add_child(link_label)
-	link_label.text = str(other_area.areaname)
-	send_map_update()
-	pass
+	if other_area.areaname in area_info["links"]:
+		print("This area is already linked!")
+	else:
+		area_links.append(other_area.areaname)
+		print("Linked to: ", other_area.areaname)
+		var link_label = Label.new()
+		%LinkContainer.add_child(link_label)
+		link_label.text = str(other_area.areaname)
+		send_map_update()
+
 
 func send_map_update():
 	area_info["name"] = areaname
