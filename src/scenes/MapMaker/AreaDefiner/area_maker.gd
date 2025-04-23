@@ -24,6 +24,8 @@ signal link_areas(link)
 func _ready():
 	
 	areaname = "Unnamed Area " + Codewords.codewords.pick_random()
+	%AreaNameInput.placeholder_text = areaname
+	
 	add_to_group("AreaBaseNode")
 	var node = get_tree().get_first_node_in_group("NewAreaButton")
 	node.link_passer.connect(connect_link_areas)
@@ -47,11 +49,11 @@ func _ready():
 
 	var random_color = colors.pick_random()
 	%AreaBG.color = random_color
-	
-	pass
+	send_map_update()
 
 func _on_area_name_input_text_changed() -> void:
 	areaname = %AreaNameInput.text
+	name = %AreaNameInput.text
 	send_map_update()
 
 func _on_change_bg_image_background_passer(bg: Variant) -> void:
