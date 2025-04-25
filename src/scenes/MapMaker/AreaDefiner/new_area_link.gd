@@ -1,6 +1,7 @@
 extends VBoxContainer
 
 var currently_linking: bool
+var current_links: Array = []
 @onready var option_nodes: Array = [%LinkConfirm, %LinkCancel]
 
 signal linker
@@ -24,6 +25,9 @@ func begin_linking():
 	%NewAreaLink.disabled = true
 	for node in option_nodes:
 		node.show()
+		
+	for link in current_links:
+		link.link_section.option_nodes[0].text = "Unlink area"
 
 func _on_link_confirm_pressed() -> void:
 	currently_linking = false

@@ -13,6 +13,8 @@ var items: Array
 var currently_linking: bool
 signal link_areas(link)
 
+@onready var link_section = %LinkSection
+
 @onready var area_info = {
 	"name": areaname,
 	"bg": bg_img,
@@ -93,6 +95,7 @@ func receive_link(other_area):
 		print("This area is already linked!")
 	else:
 		area_links.append(other_area)
+		%LinkSection.current_links.append(other_area)
 		print("Linked to: ", other_area)
 		var link_label = Label.new()
 		%LinkContainer.add_child(link_label)
