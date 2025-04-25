@@ -89,14 +89,14 @@ func _on_link_section_linker() -> void:
 	pass # Replace with function body.
 	
 func receive_link(other_area):
-	if other_area.areaname in area_info["links"]:
+	if other_area in area_info["links"]:
 		print("This area is already linked!")
 	else:
-		area_links.append(other_area.areaname)
-		print("Linked to: ", other_area.areaname)
+		area_links.append(other_area)
+		print("Linked to: ", other_area)
 		var link_label = Label.new()
 		%LinkContainer.add_child(link_label)
-		link_label.text = str(other_area.areaname)
+		link_label.text = str(other_area)
 		send_map_update()
 
 
