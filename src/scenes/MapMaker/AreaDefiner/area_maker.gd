@@ -91,18 +91,20 @@ func _on_link_section_linker() -> void:
 	pass # Replace with function body.
 	
 func receive_link(other_area):
+	
+	var link_label = Label.new()
+	
 	if other_area in area_info["links"]:
-		print("This should be unlinking the two areas.")
 		link_section.current_links.erase(other_area)
+		link_section.delete_link = true
 		area_links.erase(other_area)
 		
 	else:
 		area_links.append(other_area)
 		link_section.current_links.append(other_area)
-		print("Linked to: ", other_area)
+		print("Linked to: ", other_area.areaname)
 		
-		var link_label = Label.new()
-		link_section.add_child(link_label)
+		%LinkContainer.add_child(link_label)
 		link_label.text = str(other_area.areaname)
 		
 	send_map_update()
