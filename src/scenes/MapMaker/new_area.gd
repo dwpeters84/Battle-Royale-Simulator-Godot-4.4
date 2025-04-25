@@ -25,11 +25,11 @@ func change_bg():
 func link_areas(area):
 	if not area_to_link_1:
 		area_to_link_1 = area
-		print("Grabbed first area:", area_to_link_1.areaname)
+		print("Grabbed first area:", area_to_link_1)
 	elif not area_to_link_2:
 		area_to_link_2 = area
 		
-		print("Grabbed second area:", area_to_link_2.areaname)
+		print("Grabbed second area:", area_to_link_2)
 		print("Linking...")
 
 		# Send the link to both areas
