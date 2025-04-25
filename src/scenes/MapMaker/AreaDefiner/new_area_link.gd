@@ -5,6 +5,7 @@ var current_links: Array = []
 @onready var option_nodes: Array = [%LinkConfirm, %LinkCancel]
 
 signal linker
+signal unlink(link_to_unlink)
 
 func _ready():
 	add_to_group("AreaLinks")
