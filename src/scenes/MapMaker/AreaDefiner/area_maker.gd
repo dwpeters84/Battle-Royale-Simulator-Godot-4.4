@@ -96,7 +96,7 @@ func receive_link(other_area):
 		print("Linked to: ", other_area)
 		var link_label = Label.new()
 		%LinkContainer.add_child(link_label)
-		link_label.text = str(other_area)
+		link_label.text = str(other_area.areaname)
 		send_map_update()
 
 
