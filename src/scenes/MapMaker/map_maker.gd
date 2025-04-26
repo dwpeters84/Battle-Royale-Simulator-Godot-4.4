@@ -20,6 +20,3 @@ func update_map():
 func _on_new_area_map_updater(area_info: Variant) -> void:
 	update_map()
 	pass # Replace with function body.
-
-
-#test
