@@ -34,7 +34,7 @@ func begin_linking():
 		node.show()
 		
 	for link in current_links:
-		delete_link = true
+		print("Linkeronis: ", link)
 		link.link_section.option_nodes[0].text = "Unlink area"
 
 func _on_link_confirm_pressed() -> void:
@@ -45,13 +45,11 @@ func _on_link_confirm_pressed() -> void:
 		var link_to_remove
 		for node in get_tree().get_nodes_in_group("AreaBaseNode"):
 			if node.link_section.currently_linking == true:
-				print(node.areaname)
 				if node == self:
 					continue
 				link_to_remove = node
 			
 		for tag in %LinkContainer.get_children():
-			print(tag.text)
 			
 			if tag.text == link_to_remove.areaname:
 				tag.queue_free()
@@ -61,12 +59,19 @@ func _on_link_confirm_pressed() -> void:
 		
 	else:
 		emit_signal("linker")
-		get_tree().call_group("AreaLinks", "stop_linking")
+		
+	get_tree().call_group("AreaLinks", "stop_linking")
 
 func _on_link_cancel_pressed() -> void:
 	currently_linking = false
 	get_tree().call_group("AreaLinks", "stop_linking")
 	
+func delete_toggle(toggle: bool):
+	if toggle:
+		delete_link = true
+	if not toggle:
+		delete_link = false	
+
 func stop_linking():
 	for node in option_nodes:
 		node.disabled = false

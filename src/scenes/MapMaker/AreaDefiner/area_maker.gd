@@ -62,26 +62,22 @@ func _on_change_bg_image_background_passer(bg: Variant) -> void:
 	send_map_update()
 	
 func _on_add_item_update_item(item: Variant) -> void:
-	print("Items updated!")
 	
 	if item == null:
 		items.clear()
 	else:
 		items.clear()
 		for child in %ItemContainer.get_children():
-				print("Child is ", child, "!")
 				items.append(child.get_child(0).get_selected())
 	send_map_update()
 	
 func _on_add_tag_update_tag(tag: Variant) -> void:
-	print("Tags updated!")
 	
 	if tag == null:
 		tags.clear()
 	else:
 		tags.clear()
 		for child in %TagContainer.get_children():
-			print("Child is ", child, "!")
 			tags.append(child.get_child(0).get_selected())
 	send_map_update()
 
@@ -102,7 +98,6 @@ func receive_link(other_area):
 	else:
 		area_links.append(other_area)
 		link_section.current_links.append(other_area)
-		print("Linked to: ", other_area.areaname)
 		
 		%LinkContainer.add_child(link_label)
 		link_label.text = str(other_area.areaname)
