@@ -141,6 +141,7 @@ size_flags_vertical = 3
 [connection signal="background_passer" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="." method="_on_change_bg_image_background_passer"]
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/ChangeBgImage" to="HBoxContainer/VBoxContainer/ChangeBgImage" method="_on_pressed"]
 [connection signal="linker" from="HBoxContainer/LinkSection" to="." method="_on_link_section_linker"]
+[connection signal="unlink" from="HBoxContainer/LinkSection" to="." method="_on_link_section_unlink"]
 [connection signal="pressed" from="HBoxContainer/LinkSection/NewAreaLink" to="HBoxContainer/LinkSection" method="_on_pressed"]
 [connection signal="pressed" from="HBoxContainer/LinkSection/LinkOptions/LinkConfirm" to="HBoxContainer/LinkSection" method="_on_link_confirm_pressed"]
 [connection signal="pressed" from="HBoxContainer/LinkSection/LinkOptions/LinkCancel" to="HBoxContainer/LinkSection" method="_on_link_cancel_pressed"]

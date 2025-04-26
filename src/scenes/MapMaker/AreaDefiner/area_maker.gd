@@ -108,7 +108,11 @@ func receive_link(other_area):
 		link_label.text = str(other_area.areaname)
 		
 	send_map_update()
-
+	
+#func _on_link_section_unlink(link_to_unlink: Variant) -> void:
+	#print(link_to_unlink.areaname, " is now erased.")
+	#area_info["links"].erase(link_to_unlink.areaname)
+	#send_map_update()
 
 func send_map_update():
 	area_info["name"] = areaname
