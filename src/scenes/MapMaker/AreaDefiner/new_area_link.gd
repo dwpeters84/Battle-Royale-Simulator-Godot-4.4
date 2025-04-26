@@ -14,17 +14,23 @@ func _ready():
 
 func _on_pressed() -> void:
 	if not currently_linking:
-		emit_signal("linker",)
+		emit_signal("linker")
 		currently_linking = true
+		print("You are currently linking!")
+		
 	else:
+		print("You are not currently linking!")
 		currently_linking = false
+		
 	get_tree().call_group("AreaLinks", "begin_linking")
 	
 func begin_linking():
 	if currently_linking:
 		option_nodes[0].disabled = true
+		
 	elif not currently_linking:
 		option_nodes[1].disabled = true
+		
 	%NewAreaLink.disabled = true
 	for node in option_nodes:
 		node.show()
@@ -45,29 +51,5 @@ func stop_linking():
 	for node in option_nodes:
 		node.disabled = false
 		node.hide()
-		
-	var seen_areas := {}
-	var duplicates := []
-	
-	print("Current links: ", current_links)
-	
-	# Find duplicates
-	for area in current_links:
-		var name = area.areaname
-		if name in seen_areas:
-			if not name in duplicates:
-				duplicates.append(name)
-		else:
-			seen_areas[name] = true
-		
-	print("Duplicate areas: ", duplicates)
-	
-	# Delete duplicates
-	if delete_link:
-		print("Initiating link deletion")
-		for label in %LinkContainer.get_children():
-			print("Label: ", label.text)
-			if label.text in duplicates:
-				label.queue_free()
-	
+	currently_linking = false
 	%NewAreaLink.disabled = false
